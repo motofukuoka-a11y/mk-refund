@@ -1,12 +1,240 @@
-const $=id=>document.getElementById(id);const yen=n=>`${Math.max(0,Math.round(n)).toLocaleString("ja-JP")}円`;const floor10=n=>Math.floor(n/10)*10;
-const [segments,stations,mainFares,localFares,charges]=await Promise.all(["segments","stations","ordinary_fares_main","ordinary_fares_local","charges"].map(x=>fetch(`./data/${x}.json`).then(r=>r.json())));
-stations.forEach(s=>{const o=document.createElement("option");o.value=s;$("stations").append(o)});const graph=new Map();for(const s of segments){if(s.status!=="active")continue;for(const[a,b]of[[s.from,s.to],[s.to,s.from]]){if(!graph.has(a))graph.set(a,[]);graph.get(a).push({...s,from:a,to:b})}}
-function shortest(a,b){const d=new Map([[a,0]]),prev=new Map(),q=[{n:a,c:0}];while(q.length){q.sort((x,y)=>x.c-y.c);const x=q.shift();if(x.c!==d.get(x.n))continue;if(x.n===b)break;for(const e of graph.get(x.n)||[]){const c=x.c+Number(e.business_km||0);if(c<(d.get(e.to)??Infinity)){d.set(e.to,c);prev.set(e.to,{n:x.n,e});q.push({n:e.to,c})}}}if(!d.has(b))throw new Error(`${a}から${b}までの経路を特定できません。`);const out=[];let n=b;while(n!==a){const p=prev.get(n);out.unshift(p.e);n=p.n}return out}
-function route(from,to,vias){const pts=[from,...vias,to],out=[];for(let i=0;i<pts.length-1;i++)out.push(...shortest(pts[i],pts[i+1]));return out}
-function totals(r){const business=r.reduce((a,s)=>a+Number(s.business_km||0),0),conversion=r.reduce((a,s)=>a+Number(s.conversion_km||0),0),main=r.some(s=>s.line_type==="幹線"),local=r.some(s=>s.line_type==="地方交通線");if(main&&local&&business>10)return{business,conversion,km:Math.ceil(conversion),table:mainFares,label:"幹線表（運賃計算キロ）"};if(local&&!main)return{business,conversion,km:Math.ceil(business),table:localFares,label:"地方交通線表（営業キロ）"};if(main&&local)return{business,conversion,km:Math.ceil(business),table:localFares,label:"地方交通線表（10km以内）"};return{business,conversion,km:Math.ceil(business),table:mainFares,label:"幹線表（営業キロ）"}}
-function fare(table,km,p){const r=table.find(x=>km>=Number(x["最小km"])&&km<=Number(x["最大km"]));if(!r)throw new Error(`${km}kmに対応する普通運賃がありません。`);return Number(r[p==="child"?"小児片道運賃":"大人片道運賃"])}
-function charge(kind,km,p){let rows=charges.filter(r=>r["構成要素"]===kind);if(kind==="limited_express_reserved")rows=rows.filter(r=>r["表ID"]===(km<=150?"JRH_HOKKAIDO_SPECIAL_RESERVED":"JRH_A_EXPRESS_RESERVED"));const r=rows.find(x=>km>=Number(x["最小km"])&&km<=Number(x["最大km"]));if(!r)throw new Error(`${km}kmに対応する料金がありません。`);return Number(r[p==="child"?"小児":"大人"])}
-function decide(type,price,request,departure){if(["ordinary","unreserved"].includes(type))return{ok:true,fee:220,reason:"使用開始前・有効期間内として、払戻手数料220円を差し引きます。"};if(type==="unassigned")return{ok:true,fee:340,reason:"旅行日まで・使用開始前の座席未指定券として、払戻手数料340円を差し引きます。"};if(["reserved","green"].includes(type)){if(!departure)throw new Error("列車出発日時を入力してください。");if(request>departure)return{ok:false,fee:0,reason:"列車出発時刻を過ぎているため、払戻不可です。"};const d0=new Date(departure.getFullYear(),departure.getMonth(),departure.getDate()),r0=new Date(request.getFullYear(),request.getMonth(),request.getDate()),days=Math.round((d0-r0)/86400000);if(days>=2)return{ok:true,fee:340,reason:"列車出発日の2日前までの申出であるため、払戻手数料340円です。"};return{ok:true,fee:Math.max(340,floor10(price*.3)),reason:"出発日前日から出発時刻までの申出であるため、対象額の30％（最低340円）です。"}}return{ok:false,fee:0,reason:"この券種は使用経過額等の追加仕様が必要なため、初期版では自動計算対象外です。"}}
-function conditional(){const t=$("type").value;$("departureBox").classList.toggle("hidden",!["reserved","green"].includes(t));$("commuterBox").classList.toggle("hidden",t!=="commuter");$("couponBox").classList.toggle("hidden",t!=="coupon")}
-$("type").addEventListener("change",conditional);$("form").addEventListener("submit",e=>{e.preventDefault();try{const from=$("from").value.trim(),to=$("to").value.trim();if(!stations.includes(from)||!stations.includes(to))throw new Error("発駅・着駅は候補から正確に入力してください。");const vias=$("via").value.split(/[,、]/).map(x=>x.trim()).filter(Boolean);if(vias.some(x=>!stations.includes(x)))throw new Error("経由駅に未登録の駅名があります。");const r=route(from,to,vias),t=totals(r),p=$("passenger").value,type=$("type").value;let price=0;if(type==="ordinary")price=fare(t.table,t.km,p);else if(type==="unreserved")price=charge("limited_express_unreserved",Math.ceil(t.business),p);else if(["reserved","unassigned"].includes(type))price=charge("limited_express_reserved",Math.ceil(t.business),p);else if(type==="green")price=charge("limited_express_reserved",Math.ceil(t.business),p)+charge("green_charge",Math.ceil(t.business),p);else if(type==="commuter")price=Number($("commuterPrice").value||0);else if(type==="coupon")price=fare(t.table,t.km,p)*10;const req=new Date($("request").value),dep=$("departure").value?new Date($("departure").value):null,d=decide(type,price,req,dep),refund=d.ok?Math.max(0,price-d.fee):0;$("result").classList.remove("hidden");$("status").textContent=d.ok?"払戻可能":"払戻不可・要確認";$("status").className=`badge ${d.ok?"":"no"}`;$("metrics").innerHTML=`<div class="metric">券面額・料金<b>${yen(price)}</b></div><div class="metric">払戻手数料<b>${yen(d.fee)}</b></div><div class="metric">払戻額<b>${yen(refund)}</b></div>`;$("formula").textContent=d.ok?`${yen(price)} − ${yen(d.fee)} ＝ ${yen(refund)}`:"自動計算を行っていません。";$("reason").textContent=`${d.reason}\n営業キロ：${t.business.toFixed(1)}km／換算キロ：${t.conversion.toFixed(1)}km\n運賃参照：${t.label}、検索距離${t.km}km`;$("route").innerHTML=`<table><thead><tr><th>区間</th><th>線名</th><th>営業キロ</th><th>換算キロ</th></tr></thead><tbody>${r.map(s=>`<tr><td>${s.from} → ${s.to}</td><td>${s.line}</td><td>${s.business_km}km</td><td>${s.conversion_km??"—"}km</td></tr>`).join("")}</tbody></table>`}catch(err){alert(err.message)}});
-$("clear").addEventListener("click",()=>{$("form").reset();conditional();$("result").classList.add("hidden")});$("theme").addEventListener("click",()=>{const dark=document.documentElement.dataset.theme==="dark";document.documentElement.dataset.theme=dark?"light":"dark";localStorage.setItem("mk-theme",dark?"light":"dark")});document.documentElement.dataset.theme=localStorage.getItem("mk-theme")||"light";const now=new Date();now.setMinutes(now.getMinutes()-now.getTimezoneOffset());$("request").value=now.toISOString().slice(0,16);$("travel").value=now.toISOString().slice(0,10);conditional();
+const $ = id => document.getElementById(id);
+const yen = n => `${Math.max(0, Math.round(n)).toLocaleString('ja-JP')}円`;
+const floor10 = n => Math.floor(n / 10) * 10;
+const ceil10 = n => Math.ceil(n / 10) * 10;
+const parseDate = value => value ? new Date(`${value}T00:00:00`) : null;
+const addDays = (date, days) => { const next = new Date(date); next.setDate(next.getDate() + days); return next; };
+const addMonths = (date, months) => { const next = new Date(date); const day = next.getDate(); next.setDate(1); next.setMonth(next.getMonth() + months); const last = new Date(next.getFullYear(), next.getMonth() + 1, 0).getDate(); next.setDate(Math.min(day, last)); return next; };
+const compareDate = (a, b) => a.getTime() - b.getTime();
+
+const [segments, stations, mainFares, localFares, charges] = await Promise.all(
+  ['segments', 'stations', 'ordinary_fares_main', 'ordinary_fares_local', 'charges']
+    .map(name => fetch(`./data/${name}.json`).then(response => response.json()))
+);
+
+stations.forEach(station => { const option = document.createElement('option'); option.value = station; $('stations').append(option); });
+const graph = new Map();
+for (const segment of segments) {
+  if (segment.status !== 'active') continue;
+  for (const [from, to] of [[segment.from, segment.to], [segment.to, segment.from]]) {
+    if (!graph.has(from)) graph.set(from, []);
+    graph.get(from).push({ ...segment, from, to });
+  }
+}
+
+function shortest(start, goal) {
+  const distances = new Map([[start, 0]]), previous = new Map(), queue = [{ station: start, cost: 0 }];
+  while (queue.length) {
+    queue.sort((a, b) => a.cost - b.cost);
+    const current = queue.shift();
+    if (current.cost !== distances.get(current.station)) continue;
+    if (current.station === goal) break;
+    for (const edge of graph.get(current.station) || []) {
+      const cost = current.cost + Number(edge.business_km || 0);
+      if (cost < (distances.get(edge.to) ?? Infinity)) {
+        distances.set(edge.to, cost);
+        previous.set(edge.to, { station: current.station, edge });
+        queue.push({ station: edge.to, cost });
+      }
+    }
+  }
+  if (!distances.has(goal)) throw new Error(`${start}から${goal}までの経路を特定できません。`);
+  const result = [];
+  let station = goal;
+  while (station !== start) {
+    const item = previous.get(station);
+    result.unshift(item.edge);
+    station = item.station;
+  }
+  return result;
+}
+
+function route(from, to, vias) {
+  const points = [from, ...vias, to], result = [];
+  for (let index = 0; index < points.length - 1; index += 1) result.push(...shortest(points[index], points[index + 1]));
+  return result;
+}
+
+function totals(routeSegments) {
+  const business = routeSegments.reduce((sum, segment) => sum + Number(segment.business_km || 0), 0);
+  const conversion = routeSegments.reduce((sum, segment) => sum + Number(segment.conversion_km || 0), 0);
+  const main = routeSegments.some(segment => segment.line_type === '幹線');
+  const local = routeSegments.some(segment => segment.line_type === '地方交通線');
+  if (main && local && business > 10) return { business, conversion, km: Math.ceil(conversion), table: mainFares, label: '幹線表（運賃計算キロ）' };
+  if (local && !main) return { business, conversion, km: Math.ceil(business), table: localFares, label: '地方交通線表（営業キロ）' };
+  if (main && local) return { business, conversion, km: Math.ceil(business), table: localFares, label: '地方交通線表（10km以内）' };
+  return { business, conversion, km: Math.ceil(business), table: mainFares, label: '幹線表（営業キロ）' };
+}
+
+function fare(table, km, passenger) {
+  const row = table.find(item => km >= Number(item['最小km']) && km <= Number(item['最大km']));
+  if (!row) throw new Error(`${km}kmに対応する普通運賃がありません。`);
+  return Number(row[passenger === 'child' ? '小児片道運賃' : '大人片道運賃']);
+}
+
+function charge(kind, km, passenger) {
+  let rows = charges.filter(row => row['構成要素'] === kind);
+  if (kind === 'limited_express_reserved') rows = rows.filter(row => row['表ID'] === (km <= 150 ? 'JRH_HOKKAIDO_SPECIAL_RESERVED' : 'JRH_A_EXPRESS_RESERVED'));
+  const row = rows.find(item => km >= Number(item['最小km']) && km <= Number(item['最大km']));
+  if (!row) throw new Error(`${km}kmに対応する料金がありません。`);
+  return Number(row[passenger === 'child' ? '小児' : '大人']);
+}
+
+function createJunPeriods(start, end) {
+  const periods = [];
+  let month = 0;
+  while (true) {
+    const monthStart = addMonths(start, month);
+    if (compareDate(monthStart, end) > 0) break;
+    let monthEnd = addDays(addMonths(start, month + 1), -1);
+    if (compareDate(monthEnd, end) > 0) monthEnd = new Date(end);
+    const firstEnd = compareDate(addDays(monthStart, 9), monthEnd) <= 0 ? addDays(monthStart, 9) : new Date(monthEnd);
+    periods.push({ start: monthStart, end: firstEnd });
+    const secondStart = addDays(firstEnd, 1);
+    if (compareDate(secondStart, monthEnd) <= 0) {
+      const secondEnd = compareDate(addDays(secondStart, 9), monthEnd) <= 0 ? addDays(secondStart, 9) : new Date(monthEnd);
+      periods.push({ start: secondStart, end: secondEnd });
+      const thirdStart = addDays(secondEnd, 1);
+      if (compareDate(thirdStart, monthEnd) <= 0) periods.push({ start: thirdStart, end: new Date(monthEnd) });
+    }
+    month += 1;
+  }
+  return periods;
+}
+
+function ordinaryRefund(price) {
+  if ($('ordinaryStatus').value === 'before') return { ok: true, price, fee: 220, refund: Math.max(0, price - 220), formula: `${yen(price)} − 220円 ＝ ${yen(price - 220)}`, reason: '使用開始前・有効期間内として計算しました。' };
+  const unusedFare = Number($('unusedFare').value || 0), remainingKm = Number($('remainingKm').value || 0);
+  if (remainingKm < 101) return { ok: false, price, fee: 0, refund: 0, formula: '未使用区間が101km未満のため自動払戻対象外です。', reason: '旅行開始後の普通乗車券は、未使用区間の営業キロが101km以上の場合を対象とします。' };
+  if (unusedFare <= 0) throw new Error('未使用区間の運賃を入力してください。');
+  return { ok: true, price: unusedFare, fee: 220, refund: Math.max(0, unusedFare - 220), formula: `${yen(unusedFare)} − 220円 ＝ ${yen(unusedFare - 220)}`, reason: '旅行開始後の未使用区間額から払戻手数料を差し引きました。' };
+}
+
+function expressRefund(type, price, request, departure) {
+  if (['unreserved'].includes(type)) return { ok: true, price, fee: 220, refund: Math.max(0, price - 220), formula: `${yen(price)} − 220円 ＝ ${yen(price - 220)}`, reason: '使用開始前・有効期間内の自由席特急券として計算しました。' };
+  if (type === 'unassigned') return { ok: true, price, fee: 340, refund: Math.max(0, price - 340), formula: `${yen(price)} − 340円 ＝ ${yen(price - 340)}`, reason: '旅行日まで・使用開始前の座席未指定券として計算しました。' };
+  if (!departure) throw new Error('列車出発日時を入力してください。');
+  if (request > departure) return { ok: false, price, fee: 0, refund: 0, formula: '列車出発時刻経過後のため自動計算対象外です。', reason: '列車出発時刻を過ぎています。' };
+  const departureDay = new Date(departure.getFullYear(), departure.getMonth(), departure.getDate());
+  const requestDay = new Date(request.getFullYear(), request.getMonth(), request.getDate());
+  const days = Math.round((departureDay - requestDay) / 86400000);
+  const fee = days >= 2 ? 340 : Math.max(340, floor10(price * 0.3));
+  return { ok: true, price, fee, refund: Math.max(0, price - fee), formula: `${yen(price)} − ${yen(fee)} ＝ ${yen(price - fee)}`, reason: days >= 2 ? '列車出発日の2日前までの申出として計算しました。' : '出発日前日から出発時刻までの申出として、料金の30％（最低340円）を適用しました。' };
+}
+
+function couponRefund(oneWayFare) {
+  const price = Number($('couponPrice').value || oneWayFare * 10), used = Number($('couponUsed').value || 0);
+  if (used < 0 || !Number.isInteger(used)) throw new Error('使用済枚数は0以上の整数で入力してください。');
+  const usedAmount = oneWayFare * used, fee = 220, refund = Math.max(0, price - usedAmount - fee);
+  return { ok: refund > 0, price, fee, refund, formula: `${yen(price)} −（${yen(oneWayFare)} × ${used}枚）− 220円 ＝ ${yen(refund)}`, reason: refund > 0 ? '発売額から使用券片数分の片道普通運賃と払戻手数料を差し引きました。' : '差引後の残額がないため払戻額は0円です。', extra: [{ label: '使用分', value: usedAmount }] };
+}
+
+function commuterRefund() {
+  const start = parseDate($('commuterStart').value), end = parseDate($('commuterEnd').value), request = parseDate($('commuterRequest').value);
+  const price = Number($('commuterPrice').value || 0), simpleUsed = Number($('commuterUsedAmount').value || 0), months = Number($('commuterMonths').value || 1);
+  if (!start || !end || !request) throw new Error('定期券の日付をすべて入力してください。');
+  if (compareDate(end, start) < 0) throw new Error('有効期間終了日は開始日以降にしてください。');
+  if (price <= 0) throw new Error('券記載額面を入力してください。');
+  if (simpleUsed < 0) throw new Error('使用分は0円以上で入力してください。');
+  if (compareDate(request, end) > 0) return { ok: false, price, fee: 0, refund: 0, formula: '有効期間終了後のため自動計算対象外です。', reason: '払戻申出日が有効期間終了後です。' };
+  const fee = 220;
+  const simpleRefund = Math.max(0, price - simpleUsed - fee);
+  const periods = createJunPeriods(start, end);
+  let usedJun = 0;
+  if (compareDate(request, start) >= 0) {
+    const index = periods.findIndex(period => compareDate(request, period.start) >= 0 && compareDate(request, period.end) <= 0);
+    usedJun = index >= 0 ? index + 1 : periods.length;
+  }
+  const nominalDays = months * 30;
+  const dailyAmount = Math.ceil(price / nominalDays);
+  const oneJunAmount = dailyAmount * 10;
+  const junUsedAmount = oneJunAmount * usedJun;
+  const junRefund = Math.max(0, price - junUsedAmount - fee);
+  const useJun = junRefund > simpleRefund;
+  const refund = Math.max(simpleRefund, junRefund);
+  return {
+    ok: refund > 0,
+    price,
+    fee,
+    refund,
+    formula: `単純計算：${yen(price)} − ${yen(simpleUsed)} − 220円 ＝ ${yen(simpleRefund)}\n旬割計算：${yen(price)} −（${yen(oneJunAmount)} × ${usedJun}旬）− 220円 ＝ ${yen(junRefund)}\n採用：${useJun ? '旬割計算' : '単純計算'} ${yen(refund)}`,
+    reason: `単純計算と旬割計算を比較し、払戻額が多い${useJun ? '旬割計算' : '単純計算'}を採用しました。旬割は日割額（券記載額面÷${nominalDays}日、1円未満切上げ）×10日×使用旬数で計算しています。`,
+    extra: [
+      { label: '単純計算', value: simpleRefund },
+      { label: '旬割計算', value: junRefund },
+      { label: '使用旬数', value: `${usedJun}旬` }
+    ]
+  };
+}
+
+function conditional() {
+  const type = $('type').value;
+  const isExpress = ['unreserved', 'reserved', 'green', 'unassigned'].includes(type);
+  $('ordinaryBox').classList.toggle('hidden', type !== 'ordinary');
+  $('dateBox').classList.toggle('hidden', !isExpress);
+  $('departureBox').classList.toggle('hidden', !['reserved', 'green'].includes(type));
+  $('commuterBox').classList.toggle('hidden', type !== 'commuter');
+  $('couponBox').classList.toggle('hidden', type !== 'coupon');
+  $('ordinaryAfterBox').classList.toggle('hidden', $('ordinaryStatus').value !== 'after');
+}
+
+function renderResult(result, routeInfo, routeSegments) {
+  $('result').classList.remove('hidden');
+  $('status').textContent = result.ok ? '払戻可能' : '払戻不可・要確認';
+  $('status').className = `badge ${result.ok ? '' : 'no'}`;
+  const metrics = [
+    { label: '券面額・料金', value: yen(result.price) },
+    ...(result.extra || []).map(item => ({ label: item.label, value: typeof item.value === 'number' ? yen(item.value) : item.value })),
+    { label: '払戻手数料', value: yen(result.fee) },
+    { label: '払戻額', value: yen(result.refund) }
+  ];
+  $('metrics').innerHTML = metrics.map(item => `<div class="metric">${item.label}<b>${item.value}</b></div>`).join('');
+  $('formula').textContent = result.formula;
+  const distanceText = routeInfo ? `\n営業キロ：${routeInfo.business.toFixed(1)}km／換算キロ：${routeInfo.conversion.toFixed(1)}km\n運賃参照：${routeInfo.label}、検索距離${routeInfo.km}km` : '';
+  $('reason').textContent = `${result.reason}${distanceText}`;
+  $('routeDetails').classList.toggle('hidden', !routeSegments);
+  if (routeSegments) $('route').innerHTML = `<table><thead><tr><th>区間</th><th>線名</th><th>営業キロ</th><th>換算キロ</th></tr></thead><tbody>${routeSegments.map(segment => `<tr><td>${segment.from} → ${segment.to}</td><td>${segment.line}</td><td>${segment.business_km}km</td><td>${segment.conversion_km ?? '—'}km</td></tr>`).join('')}</tbody></table>`;
+}
+
+$('type').addEventListener('change', conditional);
+$('ordinaryStatus').addEventListener('change', conditional);
+$('form').addEventListener('submit', event => {
+  event.preventDefault();
+  try {
+    const from = $('from').value.trim(), to = $('to').value.trim(), type = $('type').value;
+    if (!type) throw new Error('券種を選択してください。');
+    if (!stations.includes(from) || !stations.includes(to)) throw new Error('発駅・着駅は候補から正確に入力してください。');
+    const vias = $('via').value.split(/[,、]/).map(value => value.trim()).filter(Boolean);
+    if (vias.some(value => !stations.includes(value))) throw new Error('経由駅に未登録の駅名があります。');
+    const routeSegments = route(from, to, vias), routeInfo = totals(routeSegments), passenger = $('passenger').value;
+    const oneWayFare = fare(routeInfo.table, routeInfo.km, passenger);
+    let result;
+    if (type === 'ordinary') result = ordinaryRefund(oneWayFare);
+    else if (type === 'coupon') result = couponRefund(oneWayFare);
+    else if (type === 'commuter') result = commuterRefund();
+    else {
+      let price = 0;
+      if (type === 'unreserved') price = charge('limited_express_unreserved', Math.ceil(routeInfo.business), passenger);
+      else if (['reserved', 'unassigned'].includes(type)) price = charge('limited_express_reserved', Math.ceil(routeInfo.business), passenger);
+      else if (type === 'green') price = charge('limited_express_reserved', Math.ceil(routeInfo.business), passenger) + charge('green_charge', Math.ceil(routeInfo.business), passenger);
+      const request = $('request').value ? new Date($('request').value) : new Date();
+      const departure = $('departure').value ? new Date($('departure').value) : null;
+      result = expressRefund(type, price, request, departure);
+    }
+    renderResult(result, routeInfo, routeSegments);
+  } catch (error) { alert(error.message); }
+});
+
+$('clear').addEventListener('click', () => { $('form').reset(); conditional(); $('result').classList.add('hidden'); setInitialDates(); });
+$('theme').addEventListener('click', () => { const dark = document.documentElement.dataset.theme === 'dark'; document.documentElement.dataset.theme = dark ? 'light' : 'dark'; localStorage.setItem('mk-theme', dark ? 'light' : 'dark'); });
+
+document.documentElement.dataset.theme = localStorage.getItem('mk-theme') || 'light';
+function setInitialDates() {
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  $('request').value = now.toISOString().slice(0, 16);
+  $('travel').value = now.toISOString().slice(0, 10);
+  $('commuterRequest').value = now.toISOString().slice(0, 10);
+}
+setInitialDates();
+conditional();
