@@ -196,8 +196,9 @@ function commuterRefund(calculatedOneWayFare, routeInfo) {
   const index = periods.findIndex(period => compareDate(request, period.start) >= 0 && compareDate(request, period.end) <= 0);
   const usedJun = index >= 0 ? index + 1 : periods.length;
   const oneMonthFare = oneMonthCommuterFare(routeInfo, category);
-  const dailyAmount = Math.ceil(oneMonthFare / 30);
-  const oneJunAmount = dailyAmount * 10;
+  // 旬額は「1箇月定期運賃 ÷ 30日 × 10日」の結果を10円未満切捨て。
+  // 例：7,690円 ÷ 30 × 10 ＝ 2,563.33…円 → 2,560円
+  const oneJunAmount = floor10((oneMonthFare / 30) * 10);
   const junUsedAmount = oneJunAmount * usedJun;
   const junRefund = Math.max(0, price - junUsedAmount - fee);
   const useJun = junRefund > usageRefund;
@@ -208,7 +209,7 @@ function commuterRefund(calculatedOneWayFare, routeInfo) {
     fee,
     refund,
     formula: `使用経過計算：${yen(price)} −（片道普通運賃 ${yen(oneWayFare)} × 2 × ${usedDays}日）− 220円 ＝ ${yen(usageRefund)}
-旬割計算：${yen(price)} −（1箇月定期運賃 ${yen(oneMonthFare)} ÷ 30日・1円未満切上げ × 10日 × ${usedJun}旬）− 220円 ＝ ${yen(junRefund)}
+旬割計算：${yen(price)} −（1箇月定期運賃 ${yen(oneMonthFare)} ÷ 30日 × 10日・10円未満切捨て × ${usedJun}旬）− 220円 ＝ ${yen(junRefund)}
 採用：${useJun ? '旬割計算' : '使用経過計算'} ${yen(refund)}`,
     reason: `券面金額は定期運賃マスタから自動算出し、入力欄で修正可能です。${months}箇月定期の旬割計算には、同一区間・同一定期種別の1箇月定期運賃${yen(oneMonthFare)}をマスタから取得しました。使用経過計算と旬割計算を比較し、払戻額が多い${useJun ? '旬割計算' : '使用経過計算'}を採用しました。有効期間終了日は${end.toLocaleDateString('ja-JP')}です。`,
     extra: [
