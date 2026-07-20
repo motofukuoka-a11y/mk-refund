@@ -129,16 +129,22 @@ function couponRefund(oneWayFare) {
   return { ok: refund > 0, price, fee, refund, formula: `${yen(price)} −（${yen(oneWayFare)} × ${used}枚）− 220円 ＝ ${yen(refund)}`, reason: refund > 0 ? '発売額から使用券片数分の片道普通運賃と払戻手数料を差し引きました。' : '差引後の残額がないため払戻額は0円です。', extra: [{ label: '使用分', value: usedAmount }] };
 }
 
-function commuterRefund() {
-  const start = parseDate($('commuterStart').value), end = parseDate($('commuterEnd').value), request = parseDate($('commuterRequest').value);
-  const price = Number($('commuterPrice').value || 0), simpleUsed = Number($('commuterUsedAmount').value || 0), months = Number($('commuterMonths').value || 1);
-  if (!start || !end || !request) throw new Error('定期券の日付をすべて入力してください。');
-  if (compareDate(end, start) < 0) throw new Error('有効期間終了日は開始日以降にしてください。');
-  if (price <= 0) throw new Error('券記載額面を入力してください。');
-  if (simpleUsed < 0) throw new Error('使用分は0円以上で入力してください。');
-  if (compareDate(request, end) > 0) return { ok: false, price, fee: 0, refund: 0, formula: '有効期間終了後のため自動計算対象外です。', reason: '払戻申出日が有効期間終了後です。' };
+function commuterRefund(oneWayFare) {
+  const start = parseDate($('commuterStart').value), request = parseDate($('commuterRequest').value);
+  const price = Number($('commuterPrice').value || 0), months = Number($('commuterMonths').value || 1);
+  if (!start || !request) throw new Error('有効期間開始日と申出日を入力してください。');
+  if (!Number.isInteger(months) || months < 1 || months > 6) throw new Error('期間は1箇月から6箇月で選択してください。');
+  if (price <= 0) throw new Error('券面金額を入力してください。');
+
+  const end = addDays(addMonths(start, months), -1);
+  if (compareDate(request, end) > 0) return { ok: false, price, fee: 0, refund: 0, formula: '有効期間終了後のため自動計算対象外です。', reason: `申出日が有効期間終了日（${end.toLocaleDateString('ja-JP')}）を過ぎています。` };
+
   const fee = 220;
+  const roundTripFare = oneWayFare * 2;
+  const usedDays = compareDate(request, start) < 0 ? 0 : Math.floor((request - start) / 86400000) + 1;
+  const simpleUsed = roundTripFare * usedDays;
   const simpleRefund = Math.max(0, price - simpleUsed - fee);
+
   const periods = createJunPeriods(start, end);
   let usedJun = 0;
   if (compareDate(request, start) >= 0) {
@@ -157,9 +163,13 @@ function commuterRefund() {
     price,
     fee,
     refund,
-    formula: `単純計算：${yen(price)} − ${yen(simpleUsed)} − 220円 ＝ ${yen(simpleRefund)}\n旬割計算：${yen(price)} −（${yen(oneJunAmount)} × ${usedJun}旬）− 220円 ＝ ${yen(junRefund)}\n採用：${useJun ? '旬割計算' : '単純計算'} ${yen(refund)}`,
-    reason: `単純計算と旬割計算を比較し、払戻額が多い${useJun ? '旬割計算' : '単純計算'}を採用しました。旬割は日割額（券記載額面÷${nominalDays}日、1円未満切上げ）×10日×使用旬数で計算しています。`,
+    formula: `単純計算：${yen(price)} −（往復普通運賃 ${yen(roundTripFare)} × ${usedDays}日）− 220円 ＝ ${yen(simpleRefund)}
+旬割計算：${yen(price)} −（${yen(oneJunAmount)} × ${usedJun}旬）− 220円 ＝ ${yen(junRefund)}
+採用：${useJun ? '旬割計算' : '単純計算'} ${yen(refund)}`,
+    reason: `片道普通運賃${yen(oneWayFare)}から往復普通運賃${yen(roundTripFare)}を自動算出しました。単純計算と旬割計算を比較し、払戻額が多い${useJun ? '旬割計算' : '単純計算'}を採用しました。有効期間終了日は${end.toLocaleDateString('ja-JP')}です。`,
     extra: [
+      { label: '往復普通運賃', value: roundTripFare },
+      { label: '使用日数', value: `${usedDays}日` },
       { label: '単純計算', value: simpleRefund },
       { label: '旬割計算', value: junRefund },
       { label: '使用旬数', value: `${usedJun}旬` }
@@ -211,7 +221,7 @@ $('form').addEventListener('submit', event => {
     let result;
     if (type === 'ordinary') result = ordinaryRefund(oneWayFare);
     else if (type === 'coupon') result = couponRefund(oneWayFare);
-    else if (type === 'commuter') result = commuterRefund();
+    else if (type === 'commuter') result = commuterRefund(oneWayFare);
     else {
       let price = 0;
       if (type === 'unreserved') price = charge('limited_express_unreserved', Math.ceil(routeInfo.business), passenger);

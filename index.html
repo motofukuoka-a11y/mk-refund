@@ -40,10 +40,7 @@
 
       <div id="ordinaryBox" class="conditional hidden">
         <label>使用状態
-          <select id="ordinaryStatus">
-            <option value="before">使用開始前</option>
-            <option value="after">使用開始後</option>
-          </select>
+          <select id="ordinaryStatus"><option value="before">使用開始前</option><option value="after">使用開始後</option></select>
         </label>
         <div id="ordinaryAfterBox" class="hidden grid">
           <label>未使用区間の運賃<input id="unusedFare" type="number" min="0" step="10" placeholder="円"></label>
@@ -52,37 +49,30 @@
       </div>
 
       <div id="dateBox" class="conditional hidden">
-        <div class="grid">
-          <label>乗車日<input id="travel" type="date"></label>
-          <label>申出日時<input id="request" type="datetime-local"></label>
-        </div>
+        <div class="grid"><label>乗車日<input id="travel" type="date"></label><label>申出日時<input id="request" type="datetime-local"></label></div>
       </div>
       <div id="departureBox" class="conditional hidden"><label>列車出発日時<input id="departure" type="datetime-local"></label></div>
 
       <div id="couponBox" class="conditional hidden">
-        <div class="grid">
-          <label>発売額<input id="couponPrice" type="number" min="0" step="10" placeholder="未入力なら片道運賃×10"></label>
-          <label>使用済枚数<input id="couponUsed" type="number" min="0" value="0"></label>
-        </div>
+        <div class="grid"><label>発売額<input id="couponPrice" type="number" min="0" step="10" placeholder="未入力なら片道運賃×10"></label><label>使用済枚数<input id="couponUsed" type="number" min="0" value="0"></label></div>
         <p class="muted">使用済枚数×券面区間の片道普通運賃と手数料220円を差し引きます。</p>
       </div>
 
       <div id="commuterBox" class="conditional hidden">
         <div class="grid">
-          <label>有効期間開始日<input id="commuterStart" type="date"></label>
-          <label>有効期間終了日<input id="commuterEnd" type="date"></label>
-        </div>
-        <div class="grid">
-          <label>払戻申出日<input id="commuterRequest" type="date"></label>
-          <label>定期期間
-            <select id="commuterMonths"><option value="1">1か月</option><option value="3">3か月</option><option value="6">6か月</option></select>
+          <label>期間
+            <select id="commuterMonths">
+              <option value="1">1箇月</option><option value="2">2箇月</option><option value="3">3箇月</option>
+              <option value="4">4箇月</option><option value="5">5箇月</option><option value="6">6箇月</option>
+            </select>
           </label>
+          <label>有効期間開始日<input id="commuterStart" type="date"></label>
         </div>
         <div class="grid">
-          <label>券記載額面<input id="commuterPrice" type="number" min="0" step="10" placeholder="円"></label>
-          <label>単純計算で差し引く使用分<input id="commuterUsedAmount" type="number" min="0" step="10" placeholder="月割等で算出した使用分"></label>
+          <label>申出日<input id="commuterRequest" type="date"></label>
+          <label>券面金額<input id="commuterPrice" type="number" min="0" step="10" placeholder="円"></label>
         </div>
-        <p class="muted">単純計算と旬割計算を比較し、払戻額が多い方を表示します。</p>
+        <p class="muted">発駅・着駅から往復普通運賃を自動算出し、単純計算と旬割計算のうち払戻額が多い方を表示します。</p>
       </div>
 
       <div class="actions"><button>検索・計算</button><button id="clear" class="sub" type="button">クリア</button></div>
