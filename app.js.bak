@@ -11,7 +11,6 @@ const formatDateInput = date => {
   local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
   return local.toISOString().slice(0, 10);
 };
-const formatJapaneseDate = date => `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
 
 const [segments, stations, mainFares, localFares, charges, commuterFares] = await Promise.all(
   ['segments', 'stations', 'ordinary_fares_main', 'ordinary_fares_local', 'charges', 'teiki_fare_master']
@@ -62,19 +61,14 @@ function route(from, to, vias) {
 }
 
 function totals(routeSegments) {
-  const mainBusiness = routeSegments.filter(s=>s.line_type==='幹線').reduce((a,s)=>a+Number(s.business_km||0),0);
-  const localBusiness = routeSegments.filter(s=>s.line_type==='地方交通線').reduce((a,s)=>a+Number(s.business_km||0),0);
-  const localConversion = routeSegments.filter(s=>s.line_type==='地方交通線').reduce((a,s)=>a+Number(s.conversion_km||0),0);
-  const business = mainBusiness+localBusiness;
-  const hasMain=mainBusiness>0, hasLocal=localBusiness>0;
-  if(hasMain&&hasLocal&&business>10){
-    const fareCalculationKm=mainBusiness+localConversion;
-    return {business,conversion:localConversion,mainBusiness,localBusiness,fareCalculationKm,km:Math.ceil(fareCalculationKm),table:mainFares,label:'幹線普通運賃表（幹線営業キロ＋地方交通線換算キロ）',commuterLineType:'幹線'};
-  }
-  if(hasLocal&&!hasMain){
-    return {business,conversion:localConversion,mainBusiness,localBusiness,fareCalculationKm:localBusiness,km:Math.ceil(localBusiness),table:localFares,label:'地方交通線普通運賃表（営業キロ）',commuterLineType:'地方交通線'};
-  }
-  return {business,conversion:business,mainBusiness,localBusiness,fareCalculationKm:business,km:Math.ceil(business),table:mainFares,label:'幹線普通運賃表（営業キロ）',commuterLineType:'幹線'};
+  const business = routeSegments.reduce((sum, segment) => sum + Number(segment.business_km || 0), 0);
+  const conversion = routeSegments.reduce((sum, segment) => sum + Number(segment.conversion_km || 0), 0);
+  const main = routeSegments.some(segment => segment.line_type === '幹線');
+  const local = routeSegments.some(segment => segment.line_type === '地方交通線');
+  if (main && local && business > 10) return { business, conversion, km: Math.ceil(conversion), table: mainFares, label: '幹線表（運賃計算キロ）', commuterLineType: '幹線' };
+  if (local && !main) return { business, conversion, km: Math.ceil(business), table: localFares, label: '地方交通線表（営業キロ）', commuterLineType: '地方交通線' };
+  if (main && local) return { business, conversion, km: Math.ceil(business), table: localFares, label: '地方交通線表（10km以内）', commuterLineType: '幹線' };
+  return { business, conversion, km: Math.ceil(business), table: mainFares, label: '幹線表（営業キロ）', commuterLineType: '幹線' };
 }
 
 function fare(table, km, passenger) {
@@ -132,63 +126,6 @@ function createJunPeriods(start, end) {
     month += 1;
   }
   return periods;
-}
-
-function renderJunDetails(forceOpen = false) {
-  const panel = $('junDetailsPanel');
-  const button = $('junDetailsButton');
-  const list = $('junDetailsList');
-  const summary = $('junDetailsSummary');
-
-  const start = parseDate($('commuterStart').value);
-  const request = parseDate($('commuterRequest').value);
-  const months = Number($('commuterMonths').value || 1);
-
-  if (!start || !Number.isInteger(months) || months < 1 || months > 6) {
-    list.innerHTML = '<p class="muted">有効期間開始日と定期期間を選択してください。</p>';
-    summary.textContent = '';
-    if (forceOpen) panel.classList.remove('hidden');
-    button.setAttribute('aria-expanded', String(!panel.classList.contains('hidden')));
-    return;
-  }
-
-  const end = addDays(addMonths(start, months), -1);
-  const periods = createJunPeriods(start, end);
-  const currentIndex = request
-    ? periods.findIndex(period => compareDate(request, period.start) >= 0 && compareDate(request, period.end) <= 0)
-    : -1;
-
-  summary.textContent = request
-    ? currentIndex >= 0
-      ? `申出日 ${formatJapaneseDate(request)} は第${currentIndex + 1}旬です。`
-      : `申出日 ${formatJapaneseDate(request)} は有効期間外です。`
-    : '申出日を選択すると、計算対象の旬を強調表示します。';
-
-  list.innerHTML = periods.map((period, index) => {
-    const isCurrent = index === currentIndex;
-    const stateClass = isCurrent
-      ? 'is-current'
-      : request && compareDate(period.end, request) < 0
-        ? 'is-past'
-        : 'is-future';
-
-    return `<article class="jun-item ${stateClass}">
-      <strong>第${index + 1}旬</strong>
-      <span class="jun-range">${formatJapaneseDate(period.start)} ～ ${formatJapaneseDate(period.end)}</span>
-      ${isCurrent ? `<span class="jun-request-date">該当日：${formatJapaneseDate(request)}</span>` : ''}
-    </article>`;
-  }).join('');
-
-  if (forceOpen) panel.classList.remove('hidden');
-  button.setAttribute('aria-expanded', String(!panel.classList.contains('hidden')));
-}
-
-function toggleJunDetails() {
-  const panel = $('junDetailsPanel');
-  const willOpen = panel.classList.contains('hidden');
-  panel.classList.toggle('hidden');
-  $('junDetailsButton').setAttribute('aria-expanded', String(willOpen));
-  if (willOpen) renderJunDetails(true);
 }
 
 function ordinaryRefund(price) {
@@ -352,7 +289,6 @@ function updateCommuterEnd() {
   $('commuterEnd').value = start && Number.isInteger(months) && months >= 1 && months <= 6
     ? formatDateInput(addDays(addMonths(start, months), -1))
     : '';
-  if (!$('junDetailsPanel').classList.contains('hidden')) renderJunDetails();
 }
 
 function updateCommuterAutoAmounts() {
@@ -379,10 +315,6 @@ function conditional() {
   $('departureBox').classList.toggle('hidden', !['reserved', 'green'].includes(type));
   $('commuterBox').classList.toggle('hidden', type !== 'commuter');
   $('couponBox').classList.toggle('hidden', type !== 'coupon');
-  if (type !== 'commuter') {
-    $('junDetailsPanel').classList.add('hidden');
-    $('junDetailsButton').setAttribute('aria-expanded', 'false');
-  }
   $('ordinaryAfterBox').classList.toggle('hidden', $('ordinaryStatus').value !== 'after');
 }
 
@@ -398,10 +330,7 @@ function renderResult(result, routeInfo, routeSegments) {
   ];
   $('metrics').innerHTML = metrics.map(item => `<div class="metric">${item.label}<b>${item.value}</b></div>`).join('');
   $('formula').textContent = result.formula;
-  const distanceText = routeInfo ? (routeInfo.mainBusiness>0&&routeInfo.localBusiness>0 ?
-`\n幹線営業キロ：${routeInfo.mainBusiness.toFixed(1)}km\n地方交通線営業キロ：${routeInfo.localBusiness.toFixed(1)}km\n地方交通線換算キロ：${routeInfo.conversion.toFixed(1)}km\n運賃計算キロ：${routeInfo.mainBusiness.toFixed(1)} + ${routeInfo.conversion.toFixed(1)} = ${routeInfo.fareCalculationKm.toFixed(1)}km\n運賃参照：${routeInfo.label}\n検索距離：${routeInfo.km}km`
-:
-`\n営業キロ：${routeInfo.business.toFixed(1)}km\n運賃参照：${routeInfo.label}\n検索距離：${routeInfo.km}km`) : '';
+  const distanceText = routeInfo ? `\n営業キロ：${routeInfo.business.toFixed(1)}km／換算キロ：${routeInfo.conversion.toFixed(1)}km\n運賃参照：${routeInfo.label}、検索距離${routeInfo.km}km` : '';
   $('reason').textContent = `${result.reason}${distanceText}`;
   $('routeDetails').classList.toggle('hidden', !routeSegments);
   if (routeSegments) $('route').innerHTML = `<table><thead><tr><th>区間</th><th>線名</th><th>営業キロ</th><th>換算キロ</th></tr></thead><tbody>${routeSegments.map(segment => `<tr><td>${segment.from} → ${segment.to}</td><td>${segment.line}</td><td>${segment.business_km}km</td><td>${segment.conversion_km ?? '—'}km</td></tr>`).join('')}</tbody></table>`;
@@ -411,10 +340,6 @@ $('type').addEventListener('change', conditional);
 $('ordinaryStatus').addEventListener('change', conditional);
 $('commuterStart').addEventListener('change', updateCommuterEnd);
 $('commuterMonths').addEventListener('change', updateCommuterEnd);
-$('commuterRequest').addEventListener('change', () => {
-  if (!$('junDetailsPanel').classList.contains('hidden')) renderJunDetails();
-});
-$('junDetailsButton').addEventListener('click', toggleJunDetails);
 ['from', 'to', 'via'].forEach(id => $(id).addEventListener('change', updateCommuterAutoAmounts));
 $('passenger').addEventListener('change', updateCommuterAutoAmounts);
 $('commuterCategory').addEventListener('change', updateCommuterAutoAmounts);

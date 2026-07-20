@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <title>MK払戻</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header>
+  <div><small>MARS KILLER</small><h1>MK払戻</h1><p>JR北海道 払戻計算支援</p></div>
+  <button id="theme" class="sub" type="button">表示切替</button>
+</header>
+<main>
+  <section class="card">
+    <h2>払戻条件</h2>
+    <p class="muted">券種を選び、表示された項目を入力してください。</p>
+    <form id="form">
+      <div class="grid">
+        <label>発駅<input id="from" list="stations" required placeholder="例：札幌"></label>
+        <label>着駅<input id="to" list="stations" required placeholder="例：函館"></label>
+      </div>
+      <label>経由駅<input id="via" placeholder="複数は「,」または「、」で区切る"></label>
+      <div class="grid">
+        <label>券種
+          <select id="type" required>
+            <option value="">選択してください</option>
+            <option value="ordinary">普通乗車券</option>
+            <option value="unreserved">自由席特急券</option>
+            <option value="reserved">指定席特急券</option>
+            <option value="green">指定席特急券＋グリーン券</option>
+            <option value="unassigned">座席未指定券</option>
+            <option value="coupon">普通回数乗車券</option>
+            <option value="commuter">定期乗車券</option>
+          </select>
+        </label>
+        <label>旅客区分<select id="passenger"><option value="adult">大人</option><option value="child">小児</option></select></label>
+      </div>
+
+      <div id="ordinaryBox" class="conditional hidden">
+        <label>使用状態
+          <select id="ordinaryStatus"><option value="before">使用開始前</option><option value="after">使用開始後</option></select>
+        </label>
+        <div id="ordinaryAfterBox" class="hidden grid">
+          <label>未使用区間の運賃<input id="unusedFare" type="number" min="0" step="10" placeholder="円"></label>
+          <label>未使用区間の営業キロ<input id="remainingKm" type="number" min="0" step="0.1" placeholder="101km以上"></label>
+        </div>
+      </div>
+
+      <div id="dateBox" class="conditional hidden">
+        <div class="grid"><label>乗車日<input id="travel" type="date"></label><label>申出日時<input id="request" type="datetime-local"></label></div>
+      </div>
+      <div id="departureBox" class="conditional hidden"><label>列車出発日時<input id="departure" type="datetime-local"></label></div>
+
+      <div id="couponBox" class="conditional hidden">
+        <div class="grid"><label>発売額<input id="couponPrice" type="number" min="0" step="10" placeholder="未入力なら片道運賃×10"></label><label>使用済枚数<input id="couponUsed" type="number" min="0" value="0"></label></div>
+        <p class="muted">使用済枚数×券面区間の片道普通運賃と手数料220円を差し引きます。</p>
+      </div>
+
+      <div id="commuterBox" class="conditional hidden">
+        <div class="grid">
+          <label>期間
+            <select id="commuterMonths">
+              <option value="1">1箇月</option><option value="2">2箇月</option><option value="3">3箇月</option>
+              <option value="4">4箇月</option><option value="5">5箇月</option><option value="6">6箇月</option>
+            </select>
+          </label>
+          <label>有効期間開始日<input id="commuterStart" type="date"></label>
+        </div>
+        <div class="grid">
+          <label>有効期間終了日<input id="commuterEnd" type="date" readonly></label>
+          <label>申出日<input id="commuterRequest" type="date"></label>
+        </div>
+        <div class="grid">
+          <label>定期種別
+            <select id="commuterCategory">
+              <option value="通勤">通勤</option>
+              <option value="通学（大学生用）">通学（大学生用）</option>
+              <option value="通学（高校生用）">通学（高校生用）</option>
+              <option value="通学（中学生用）">通学（中学生用）</option>
+            </select>
+          </label>
+          <label>券面金額<input id="commuterPrice" type="number" min="0" step="10" placeholder="発着駅から自動計算"></label>
+        </div>
+        <div class="grid">
+          <label>片道普通運賃<input id="commuterOneWayFare" type="number" min="0" step="10" placeholder="発着駅から自動計算"></label>
+        </div>
+        <p class="muted">券面金額と片道普通運賃は発駅・着駅から自動入力され、必要に応じて手動で修正できます。使用経過計算と旬割計算を比較し、払戻額が多い方を表示します。</p>
+      </div>
+
+      <div class="actions"><button>検索・計算</button><button id="clear" class="sub" type="button">クリア</button></div>
+    </form>
+    <datalist id="stations"></datalist>
+  </section>
+
+  <section id="result" class="card hidden">
+    <span id="status" class="badge"></span><h2>計算結果</h2>
+    <div id="metrics" class="metrics"></div>
+    <h3>計算式</h3><pre id="formula"></pre>
+    <h3>判定理由・注意事項</h3><p id="reason" class="reason"></p>
+    <details id="routeDetails"><summary>経路明細</summary><div id="route"></div></details>
+  </section>
+</main>
+<footer>本サイトは営業取扱いの確認を支援する試作ツールです。最終判断は正式な規程・資料に基づいてください。</footer>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
