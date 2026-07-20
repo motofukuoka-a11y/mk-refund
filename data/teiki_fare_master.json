@@ -1,0 +1,10922 @@
+[
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通勤",
+    "months": 1,
+    "fare": 7690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通勤",
+    "months": 3,
+    "fare": 22000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通勤",
+    "months": 6,
+    "fare": 39460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 4100
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 11680
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 22230
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 3730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 10660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 20270
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 2940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 8430
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 1,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 15950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通勤",
+    "months": 1,
+    "fare": 7690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通勤",
+    "months": 3,
+    "fare": 22000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通勤",
+    "months": 6,
+    "fare": 39460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 4100
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 11680
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 22230
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 3730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 10660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 20270
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 2940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 8430
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 2,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 15950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通勤",
+    "months": 1,
+    "fare": 7690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通勤",
+    "months": 3,
+    "fare": 22000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通勤",
+    "months": 6,
+    "fare": 39460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 4100
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 11680
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 22230
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 3730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 10660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 20270
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 2940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 8430
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 3,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 15950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通勤",
+    "months": 1,
+    "fare": 9490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通勤",
+    "months": 3,
+    "fare": 27220
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通勤",
+    "months": 6,
+    "fare": 48990
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 4850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 13800
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 26240
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 4410
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 12590
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 23910
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 3470
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 9970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 4,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 18860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通勤",
+    "months": 1,
+    "fare": 9490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通勤",
+    "months": 3,
+    "fare": 27220
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通勤",
+    "months": 6,
+    "fare": 48990
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 5220
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 14930
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 28290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 4780
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 13610
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 25860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 3760
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 10750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 5,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 20410
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通勤",
+    "months": 1,
+    "fare": 9490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通勤",
+    "months": 3,
+    "fare": 27220
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通勤",
+    "months": 6,
+    "fare": 48990
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 5590
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 15940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 30330
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 5090
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 14540
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 27600
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 4020
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 11470
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 6,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 21770
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通勤",
+    "months": 1,
+    "fare": 10950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通勤",
+    "months": 3,
+    "fare": 31420
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通勤",
+    "months": 6,
+    "fare": 56460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 6550
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 18700
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 35490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 5970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 17070
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 32360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 4710
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 13450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 7,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 25550
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通勤",
+    "months": 1,
+    "fare": 10950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通勤",
+    "months": 3,
+    "fare": 31420
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通勤",
+    "months": 6,
+    "fare": 56460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 7170
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 20480
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 38840
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 6520
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 18700
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 35490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 5160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 14730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 8,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 27900
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通勤",
+    "months": 1,
+    "fare": 10950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通勤",
+    "months": 3,
+    "fare": 31420
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通勤",
+    "months": 6,
+    "fare": 56460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 7630
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 21770
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 41180
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 6940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 19810
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 37610
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 5450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 15620
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 9,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 29570
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通勤",
+    "months": 1,
+    "fare": 10950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通勤",
+    "months": 3,
+    "fare": 31420
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通勤",
+    "months": 6,
+    "fare": 56460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 7810
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 22320
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 42290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 7120
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 20370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 38620
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 5590
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 16020
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 10,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 30350
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通勤",
+    "months": 1,
+    "fare": 12920
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通勤",
+    "months": 3,
+    "fare": 37000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通勤",
+    "months": 6,
+    "fare": 66490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 8940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 25530
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 48340
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 8150
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 23260
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 44190
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 6390
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 18340
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 11,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 34730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通勤",
+    "months": 1,
+    "fare": 12920
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通勤",
+    "months": 3,
+    "fare": 37000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通勤",
+    "months": 6,
+    "fare": 66490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 9110
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 26050
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 49380
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 8290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 23720
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 44970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 6530
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 18660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 12,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 35380
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通勤",
+    "months": 1,
+    "fare": 12920
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通勤",
+    "months": 3,
+    "fare": 37000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通勤",
+    "months": 6,
+    "fare": 66490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 9290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 26570
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 50410
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 8490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 24240
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 46010
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 6670
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 19050
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 13,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 36160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通勤",
+    "months": 1,
+    "fare": 12920
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通勤",
+    "months": 3,
+    "fare": 37000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通勤",
+    "months": 6,
+    "fare": 66490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 9520
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 27210
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 51580
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 8690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 24820
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 47050
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 6820
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 19510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 14,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 37060
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通勤",
+    "months": 1,
+    "fare": 12920
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通勤",
+    "months": 3,
+    "fare": 37000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通勤",
+    "months": 6,
+    "fare": 66490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 9520
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 27210
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 51580
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 8690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 24820
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 47050
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 6820
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 19510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 15,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 37060
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通勤",
+    "months": 1,
+    "fare": 16750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通勤",
+    "months": 3,
+    "fare": 47960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通勤",
+    "months": 6,
+    "fare": 86290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 11200
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 31980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 60570
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 10210
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 29100
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 55330
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8040
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 22930
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 16,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 43480
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通勤",
+    "months": 1,
+    "fare": 16750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通勤",
+    "months": 3,
+    "fare": 47960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通勤",
+    "months": 6,
+    "fare": 86290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 11440
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 32660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 61930
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 10430
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 29780
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 56510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8210
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 23440
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 17,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 44500
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通勤",
+    "months": 1,
+    "fare": 16750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通勤",
+    "months": 3,
+    "fare": 47960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通勤",
+    "months": 6,
+    "fare": 86290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 11440
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 32660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 61930
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 10430
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 29780
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 56510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8210
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 23440
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 18,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 44500
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通勤",
+    "months": 1,
+    "fare": 16750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通勤",
+    "months": 3,
+    "fare": 47960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通勤",
+    "months": 6,
+    "fare": 86290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 11620
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 33160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 62940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 10600
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 30200
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 57350
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8310
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 23770
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 19,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 45180
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通勤",
+    "months": 1,
+    "fare": 16750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通勤",
+    "months": 3,
+    "fare": 47960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通勤",
+    "months": 6,
+    "fare": 86290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 11820
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 33760
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 63960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 10770
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 30800
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 58370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 24200
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 20,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 46020
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通勤",
+    "months": 1,
+    "fare": 20980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通勤",
+    "months": 3,
+    "fare": 60140
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通勤",
+    "months": 6,
+    "fare": 108160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12110
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 34560
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 65570
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11040
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 31530
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 59930
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8700
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 24850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 21,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 47190
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通勤",
+    "months": 1,
+    "fare": 20980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通勤",
+    "months": 3,
+    "fare": 60140
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通勤",
+    "months": 6,
+    "fare": 108160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12280
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 66610
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11210
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32050
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 60760
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8800
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 22,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 47810
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通勤",
+    "months": 1,
+    "fare": 20980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通勤",
+    "months": 3,
+    "fare": 60140
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通勤",
+    "months": 6,
+    "fare": 108160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12280
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 66610
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11210
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32050
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 60760
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8800
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 23,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 47810
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通勤",
+    "months": 1,
+    "fare": 20980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通勤",
+    "months": 3,
+    "fare": 60140
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通勤",
+    "months": 6,
+    "fare": 108160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 67080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11300
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32310
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 61450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8900
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 24,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通勤",
+    "months": 1,
+    "fare": 20980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通勤",
+    "months": 3,
+    "fare": 60140
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通勤",
+    "months": 6,
+    "fare": 108160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 67080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11300
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32310
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 61450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8900
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 25,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48480
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通勤",
+    "months": 1,
+    "fare": 24270
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通勤",
+    "months": 3,
+    "fare": 69650
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通勤",
+    "months": 6,
+    "fare": 128030
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 67080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11300
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32310
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 61450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8900
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 26,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48480
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通勤",
+    "months": 1,
+    "fare": 24690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通勤",
+    "months": 3,
+    "fare": 70630
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通勤",
+    "months": 6,
+    "fare": 128030
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 67080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11300
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32310
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 61450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8900
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 27,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48480
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通勤",
+    "months": 1,
+    "fare": 24690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通勤",
+    "months": 3,
+    "fare": 70630
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通勤",
+    "months": 6,
+    "fare": 128030
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12520
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 68060
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11470
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32680
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 62180
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9010
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25830
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 28,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通勤",
+    "months": 1,
+    "fare": 24690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通勤",
+    "months": 3,
+    "fare": 70630
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通勤",
+    "months": 6,
+    "fare": 128030
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12520
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 68060
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11470
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32680
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 62180
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9010
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25830
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 29,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通勤",
+    "months": 1,
+    "fare": 24690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通勤",
+    "months": 3,
+    "fare": 70630
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通勤",
+    "months": 6,
+    "fare": 128030
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 36350
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 69000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11630
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 33170
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 62910
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9140
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 26180
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 30,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 49700
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通勤",
+    "months": 1,
+    "fare": 27700
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通勤",
+    "months": 3,
+    "fare": 79350
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通勤",
+    "months": 6,
+    "fare": 147460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 36730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 69700
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11770
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 33560
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 63650
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9270
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 26500
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 31,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 50400
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通勤",
+    "months": 1,
+    "fare": 28320
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通勤",
+    "months": 3,
+    "fare": 81080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通勤",
+    "months": 6,
+    "fare": 147460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 36730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 69700
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11770
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 33560
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 63650
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9270
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 26500
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 32,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 50400
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通勤",
+    "months": 1,
+    "fare": 28660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通勤",
+    "months": 3,
+    "fare": 82080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通勤",
+    "months": 6,
+    "fare": 147460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 37010
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 70270
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 33850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 64220
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 26780
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 33,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 50980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通勤",
+    "months": 1,
+    "fare": 28660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通勤",
+    "months": 3,
+    "fare": 82080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通勤",
+    "months": 6,
+    "fare": 147460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 13060
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 37300
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 70850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11900
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 33980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 64510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9410
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 26930
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 34,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 50980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通勤",
+    "months": 1,
+    "fare": 28660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通勤",
+    "months": 3,
+    "fare": 82080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通勤",
+    "months": 6,
+    "fare": 147460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 13340
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 38170
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 72580
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 12190
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 34850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 66240
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9650
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 27510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 35,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 52420
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通勤",
+    "months": 1,
+    "fare": 31350
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通勤",
+    "months": 3,
+    "fare": 89750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通勤",
+    "months": 6,
+    "fare": 169250
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 13580
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 38760
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 73850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 12420
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 35440
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 67230
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9830
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 27980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 36,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 53320
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通勤",
+    "months": 1,
+    "fare": 31960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通勤",
+    "months": 3,
+    "fare": 91580
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通勤",
+    "months": 6,
+    "fare": 169250
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 13640
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 38920
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 73850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 12480
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 35600
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 67560
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9830
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 28150
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 37,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 53660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通勤",
+    "months": 1,
+    "fare": 32450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通勤",
+    "months": 3,
+    "fare": 93070
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通勤",
+    "months": 6,
+    "fare": 169250
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 13970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 39910
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 75840
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 12750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 36430
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 69220
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 10110
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 28820
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 38,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 54980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通勤",
+    "months": 1,
+    "fare": 32850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通勤",
+    "months": 3,
+    "fare": 94060
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通勤",
+    "months": 6,
+    "fare": 169250
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 14020
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 40070
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 76170
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 12810
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 36590
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 69550
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 10110
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 28980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 39,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 54980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通勤",
+    "months": 1,
+    "fare": 32850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通勤",
+    "months": 3,
+    "fare": 94060
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通勤",
+    "months": 6,
+    "fare": 169250
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 14410
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 41070
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 78160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 13130
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 37590
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 71210
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 10370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 29640
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 40,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 56310
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通勤",
+    "months": 1,
+    "fare": 34880
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通勤",
+    "months": 3,
+    "fare": 99960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通勤",
+    "months": 6,
+    "fare": 190950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 14850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 42500
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 80880
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 13610
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 38750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 73760
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 10730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 30700
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 41,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 58400
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通勤",
+    "months": 1,
+    "fare": 35320
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通勤",
+    "months": 3,
+    "fare": 101090
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通勤",
+    "months": 6,
+    "fare": 190950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 15100
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 43250
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 81990
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 13850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 39490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 74880
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 10920
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 31260
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 42,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 59530
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通勤",
+    "months": 1,
+    "fare": 35760
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通勤",
+    "months": 3,
+    "fare": 102400
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通勤",
+    "months": 6,
+    "fare": 190950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 15540
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 44360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 84240
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 14170
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 40620
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 77120
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 11230
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 32010
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 43,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 61030
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通勤",
+    "months": 1,
+    "fare": 36380
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通勤",
+    "months": 3,
+    "fare": 104270
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通勤",
+    "months": 6,
+    "fare": 190950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 15720
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 44930
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 85370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 14350
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 41000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 77870
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 11360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 32390
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 44,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 61780
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通勤",
+    "months": 1,
+    "fare": 36820
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通勤",
+    "months": 3,
+    "fare": 105390
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通勤",
+    "months": 6,
+    "fare": 190950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 16100
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 46060
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 87610
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 14720
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 42120
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 79750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 11600
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 33320
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 45,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 63270
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通勤",
+    "months": 1,
+    "fare": 40000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通勤",
+    "months": 3,
+    "fare": 114560
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通勤",
+    "months": 6,
+    "fare": 226080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 17490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 50100
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 94960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 15970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 45740
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 86690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 12630
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 36150
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 46,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 68830
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通勤",
+    "months": 1,
+    "fare": 40370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通勤",
+    "months": 3,
+    "fare": 115650
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通勤",
+    "months": 6,
+    "fare": 226080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 17640
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 50520
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 95830
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 16110
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 46180
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 87560
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 12770
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 36590
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 47,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 69260
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通勤",
+    "months": 1,
+    "fare": 40870
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通勤",
+    "months": 3,
+    "fare": 117180
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通勤",
+    "months": 6,
+    "fare": 226080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 18150
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 51620
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 98450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 16550
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 47260
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 89730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 13070
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 37460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 48,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 71000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通勤",
+    "months": 1,
+    "fare": 41310
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通勤",
+    "months": 3,
+    "fare": 118490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通勤",
+    "months": 6,
+    "fare": 226080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 18370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 52490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 99750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 16770
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 47910
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 91040
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 13290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 37900
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 49,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 72310
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通勤",
+    "months": 1,
+    "fare": 41750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通勤",
+    "months": 3,
+    "fare": 119790
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通勤",
+    "months": 6,
+    "fare": 226080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 18800
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 53800
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 101930
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 17130
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 49000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 93220
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 13580
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 38770
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 50,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 73620
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通勤",
+    "months": 1,
+    "fare": 42720
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通勤",
+    "months": 3,
+    "fare": 122700
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通勤",
+    "months": 6,
+    "fare": 243430
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 19050
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 54400
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 103330
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 17390
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 49680
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 94390
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 13740
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 39250
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 51,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 74520
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通勤",
+    "months": 1,
+    "fare": 43380
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通勤",
+    "months": 3,
+    "fare": 124450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通勤",
+    "months": 6,
+    "fare": 246900
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 19380
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 55390
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 105320
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 17720
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 50680
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 96380
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 14000
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 40400
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 52,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 76500
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通勤",
+    "months": 1,
+    "fare": 43970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通勤",
+    "months": 3,
+    "fare": 125940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通勤",
+    "months": 6,
+    "fare": 249890
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 19710
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 56140
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 106810
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 17970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 51420
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 97870
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 14240
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 40740
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 53,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 77500
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通勤",
+    "months": 1,
+    "fare": 44710
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通勤",
+    "months": 3,
+    "fare": 128170
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通勤",
+    "months": 6,
+    "fare": 253870
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 19960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 56880
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 108310
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 18210
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 52160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 98860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 14400
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 41230
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 54,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 78490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通勤",
+    "months": 1,
+    "fare": 45290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通勤",
+    "months": 3,
+    "fare": 129910
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 20370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 58120
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 110290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 18630
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 53160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 100850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 14730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 41980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 55,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 79980
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通勤",
+    "months": 1,
+    "fare": 45950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通勤",
+    "months": 3,
+    "fare": 131650
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 20700
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 59120
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 112280
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 18870
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 54150
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 102840
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 14910
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 42730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 56,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 81480
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通勤",
+    "months": 1,
+    "fare": 46450
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通勤",
+    "months": 3,
+    "fare": 133150
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 20860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 59620
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 113270
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 19050
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 54400
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 103330
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 15070
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 42970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 57,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 81970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通勤",
+    "months": 1,
+    "fare": 47190
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通勤",
+    "months": 3,
+    "fare": 135380
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 21280
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 60860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 115750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 19460
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 55640
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 105810
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 15400
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 43970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 58,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 83470
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通勤",
+    "months": 1,
+    "fare": 47780
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通勤",
+    "months": 3,
+    "fare": 137110
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 21690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 61860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 117240
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 19780
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 56390
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 107310
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 15640
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 44710
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 59,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 84950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通勤",
+    "months": 1,
+    "fare": 48440
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通勤",
+    "months": 3,
+    "fare": 138860
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 21950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 62730
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 119150
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 20050
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 57290
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 108800
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 15850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 45230
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 60,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 85870
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通勤",
+    "months": 1,
+    "fare": 49510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通勤",
+    "months": 3,
+    "fare": 142240
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通勤",
+    "months": 6,
+    "fare": 281620
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 22040
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 62960
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 119630
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 20130
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 57530
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 109330
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 15940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 45500
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 61,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 86430
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通勤",
+    "months": 1,
+    "fare": 50080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通勤",
+    "months": 3,
+    "fare": 143670
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通勤",
+    "months": 6,
+    "fare": 285060
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 22420
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 64100
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 121920
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 20510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 58670
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 111610
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 16210
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 46370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 62,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 88150
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通勤",
+    "months": 1,
+    "fare": 50760
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通勤",
+    "months": 3,
+    "fare": 145670
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通勤",
+    "months": 6,
+    "fare": 288490
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 22800
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 65260
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 123640
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 20890
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 59530
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 113330
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 16500
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 47220
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 63,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 89870
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通勤",
+    "months": 1,
+    "fare": 51320
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通勤",
+    "months": 3,
+    "fare": 147100
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通勤",
+    "months": 6,
+    "fare": 291920
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 23090
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 66110
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 125360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 21180
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 60390
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 114280
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 16690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 47800
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 64,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 91010
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通勤",
+    "months": 1,
+    "fare": 52090
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通勤",
+    "months": 3,
+    "fare": 149400
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通勤",
+    "months": 6,
+    "fare": 295360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 23470
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 66970
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 127080
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 21370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 61240
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 116200
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 16890
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 48360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 65,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 92160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通勤",
+    "months": 1,
+    "fare": 52660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通勤",
+    "months": 3,
+    "fare": 151120
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通勤",
+    "months": 6,
+    "fare": 295360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 23850
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 68120
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 129360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 21750
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 62110
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 117910
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 17170
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 49230
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 66,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 93300
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通勤",
+    "months": 1,
+    "fare": 53230
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通勤",
+    "months": 3,
+    "fare": 152550
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通勤",
+    "months": 6,
+    "fare": 295360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 24040
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 68690
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 130510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 21940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 62670
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 119060
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 17370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 49520
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 67,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 94440
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通勤",
+    "months": 1,
+    "fare": 53900
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通勤",
+    "months": 3,
+    "fare": 154550
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通勤",
+    "months": 6,
+    "fare": 295360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 24520
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 70120
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 133370
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 22420
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 64100
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 121920
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 17740
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 50660
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 68,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 96160
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通勤",
+    "months": 1,
+    "fare": 54570
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通勤",
+    "months": 3,
+    "fare": 156550
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通勤",
+    "months": 6,
+    "fare": 295360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 24610
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 70410
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 133940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 22510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 64390
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 122500
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 17740
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 50950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 69,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 96740
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通勤",
+    "months": 1,
+    "fare": 54590
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通勤",
+    "months": 3,
+    "fare": 157540
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通勤",
+    "months": 6,
+    "fare": 295360
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 24940
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 71260
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 135440
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 22790
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 65140
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 123640
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 17950
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 51510
+  },
+  {
+    "lineType": "幹線",
+    "businessKm": 70,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 97880
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通勤",
+    "months": 1,
+    "fare": 7690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通勤",
+    "months": 3,
+    "fare": 22000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通勤",
+    "months": 6,
+    "fare": 39460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 4110
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 11720
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 22230
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 3740
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 10700
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 20340
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 2940
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 8430
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 1,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 16030
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通勤",
+    "months": 1,
+    "fare": 7690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通勤",
+    "months": 3,
+    "fare": 22000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通勤",
+    "months": 6,
+    "fare": 39460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 4110
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 11720
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 22230
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 3740
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 10700
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 20340
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 2940
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 8430
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 2,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 16020
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通勤",
+    "months": 1,
+    "fare": 7690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通勤",
+    "months": 3,
+    "fare": 22000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通勤",
+    "months": 6,
+    "fare": 39460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 4110
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 11720
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 22230
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 3740
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 10700
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 20340
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 2940
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 8430
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 3,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 16020
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通勤",
+    "months": 1,
+    "fare": 9950
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通勤",
+    "months": 3,
+    "fare": 28530
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通勤",
+    "months": 6,
+    "fare": 51220
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 4980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 14190
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 26830
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 4670
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 13370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 25370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 3690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 10550
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 4,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 20020
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通勤",
+    "months": 1,
+    "fare": 9950
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通勤",
+    "months": 3,
+    "fare": 28530
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通勤",
+    "months": 6,
+    "fare": 51220
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 5380
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 15310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 29060
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 5050
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 14440
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 27410
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 3970
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 11370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 5,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 21590
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通勤",
+    "months": 1,
+    "fare": 9950
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通勤",
+    "months": 3,
+    "fare": 28530
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通勤",
+    "months": 6,
+    "fare": 51220
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 5790
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 16520
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 31300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 5410
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 15510
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 29450
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 4270
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 12200
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 6,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 23230
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通勤",
+    "months": 1,
+    "fare": 11370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通勤",
+    "months": 3,
+    "fare": 32540
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通勤",
+    "months": 6,
+    "fare": 58520
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 6680
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 19010
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 36050
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 6260
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 17910
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 33980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 4920
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 14110
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 7,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 26730
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通勤",
+    "months": 1,
+    "fare": 11870
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通勤",
+    "months": 3,
+    "fare": 32540
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通勤",
+    "months": 6,
+    "fare": 58520
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 7340
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 20850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 39510
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 6840
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 19530
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 37100
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 5380
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 15380
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 8,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 29270
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通勤",
+    "months": 1,
+    "fare": 11370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通勤",
+    "months": 3,
+    "fare": 32540
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通勤",
+    "months": 6,
+    "fare": 58520
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 7750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 22180
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 41930
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 7250
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 20740
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 39400
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 5710
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 16300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 9,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 31000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通勤",
+    "months": 1,
+    "fare": 11370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通勤",
+    "months": 3,
+    "fare": 32540
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通勤",
+    "months": 6,
+    "fare": 58520
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 7990
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 22750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 43200
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 7450
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 21310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 40440
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 5860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 16700
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 10,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 31810
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通勤",
+    "months": 1,
+    "fare": 12920
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通勤",
+    "months": 3,
+    "fare": 37000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通勤",
+    "months": 6,
+    "fare": 66490
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 9070
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 25920
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 49120
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 8490
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 24240
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 46010
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 6670
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 19050
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 11,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 36170
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通勤",
+    "months": 1,
+    "fare": 12920
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通勤",
+    "months": 3,
+    "fare": 37000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通勤",
+    "months": 6,
+    "fare": 66490
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 9310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 26570
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 50280
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 8690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 24820
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 47050
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 6820
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 19510
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 12,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 37100
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通勤",
+    "months": 1,
+    "fare": 12920
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通勤",
+    "months": 3,
+    "fare": 37000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通勤",
+    "months": 6,
+    "fare": 66490
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 9310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 26570
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 50410
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 8690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 24820
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 47050
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 6820
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 19510
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 13,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 37100
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通勤",
+    "months": 1,
+    "fare": 13670
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通勤",
+    "months": 3,
+    "fare": 39200
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通勤",
+    "months": 6,
+    "fare": 70240
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 10510
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 30010
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 54830
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 9790
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 27930
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 51190
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 7670
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 21960
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 14,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 40310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通勤",
+    "months": 1,
+    "fare": 13670
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通勤",
+    "months": 3,
+    "fare": 39200
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通勤",
+    "months": 6,
+    "fare": 70240
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 10510
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 30010
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 54830
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 9790
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 27930
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 51190
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 7670
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 21960
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 15,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 40310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通勤",
+    "months": 1,
+    "fare": 16750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通勤",
+    "months": 3,
+    "fare": 47960
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通勤",
+    "months": 6,
+    "fare": 86290
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 11440
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 32660
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 61930
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 10430
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 29780
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 56510
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8210
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 23440
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 16,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 44500
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通勤",
+    "months": 1,
+    "fare": 16750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通勤",
+    "months": 3,
+    "fare": 47960
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通勤",
+    "months": 6,
+    "fare": 86290
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 11540
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 32910
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 62260
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 10600
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 30200
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 57350
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 23770
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 17,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 45190
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通勤",
+    "months": 1,
+    "fare": 16750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通勤",
+    "months": 3,
+    "fare": 47960
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通勤",
+    "months": 6,
+    "fare": 86290
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 11540
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 38291
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 62600
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 10770
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 30800
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 58370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 24000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 18,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 46000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通勤",
+    "months": 1,
+    "fare": 17460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通勤",
+    "months": 3,
+    "fare": 50000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通勤",
+    "months": 6,
+    "fare": 89850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 11900
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 33930
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 64290
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 31738
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 60240
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8740
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 24950
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 19,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 47390
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通勤",
+    "months": 1,
+    "fare": 17460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通勤",
+    "months": 3,
+    "fare": 50000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通勤",
+    "months": 6,
+    "fare": 89850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12010
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 34270
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 64980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11210
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 31990
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 60760
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8800
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25140
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 20,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 47790
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通勤",
+    "months": 1,
+    "fare": 20980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通勤",
+    "months": 3,
+    "fare": 60140
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通勤",
+    "months": 6,
+    "fare": 108160
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 67080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 61450
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8900
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 21,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48400
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通勤",
+    "months": 1,
+    "fare": 20980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通勤",
+    "months": 3,
+    "fare": 60140
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通勤",
+    "months": 6,
+    "fare": 108160
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 67080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 61450
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8900
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 22,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48490
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通勤",
+    "months": 1,
+    "fare": 21680
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通勤",
+    "months": 3,
+    "fare": 62120
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通勤",
+    "months": 6,
+    "fare": 111710
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 67080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11800
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 61450
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8900
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 23,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48490
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通勤",
+    "months": 1,
+    "fare": 24690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通勤",
+    "months": 3,
+    "fare": 70630
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通勤",
+    "months": 6,
+    "fare": 128030
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 67080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 61450
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 8900
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 24,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48500
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通勤",
+    "months": 1,
+    "fare": 24690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通勤",
+    "months": 3,
+    "fare": 70630
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通勤",
+    "months": 6,
+    "fare": 128030
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12520
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 68060
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11470
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32680
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 62180
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9010
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25830
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 25,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48970
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通勤",
+    "months": 1,
+    "fare": 24690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通勤",
+    "months": 3,
+    "fare": 70630
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通勤",
+    "months": 6,
+    "fare": 128030
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12520
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 35860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 68060
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11470
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 32680
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 62180
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9010
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 25830
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 26,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 48970
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通勤",
+    "months": 1,
+    "fare": 24690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通勤",
+    "months": 3,
+    "fare": 70630
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通勤",
+    "months": 6,
+    "fare": 128030
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12730
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 36350
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 69000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11680
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 33170
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 62910
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9140
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 26180
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 27,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 49710
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通勤",
+    "months": 1,
+    "fare": 25090
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通勤",
+    "months": 3,
+    "fare": 71980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通勤",
+    "months": 6,
+    "fare": 129260
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12740
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 36370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 69000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11650
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 33220
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 62980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9160
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 26180
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 28,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 49800
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通勤",
+    "months": 1,
+    "fare": 28320
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通勤",
+    "months": 3,
+    "fare": 81080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通勤",
+    "months": 6,
+    "fare": 147460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 36730
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 69700
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11770
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 33560
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 63650
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9270
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 26500
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 29,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 50400
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通勤",
+    "months": 1,
+    "fare": 28660
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通勤",
+    "months": 3,
+    "fare": 82080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通勤",
+    "months": 6,
+    "fare": 147460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 36730
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 69700
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 11860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 33850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 64220
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 26780
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 30,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 51000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通勤",
+    "months": 1,
+    "fare": 28660
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通勤",
+    "months": 3,
+    "fare": 82080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通勤",
+    "months": 6,
+    "fare": 147460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 12860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 36730
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 69700
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 12190
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 34850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 66240
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9650
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 27510
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 31,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 52420
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通勤",
+    "months": 1,
+    "fare": 29280
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通勤",
+    "months": 3,
+    "fare": 83810
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通勤",
+    "months": 6,
+    "fare": 150910
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 13050
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 37150
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 70340
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 12370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 35290
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 66940
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9730
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 27860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 32,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 53100
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通勤",
+    "months": 1,
+    "fare": 31960
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通勤",
+    "months": 3,
+    "fare": 91580
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通勤",
+    "months": 6,
+    "fare": 169500
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 13080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 37260
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 70540
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 12480
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 35600
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 67560
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 9830
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 28150
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 33,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 53700
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通勤",
+    "months": 1,
+    "fare": 32450
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通勤",
+    "months": 3,
+    "fare": 93070
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通勤",
+    "months": 6,
+    "fare": 169250
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 13410
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 38250
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 72530
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 12750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 36438
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 69220
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 10110
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 28820
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 34,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 55000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通勤",
+    "months": 1,
+    "fare": 32850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通勤",
+    "months": 3,
+    "fare": 94060
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通勤",
+    "months": 6,
+    "fare": 169250
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 13470
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 38420
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 72860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 12810
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 36590
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 69550
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 10110
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 28980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 35,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 55000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通勤",
+    "months": 1,
+    "fare": 32850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通勤",
+    "months": 3,
+    "fare": 94060
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通勤",
+    "months": 6,
+    "fare": 169250
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 13850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 39410
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 74850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 13130
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 37590
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 71210
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 10370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 29640
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 36,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 56300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通勤",
+    "months": 1,
+    "fare": 33340
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通勤",
+    "months": 3,
+    "fare": 95550
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通勤",
+    "months": 6,
+    "fare": 172550
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 14290
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 40740
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 77170
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 13580
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 38760
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 73530
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 10700
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 30640
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 37,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 58290
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通勤",
+    "months": 1,
+    "fare": 35320
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通勤",
+    "months": 3,
+    "fare": 101080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通勤",
+    "months": 6,
+    "fare": 190950
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 14470
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 41370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 78250
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 13850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 39490
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 74880
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 10920
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 31260
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 38,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 59530
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通勤",
+    "months": 1,
+    "fare": 35760
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通勤",
+    "months": 3,
+    "fare": 102400
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通勤",
+    "months": 6,
+    "fare": 190950
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 14910
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 42120
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 79750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 14170
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 40620
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 77120
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 11230
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 32010
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 39,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 61000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通勤",
+    "months": 1,
+    "fare": 36380
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通勤",
+    "months": 3,
+    "fare": 104270
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通勤",
+    "months": 6,
+    "fare": 190950
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 15100
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 42120
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 79750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 14850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 41000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 77870
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 11360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 32390
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 40,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 61800
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通勤",
+    "months": 1,
+    "fare": 37620
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通勤",
+    "months": 3,
+    "fare": 107820
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通勤",
+    "months": 6,
+    "fare": 196560
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 15980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 44560
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 84240
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 15160
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 43250
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 82370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 11980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 34260
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 41,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 65200
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通勤",
+    "months": 1,
+    "fare": 40370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通勤",
+    "months": 3,
+    "fare": 115650
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通勤",
+    "months": 6,
+    "fare": 226080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 16920
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 47260
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 89300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 16110
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 46180
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 87560
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 12770
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 36590
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 42,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 69300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通勤",
+    "months": 1,
+    "fare": 40870
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通勤",
+    "months": 3,
+    "fare": 117180
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通勤",
+    "months": 6,
+    "fare": 226080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 17420
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 48350
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 91910
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 16550
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 47260
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 89730
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 13070
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 37460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 43,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 71000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通勤",
+    "months": 1,
+    "fare": 41310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通勤",
+    "months": 3,
+    "fare": 118490
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通勤",
+    "months": 6,
+    "fare": 226080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 17650
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 49230
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 93220
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 16770
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 47910
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 91040
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 13290
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 37900
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 44,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 72300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通勤",
+    "months": 1,
+    "fare": 41750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通勤",
+    "months": 3,
+    "fare": 119790
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通勤",
+    "months": 6,
+    "fare": 226080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 18080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 50530
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 95390
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 17138
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 49000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 93220
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 13580
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 38770
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 45,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 73620
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通勤",
+    "months": 1,
+    "fare": 42480
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通勤",
+    "months": 3,
+    "fare": 121750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通勤",
+    "months": 6,
+    "fare": 227390
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 18300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 51190
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 96700
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 17420
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 49660
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 94530
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 13730
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 39210
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 46,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 74920
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通勤",
+    "months": 1,
+    "fare": 43380
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通勤",
+    "months": 3,
+    "fare": 124450
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通勤",
+    "months": 6,
+    "fare": 246900
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 18550
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 51670
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 97870
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 17720
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 50680
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 96380
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 14000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 40240
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 47,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 76500
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通勤",
+    "months": 1,
+    "fare": 43970
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通勤",
+    "months": 3,
+    "fare": 125940
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通勤",
+    "months": 6,
+    "fare": 249890
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 18880
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 52420
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 99360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 17970
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 51420
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 97870
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 14240
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 40740
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 48,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 77500
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通勤",
+    "months": 1,
+    "fare": 44710
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通勤",
+    "months": 3,
+    "fare": 128170
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通勤",
+    "months": 6,
+    "fare": 253870
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 19130
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 53160
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 100860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 18210
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 52160
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 98860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 14400
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 41230
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 49,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 78490
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通勤",
+    "months": 1,
+    "fare": 45290
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通勤",
+    "months": 3,
+    "fare": 129910
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 19540
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 54400
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 102830
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 18630
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 53160
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 100850
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 14730
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 41980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 50,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 80000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通勤",
+    "months": 1,
+    "fare": 46450
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通勤",
+    "months": 3,
+    "fare": 133150
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 20040
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 55890
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 105820
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 19050
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 54400
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 103330
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 15070
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 42970
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 51,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 81970
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通勤",
+    "months": 1,
+    "fare": 47190
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通勤",
+    "months": 3,
+    "fare": 135380
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 20450
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 57140
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 108300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 19460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 55640
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 105810
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 15400
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 43970
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 52,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 83500
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通勤",
+    "months": 1,
+    "fare": 47780
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通勤",
+    "months": 3,
+    "fare": 137110
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 20860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 58130
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 109790
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 19780
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 56390
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 107310
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 15640
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 44710
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 53,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 84950
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通勤",
+    "months": 1,
+    "fare": 48440
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通勤",
+    "months": 3,
+    "fare": 138860
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通勤",
+    "months": 6,
+    "fare": 255360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 21120
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 59110
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 111780
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 20120
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 57380
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 108800
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 15980
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 45460
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 54,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 85950
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通勤",
+    "months": 1,
+    "fare": 49440
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通勤",
+    "months": 3,
+    "fare": 141710
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通勤",
+    "months": 6,
+    "fare": 263300
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 21470
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 59810
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 113340
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 20440
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 58430
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 111120
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 16130
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 46100
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 55,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 87600
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通勤",
+    "months": 1,
+    "fare": 50080
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通勤",
+    "months": 3,
+    "fare": 143670
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通勤",
+    "months": 6,
+    "fare": 285060
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 21470
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 59810
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 113340
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 20510
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 58670
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 111610
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 16210
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 46370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 56,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 88200
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通勤",
+    "months": 1,
+    "fare": 50760
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通勤",
+    "months": 3,
+    "fare": 145670
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通勤",
+    "months": 6,
+    "fare": 288490
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 21840
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 60960
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 115050
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 20890
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 59530
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 113330
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 16500
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 47220
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 57,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 89900
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通勤",
+    "months": 1,
+    "fare": 51320
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通勤",
+    "months": 3,
+    "fare": 147100
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通勤",
+    "months": 6,
+    "fare": 291920
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 22130
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 61820
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 116770
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 21180
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 60390
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 114480
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 16690
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 47800
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 58,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 91000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通勤",
+    "months": 1,
+    "fare": 52090
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通勤",
+    "months": 3,
+    "fare": 149400
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通勤",
+    "months": 6,
+    "fare": 295360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 22520
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 62680
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 118480
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 21370
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 61240
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 116000
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 16890
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 48360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 59,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 92200
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通勤",
+    "months": 1,
+    "fare": 52660
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通勤",
+    "months": 3,
+    "fare": 151120
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通勤",
+    "months": 6,
+    "fare": 295360
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通学（大学生用）",
+    "months": 1,
+    "fare": 22900
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通学（大学生用）",
+    "months": 3,
+    "fare": 63820
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通学（大学生用）",
+    "months": 6,
+    "fare": 120770
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通学（高校生用）",
+    "months": 1,
+    "fare": 21750
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通学（高校生用）",
+    "months": 3,
+    "fare": 62110
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通学（高校生用）",
+    "months": 6,
+    "fare": 117910
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通学（中学生用）",
+    "months": 1,
+    "fare": 17170
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通学（中学生用）",
+    "months": 3,
+    "fare": 49230
+  },
+  {
+    "lineType": "地方交通線",
+    "businessKm": 60,
+    "category": "通学（中学生用）",
+    "months": 6,
+    "fare": 93300
+  }
+]

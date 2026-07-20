@@ -73,10 +73,20 @@
           <label>申出日<input id="commuterRequest" type="date"></label>
         </div>
         <div class="grid">
-          <label>券面金額<input id="commuterPrice" type="number" min="0" step="10" placeholder="円"></label>
+          <label>定期種別
+            <select id="commuterCategory">
+              <option value="通勤">通勤</option>
+              <option value="通学（大学生用）">通学（大学生用）</option>
+              <option value="通学（高校生用）">通学（高校生用）</option>
+              <option value="通学（中学生用）">通学（中学生用）</option>
+            </select>
+          </label>
+          <label>券面金額<input id="commuterPrice" type="number" min="0" step="10" placeholder="発着駅から自動計算"></label>
+        </div>
+        <div class="grid">
           <label>片道普通運賃<input id="commuterOneWayFare" type="number" min="0" step="10" placeholder="発着駅から自動計算"></label>
         </div>
-        <p class="muted">片道普通運賃は発駅・着駅から自動入力され、必要に応じて手動で修正できます。単純使用計算と旬割計算を比較し、払戻額が多い方を表示します。</p>
+        <p class="muted">券面金額と片道普通運賃は発駅・着駅から自動入力され、必要に応じて手動で修正できます。使用経過計算と旬割計算を比較し、払戻額が多い方を表示します。</p>
       </div>
 
       <div class="actions"><button>検索・計算</button><button id="clear" class="sub" type="button">クリア</button></div>
