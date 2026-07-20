@@ -11,6 +11,7 @@ const formatDateInput = date => {
   local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
   return local.toISOString().slice(0, 10);
 };
+const formatJapaneseDate = date => `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
 
 const [segments, stations, mainFares, localFares, charges, commuterFares] = await Promise.all(
   ['segments', 'stations', 'ordinary_fares_main', 'ordinary_fares_local', 'charges', 'teiki_fare_master']
@@ -126,6 +127,63 @@ function createJunPeriods(start, end) {
     month += 1;
   }
   return periods;
+}
+
+function renderJunDetails(forceOpen = false) {
+  const panel = $('junDetailsPanel');
+  const button = $('junDetailsButton');
+  const list = $('junDetailsList');
+  const summary = $('junDetailsSummary');
+
+  const start = parseDate($('commuterStart').value);
+  const request = parseDate($('commuterRequest').value);
+  const months = Number($('commuterMonths').value || 1);
+
+  if (!start || !Number.isInteger(months) || months < 1 || months > 6) {
+    list.innerHTML = '<p class="muted">有効期間開始日と定期期間を選択してください。</p>';
+    summary.textContent = '';
+    if (forceOpen) panel.classList.remove('hidden');
+    button.setAttribute('aria-expanded', String(!panel.classList.contains('hidden')));
+    return;
+  }
+
+  const end = addDays(addMonths(start, months), -1);
+  const periods = createJunPeriods(start, end);
+  const currentIndex = request
+    ? periods.findIndex(period => compareDate(request, period.start) >= 0 && compareDate(request, period.end) <= 0)
+    : -1;
+
+  summary.textContent = request
+    ? currentIndex >= 0
+      ? `申出日 ${formatJapaneseDate(request)} は第${currentIndex + 1}旬です。`
+      : `申出日 ${formatJapaneseDate(request)} は有効期間外です。`
+    : '申出日を選択すると、計算対象の旬を強調表示します。';
+
+  list.innerHTML = periods.map((period, index) => {
+    const isCurrent = index === currentIndex;
+    const stateClass = isCurrent
+      ? 'is-current'
+      : request && compareDate(period.end, request) < 0
+        ? 'is-past'
+        : 'is-future';
+
+    return `<article class="jun-item ${stateClass}">
+      <strong>第${index + 1}旬</strong>
+      <span class="jun-range">${formatJapaneseDate(period.start)} ～ ${formatJapaneseDate(period.end)}</span>
+      ${isCurrent ? `<span class="jun-request-date">該当日：${formatJapaneseDate(request)}</span>` : ''}
+    </article>`;
+  }).join('');
+
+  if (forceOpen) panel.classList.remove('hidden');
+  button.setAttribute('aria-expanded', String(!panel.classList.contains('hidden')));
+}
+
+function toggleJunDetails() {
+  const panel = $('junDetailsPanel');
+  const willOpen = panel.classList.contains('hidden');
+  panel.classList.toggle('hidden');
+  $('junDetailsButton').setAttribute('aria-expanded', String(willOpen));
+  if (willOpen) renderJunDetails(true);
 }
 
 function ordinaryRefund(price) {
@@ -289,6 +347,7 @@ function updateCommuterEnd() {
   $('commuterEnd').value = start && Number.isInteger(months) && months >= 1 && months <= 6
     ? formatDateInput(addDays(addMonths(start, months), -1))
     : '';
+  if (!$('junDetailsPanel').classList.contains('hidden')) renderJunDetails();
 }
 
 function updateCommuterAutoAmounts() {
@@ -315,6 +374,10 @@ function conditional() {
   $('departureBox').classList.toggle('hidden', !['reserved', 'green'].includes(type));
   $('commuterBox').classList.toggle('hidden', type !== 'commuter');
   $('couponBox').classList.toggle('hidden', type !== 'coupon');
+  if (type !== 'commuter') {
+    $('junDetailsPanel').classList.add('hidden');
+    $('junDetailsButton').setAttribute('aria-expanded', 'false');
+  }
   $('ordinaryAfterBox').classList.toggle('hidden', $('ordinaryStatus').value !== 'after');
 }
 
@@ -340,6 +403,10 @@ $('type').addEventListener('change', conditional);
 $('ordinaryStatus').addEventListener('change', conditional);
 $('commuterStart').addEventListener('change', updateCommuterEnd);
 $('commuterMonths').addEventListener('change', updateCommuterEnd);
+$('commuterRequest').addEventListener('change', () => {
+  if (!$('junDetailsPanel').classList.contains('hidden')) renderJunDetails();
+});
+$('junDetailsButton').addEventListener('click', toggleJunDetails);
 ['from', 'to', 'via'].forEach(id => $(id).addEventListener('change', updateCommuterAutoAmounts));
 $('passenger').addEventListener('change', updateCommuterAutoAmounts);
 $('commuterCategory').addEventListener('change', updateCommuterAutoAmounts);

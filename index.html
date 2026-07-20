@@ -87,6 +87,16 @@
           <label>片道普通運賃<input id="commuterOneWayFare" type="number" min="0" step="10" placeholder="発着駅から自動計算"></label>
         </div>
         <p class="muted">券面金額と片道普通運賃は発駅・着駅から自動入力され、必要に応じて手動で修正できます。使用経過計算と旬割計算を比較し、払戻額が多い方を表示します。</p>
+        <div class="jun-detail-actions">
+          <button id="junDetailsButton" class="sub" type="button" aria-expanded="false" aria-controls="junDetailsPanel">旬数詳細</button>
+        </div>
+        <section id="junDetailsPanel" class="jun-details hidden" aria-live="polite">
+          <div class="jun-details-heading">
+            <h3>旬数一覧</h3>
+            <p id="junDetailsSummary" class="muted"></p>
+          </div>
+          <div id="junDetailsList" class="jun-list"></div>
+        </section>
       </div>
 
       <div class="actions"><button>検索・計算</button><button id="clear" class="sub" type="button">クリア</button></div>
