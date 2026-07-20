@@ -1,0 +1,42 @@
+[
+  {
+    "ルールID": "REFUND_BASIC",
+    "券種": "ordinary_ticket、ordinary_express、unreserved_limited_express、specific_limited_express、unreserved_green",
+    "時期": "before_use_within_validity",
+    "方式": "fixed",
+    "値": 220,
+    "最低額": null,
+    "出典": "JRH_RULE_19",
+    "証拠": "A"
+  },
+  {
+    "ルールID": "REFUND_RESERVED_EARLY",
+    "券種": "reserved_limited_express、reserved_green、sleeper、reserved_seat",
+    "時期": "until_2_days_before_departure",
+    "方式": "fixed",
+    "値": 340,
+    "最低額": null,
+    "出典": "JRH_RULE_19",
+    "証拠": "A"
+  },
+  {
+    "ルールID": "REFUND_RESERVED_LATE",
+    "券種": "reserved_limited_express、reserved_green、sleeper、reserved_seat",
+    "時期": "day_before_to_departure",
+    "方式": "rate",
+    "値": 0.3,
+    "最低額": 340,
+    "出典": "JRH_RULE_19",
+    "証拠": "A"
+  },
+  {
+    "ルールID": "REFUND_UNASSIGNED",
+    "券種": "unassigned_seat_limited_express",
+    "時期": "before_use_until_travel_date",
+    "方式": "fixed",
+    "値": 340,
+    "最低額": null,
+    "出典": "JRH_RULE_19",
+    "証拠": "A"
+  }
+]
