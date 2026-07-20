@@ -69,10 +69,14 @@
           <label>有効期間開始日<input id="commuterStart" type="date"></label>
         </div>
         <div class="grid">
+          <label>有効期間終了日<input id="commuterEnd" type="date" readonly></label>
           <label>申出日<input id="commuterRequest" type="date"></label>
-          <label>券面金額<input id="commuterPrice" type="number" min="0" step="10" placeholder="円"></label>
         </div>
-        <p class="muted">発駅・着駅から往復普通運賃を自動算出し、単純計算と旬割計算のうち払戻額が多い方を表示します。</p>
+        <div class="grid">
+          <label>券面金額<input id="commuterPrice" type="number" min="0" step="10" placeholder="円"></label>
+          <label>片道普通運賃<input id="commuterOneWayFare" type="number" min="0" step="10" placeholder="発着駅から自動計算"></label>
+        </div>
+        <p class="muted">片道普通運賃は発駅・着駅から自動入力され、必要に応じて手動で修正できます。単純使用計算と旬割計算を比較し、払戻額が多い方を表示します。</p>
       </div>
 
       <div class="actions"><button>検索・計算</button><button id="clear" class="sub" type="button">クリア</button></div>

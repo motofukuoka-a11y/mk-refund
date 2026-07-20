@@ -6,6 +6,11 @@ const parseDate = value => value ? new Date(`${value}T00:00:00`) : null;
 const addDays = (date, days) => { const next = new Date(date); next.setDate(next.getDate() + days); return next; };
 const addMonths = (date, months) => { const next = new Date(date); const day = next.getDate(); next.setDate(1); next.setMonth(next.getMonth() + months); const last = new Date(next.getFullYear(), next.getMonth() + 1, 0).getDate(); next.setDate(Math.min(day, last)); return next; };
 const compareDate = (a, b) => a.getTime() - b.getTime();
+const formatDateInput = date => {
+  const local = new Date(date);
+  local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
+  return local.toISOString().slice(0, 10);
+};
 
 const [segments, stations, mainFares, localFares, charges] = await Promise.all(
   ['segments', 'stations', 'ordinary_fares_main', 'ordinary_fares_local', 'charges']
@@ -129,21 +134,24 @@ function couponRefund(oneWayFare) {
   return { ok: refund > 0, price, fee, refund, formula: `${yen(price)} −（${yen(oneWayFare)} × ${used}枚）− 220円 ＝ ${yen(refund)}`, reason: refund > 0 ? '発売額から使用券片数分の片道普通運賃と払戻手数料を差し引きました。' : '差引後の残額がないため払戻額は0円です。', extra: [{ label: '使用分', value: usedAmount }] };
 }
 
-function commuterRefund(oneWayFare) {
+function commuterRefund(calculatedOneWayFare) {
   const start = parseDate($('commuterStart').value), request = parseDate($('commuterRequest').value);
   const price = Number($('commuterPrice').value || 0), months = Number($('commuterMonths').value || 1);
+  const oneWayFare = Number($('commuterOneWayFare').value || calculatedOneWayFare || 0);
   if (!start || !request) throw new Error('有効期間開始日と申出日を入力してください。');
   if (!Number.isInteger(months) || months < 1 || months > 6) throw new Error('期間は1箇月から6箇月で選択してください。');
   if (price <= 0) throw new Error('券面金額を入力してください。');
+  if (oneWayFare <= 0) throw new Error('片道普通運賃を確認してください。');
 
   const end = addDays(addMonths(start, months), -1);
+  $('commuterEnd').value = formatDateInput(end);
   if (compareDate(request, end) > 0) return { ok: false, price, fee: 0, refund: 0, formula: '有効期間終了後のため自動計算対象外です。', reason: `申出日が有効期間終了日（${end.toLocaleDateString('ja-JP')}）を過ぎています。` };
 
   const fee = 220;
   const roundTripFare = oneWayFare * 2;
   const usedDays = compareDate(request, start) < 0 ? 0 : Math.floor((request - start) / 86400000) + 1;
-  const simpleUsed = roundTripFare * usedDays;
-  const simpleRefund = Math.max(0, price - simpleUsed - fee);
+  const elapsedEquivalentAmount = roundTripFare * usedDays;
+  const usageRefund = Math.max(0, price - elapsedEquivalentAmount - fee);
 
   const periods = createJunPeriods(start, end);
   let usedJun = 0;
@@ -156,25 +164,49 @@ function commuterRefund(oneWayFare) {
   const oneJunAmount = dailyAmount * 10;
   const junUsedAmount = oneJunAmount * usedJun;
   const junRefund = Math.max(0, price - junUsedAmount - fee);
-  const useJun = junRefund > simpleRefund;
-  const refund = Math.max(simpleRefund, junRefund);
+  const useJun = junRefund > usageRefund;
+  const refund = Math.max(usageRefund, junRefund);
   return {
     ok: refund > 0,
     price,
     fee,
     refund,
-    formula: `単純計算：${yen(price)} −（往復普通運賃 ${yen(roundTripFare)} × ${usedDays}日）− 220円 ＝ ${yen(simpleRefund)}
+    formula: `単純使用計算：${yen(price)} −（片道普通運賃 ${yen(oneWayFare)} × 2 × ${usedDays}日）− 220円 ＝ ${yen(usageRefund)}
 旬割計算：${yen(price)} −（${yen(oneJunAmount)} × ${usedJun}旬）− 220円 ＝ ${yen(junRefund)}
-採用：${useJun ? '旬割計算' : '単純計算'} ${yen(refund)}`,
-    reason: `片道普通運賃${yen(oneWayFare)}から往復普通運賃${yen(roundTripFare)}を自動算出しました。単純計算と旬割計算を比較し、払戻額が多い${useJun ? '旬割計算' : '単純計算'}を採用しました。有効期間終了日は${end.toLocaleDateString('ja-JP')}です。`,
+採用：${useJun ? '旬割計算' : '単純使用計算'} ${yen(refund)}`,
+    reason: `片道普通運賃は発駅・着駅から自動算出し、入力欄で修正可能です。単純使用計算と旬割計算を比較し、払戻額が多い${useJun ? '旬割計算' : '単純使用計算'}を採用しました。有効期間終了日は${end.toLocaleDateString('ja-JP')}です。`,
     extra: [
+      { label: '片道普通運賃', value: oneWayFare },
       { label: '往復普通運賃', value: roundTripFare },
       { label: '使用日数', value: `${usedDays}日` },
-      { label: '単純計算', value: simpleRefund },
+      { label: '使用経過相当額', value: elapsedEquivalentAmount },
+      { label: '単純使用計算', value: usageRefund },
       { label: '旬割計算', value: junRefund },
       { label: '使用旬数', value: `${usedJun}旬` }
     ]
   };
+}
+
+function updateCommuterEnd() {
+  const start = parseDate($('commuterStart').value);
+  const months = Number($('commuterMonths').value || 1);
+  $('commuterEnd').value = start && Number.isInteger(months) && months >= 1 && months <= 6
+    ? formatDateInput(addDays(addMonths(start, months), -1))
+    : '';
+}
+
+function updateCommuterOneWayFare() {
+  if ($('type').value !== 'commuter') return;
+  const from = $('from').value.trim(), to = $('to').value.trim();
+  if (!stations.includes(from) || !stations.includes(to)) return;
+  try {
+    const vias = $('via').value.split(/[,、]/).map(value => value.trim()).filter(Boolean);
+    if (vias.some(value => !stations.includes(value))) return;
+    const info = totals(route(from, to, vias));
+    $('commuterOneWayFare').value = fare(info.table, info.km, $('passenger').value);
+  } catch (_) {
+    // 入力途中は自動計算を行わない。
+  }
 }
 
 function conditional() {
@@ -208,6 +240,11 @@ function renderResult(result, routeInfo, routeSegments) {
 
 $('type').addEventListener('change', conditional);
 $('ordinaryStatus').addEventListener('change', conditional);
+$('commuterStart').addEventListener('change', updateCommuterEnd);
+$('commuterMonths').addEventListener('change', updateCommuterEnd);
+['from', 'to', 'via'].forEach(id => $(id).addEventListener('change', updateCommuterOneWayFare));
+$('passenger').addEventListener('change', updateCommuterOneWayFare);
+$('type').addEventListener('change', () => { updateCommuterEnd(); updateCommuterOneWayFare(); });
 $('form').addEventListener('submit', event => {
   event.preventDefault();
   try {
@@ -218,6 +255,7 @@ $('form').addEventListener('submit', event => {
     if (vias.some(value => !stations.includes(value))) throw new Error('経由駅に未登録の駅名があります。');
     const routeSegments = route(from, to, vias), routeInfo = totals(routeSegments), passenger = $('passenger').value;
     const oneWayFare = fare(routeInfo.table, routeInfo.km, passenger);
+    if (type === 'commuter' && !$('commuterOneWayFare').value) $('commuterOneWayFare').value = oneWayFare;
     let result;
     if (type === 'ordinary') result = ordinaryRefund(oneWayFare);
     else if (type === 'coupon') result = couponRefund(oneWayFare);
@@ -235,7 +273,7 @@ $('form').addEventListener('submit', event => {
   } catch (error) { alert(error.message); }
 });
 
-$('clear').addEventListener('click', () => { $('form').reset(); conditional(); $('result').classList.add('hidden'); setInitialDates(); });
+$('clear').addEventListener('click', () => { $('form').reset(); conditional(); $('result').classList.add('hidden'); setInitialDates(); updateCommuterEnd(); });
 $('theme').addEventListener('click', () => { const dark = document.documentElement.dataset.theme === 'dark'; document.documentElement.dataset.theme = dark ? 'light' : 'dark'; localStorage.setItem('mk-theme', dark ? 'light' : 'dark'); });
 
 document.documentElement.dataset.theme = localStorage.getItem('mk-theme') || 'light';
@@ -248,3 +286,4 @@ function setInitialDates() {
 }
 setInitialDates();
 conditional();
+updateCommuterEnd();
