@@ -208,7 +208,10 @@ function commuterRefund(calculatedOneWayFare, routeInfo) {
   const index = periods.findIndex(period => compareDate(request, period.start) >= 0 && compareDate(request, period.end) <= 0);
   const usedJun = index >= 0 ? index + 1 : periods.length;
   const periodDays = months * 30;
-  const oneJunAmount = floor10((price / periodDays) * 10);
+  // 定期運賃を期間日数で除した直後に小数点以下を切り上げ、その整数に10を乗じる。
+  // 例：22,000円 ÷ 90日 ＝ 244.44…円 → 245円 × 10日 ＝ 2,450円
+  const dailyJunBasis = Math.ceil(price / periodDays);
+  const oneJunAmount = dailyJunBasis * 10;
   const junUsedAmount = oneJunAmount * usedJun;
   const junRefund = Math.max(0, price - junUsedAmount - fee);
 
@@ -257,10 +260,10 @@ function commuterRefund(calculatedOneWayFare, routeInfo) {
     fee,
     refund,
     formula: `使用経過計算：${yen(price)} −（片道普通運賃 ${yen(oneWayFare)} × 2 × ${usedDays}日）− 220円 ＝ ${yen(usageRefund)}
-旬割計算：${yen(price)} −（${months}箇月定期運賃 ${yen(price)} ÷ ${periodDays}日 × 10日・10円未満切捨て ${yen(oneJunAmount)} × ${usedJun}旬）− 220円 ＝ ${yen(junRefund)}
+旬割計算：${yen(price)} −（${months}箇月定期運賃 ${yen(price)} ÷ ${periodDays}日 ＝ ${yen(dailyJunBasis)}（小数点以下切上げ）× 10日 ＝ ${yen(oneJunAmount)} × ${usedJun}旬）− 220円 ＝ ${yen(junRefund)}
 ${overOneMonthFormula ? `${overOneMonthFormula}
 ` : ''}採用：${adopted.name} ${yen(refund)}`,
-    reason: `${months}箇月定期の旬割運賃は、選択した期間の定期運賃${yen(price)}を${periodDays}日で除し、10日分に換算して10円未満を切り捨てました。${overOneMonthAvailable ? `また、使用期間が1箇月を超えているため「1箇月超え払戻計算」も行い、完了${completedMonths}箇月分の1箇月定期運賃と、残${remainingDays}日分について普通運賃計算と追加1箇月分計算の有利な方を適用しました。` : ''}各計算結果を比較し、払戻額が最も多い${adopted.name}を採用しました。有効期間終了日は${end.toLocaleDateString('ja-JP')}です。`,
+    reason: `${months}箇月定期の旬割運賃は、選択した期間の定期運賃${yen(price)}を${periodDays}日で除した直後に小数点以下を切り上げ、その金額に10日を乗じて算出しました。${overOneMonthAvailable ? `また、使用期間が1箇月を超えているため「1箇月超え払戻計算」も行い、完了${completedMonths}箇月分の1箇月定期運賃と、残${remainingDays}日分について普通運賃計算と追加1箇月分計算の有利な方を適用しました。` : ''}各計算結果を比較し、払戻額が最も多い${adopted.name}を採用しました。有効期間終了日は${end.toLocaleDateString('ja-JP')}です。`,
     extra: [
       { label: '片道普通運賃', value: oneWayFare },
       { label: '往復普通運賃', value: roundTripFare },
