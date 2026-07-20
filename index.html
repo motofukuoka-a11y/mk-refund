@@ -39,11 +39,24 @@
       </div>
 
       <div id="ordinaryBox" class="conditional hidden">
-        <label>使用状態
-          <select id="ordinaryStatus"><option value="before">使用開始前</option><option value="after">使用開始後</option></select>
-        </label>
+        <div class="grid">
+          <label>使用状態
+            <select id="ordinaryStatus"><option value="before">使用開始前</option><option value="after">使用開始後</option></select>
+          </label>
+          <label>割引種別
+            <select id="ordinaryDiscount">
+              <option value="none">割引なし</option>
+              <option value="student">学生割引</option>
+              <option value="disability_type1_accompanied">障害者第1種（本人・介護者同行）</option>
+              <option value="disability_type1_single">障害者第1種（本人単独）</option>
+              <option value="disability_type2_single">障害者第2種（本人単独）</option>
+              <option value="caregiver_type1">介護者（第1種本人と同行）</option>
+            </select>
+          </label>
+        </div>
+        <p id="discountNotice" class="muted discount-notice"></p>
         <div id="ordinaryAfterBox" class="hidden grid">
-          <label>未使用区間の運賃<input id="unusedFare" type="number" min="0" step="10" placeholder="円"></label>
+          <label>未使用区間の普通運賃（割引前）<input id="unusedFare" type="number" min="0" step="10" placeholder="円"></label>
           <label>未使用区間の営業キロ<input id="remainingKm" type="number" min="0" step="0.1" placeholder="101km以上"></label>
         </div>
       </div>

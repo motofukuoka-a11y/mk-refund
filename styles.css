@@ -15,3 +15,5 @@
 .jun-item.is-past{opacity:.72}
 .jun-item.is-future{opacity:.9}
 @media(max-width:640px){.jun-details-heading{display:block}.jun-details-heading p{text-align:left;margin-top:4px}.jun-list{grid-template-columns:1fr}}
+
+.discount-notice{margin:-4px 0 12px;padding:10px 12px;border-left:4px solid var(--accent);background:var(--bg);border-radius:8px}

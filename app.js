@@ -13,10 +13,57 @@ const formatDateInput = date => {
 };
 const formatJapaneseDate = date => `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
 
-const [segments, stations, mainFares, localFares, charges, commuterFares] = await Promise.all(
-  ['segments', 'stations', 'ordinary_fares_main', 'ordinary_fares_local', 'charges', 'teiki_fare_master']
+const DISCOUNT_RULES = new Map();
+
+function discountRule(type) {
+  const rule = DISCOUNT_RULES.get(type);
+  if (!rule) throw new Error('割引種別の設定を確認できません。');
+  return rule;
+}
+
+function validateDiscount(type, businessKm) {
+  const rule = discountRule(type);
+  if (rule.minimumBusinessKmExclusive !== null && businessKm <= Number(rule.minimumBusinessKmExclusive)) {
+    return {
+      ok: false,
+      message: `${rule.label}は、片道の営業キロが100kmを超える区間に限り適用できます。現在の営業キロは${businessKm.toFixed(1)}kmです。`
+    };
+  }
+  return { ok: true, message: '' };
+}
+
+function applyOrdinaryDiscount(normalFare, type, businessKm) {
+  const rule = discountRule(type);
+  const validation = validateDiscount(type, businessKm);
+  if (!validation.ok) throw new Error(validation.message);
+  const discountedFare = rule.rate > 0 ? ceil10(normalFare * (1 - Number(rule.rate))) : normalFare;
+  return {
+    type,
+    label: rule.label,
+    rate: Number(rule.rate),
+    normalFare,
+    discountedFare,
+    conditionNote: rule.requiresCompanion ? '本人と介護者が同一種類・同一区間を同時に利用する場合として計算します。' : ''
+  };
+}
+
+function updateDiscountNotice() {
+  const type = $('ordinaryDiscount').value;
+  const rule = DISCOUNT_RULES.get(type);
+  if (!rule) return;
+  const notes = [];
+  if (rule.rate > 0) notes.push(`${Math.round(rule.rate * 100)}％引`);
+  if (rule.minimumBusinessKmExclusive !== null) notes.push('片道の営業キロが100kmを超える場合に適用');
+  if (rule.requiresCompanion) notes.push('本人・介護者が同一種類・同一区間を同行する場合');
+  $('discountNotice').textContent = notes.length ? `${rule.label}：${notes.join('／')}` : '普通運賃をそのまま払戻計算に使用します。';
+}
+
+const [segments, stations, mainFares, localFares, charges, commuterFares, discountRuleData] = await Promise.all(
+  ['segments', 'stations', 'ordinary_fares_main', 'ordinary_fares_local', 'charges', 'teiki_fare_master', 'discount_rules']
     .map(name => fetch(`./data/${name}.json`).then(response => response.json()))
 );
+
+discountRuleData.discounts.forEach(rule => DISCOUNT_RULES.set(rule.id, rule));
 
 stations.forEach(station => { const option = document.createElement('option'); option.value = station; $('stations').append(option); });
 const graph = new Map();
@@ -191,12 +238,61 @@ function toggleJunDetails() {
   if (willOpen) renderJunDetails(true);
 }
 
-function ordinaryRefund(price) {
-  if ($('ordinaryStatus').value === 'before') return { ok: true, price, fee: 220, refund: Math.max(0, price - 220), formula: `${yen(price)} − 220円 ＝ ${yen(price - 220)}`, reason: '使用開始前・有効期間内として計算しました。' };
-  const unusedFare = Number($('unusedFare').value || 0), remainingKm = Number($('remainingKm').value || 0);
-  if (remainingKm < 101) return { ok: false, price, fee: 0, refund: 0, formula: '未使用区間が101km未満のため自動払戻対象外です。', reason: '旅行開始後の普通乗車券は、未使用区間の営業キロが101km以上の場合を対象とします。' };
-  if (unusedFare <= 0) throw new Error('未使用区間の運賃を入力してください。');
-  return { ok: true, price: unusedFare, fee: 220, refund: Math.max(0, unusedFare - 220), formula: `${yen(unusedFare)} − 220円 ＝ ${yen(unusedFare - 220)}`, reason: '旅行開始後の未使用区間額から払戻手数料を差し引きました。' };
+function ordinaryRefund(normalFare, routeInfo) {
+  const discountType = $('ordinaryDiscount').value;
+  const discount = applyOrdinaryDiscount(normalFare, discountType, routeInfo.business);
+  const fee = 220;
+
+  if ($('ordinaryStatus').value === 'before') {
+    const refund = Math.max(0, discount.discountedFare - fee);
+    const discountFormula = discount.rate > 0
+      ? `${yen(normalFare)} × ${Math.round((1 - discount.rate) * 100)}％ ＝ ${yen(discount.discountedFare)}（10円単位に切上げ）`
+      : `${yen(normalFare)}（割引なし）`;
+    return {
+      ok: refund > 0,
+      price: discount.discountedFare,
+      fee,
+      refund,
+      formula: `普通運賃：${yen(normalFare)}
+割引：${discount.label}
+発売額：${discountFormula}
+払戻額：${yen(discount.discountedFare)} − 220円 ＝ ${yen(refund)}`,
+      reason: `使用開始前・有効期間内として、${discount.label}適用後の発売額から払戻手数料を差し引きました。${discount.conditionNote}`,
+      extra: [
+        { label: '割引前普通運賃', value: normalFare },
+        { label: '割引種別', value: discount.label },
+        { label: '割引後発売額', value: discount.discountedFare }
+      ]
+    };
+  }
+
+  const unusedNormalFare = Number($('unusedFare').value || 0);
+  const remainingKm = Number($('remainingKm').value || 0);
+  if (remainingKm < 101) return { ok: false, price: discount.discountedFare, fee: 0, refund: 0, formula: '未使用区間が101km未満のため自動払戻対象外です。', reason: '旅行開始後の普通乗車券は、未使用区間の営業キロが101km以上の場合を対象とします。' };
+  if (unusedNormalFare <= 0) throw new Error('未使用区間の普通運賃（割引前）を入力してください。');
+
+  const unusedDiscount = applyOrdinaryDiscount(unusedNormalFare, discountType, remainingKm);
+  const refund = Math.max(0, unusedDiscount.discountedFare - fee);
+  const discountFormula = unusedDiscount.rate > 0
+    ? `${yen(unusedNormalFare)} × ${Math.round((1 - unusedDiscount.rate) * 100)}％ ＝ ${yen(unusedDiscount.discountedFare)}（10円単位に切上げ）`
+    : `${yen(unusedNormalFare)}（割引なし）`;
+  return {
+    ok: refund > 0,
+    price: unusedDiscount.discountedFare,
+    fee,
+    refund,
+    formula: `未使用区間の普通運賃：${yen(unusedNormalFare)}
+割引：${unusedDiscount.label}
+未使用区間相当額：${discountFormula}
+払戻額：${yen(unusedDiscount.discountedFare)} − 220円 ＝ ${yen(refund)}`,
+    reason: `旅行開始後として、未使用区間の普通運賃に${unusedDiscount.label}を適用した額から払戻手数料を差し引きました。${unusedDiscount.conditionNote}`,
+    extra: [
+      { label: '元の割引後発売額', value: discount.discountedFare },
+      { label: '割引種別', value: unusedDiscount.label },
+      { label: '未使用区間・割引前', value: unusedNormalFare },
+      { label: '未使用区間相当額', value: unusedDiscount.discountedFare }
+    ]
+  };
 }
 
 function expressRefund(type, price, request, departure) {
@@ -384,6 +480,7 @@ function conditional() {
     $('junDetailsButton').setAttribute('aria-expanded', 'false');
   }
   $('ordinaryAfterBox').classList.toggle('hidden', $('ordinaryStatus').value !== 'after');
+  updateDiscountNotice();
 }
 
 function renderResult(result, routeInfo, routeSegments) {
@@ -409,6 +506,7 @@ function renderResult(result, routeInfo, routeSegments) {
 
 $('type').addEventListener('change', conditional);
 $('ordinaryStatus').addEventListener('change', conditional);
+$('ordinaryDiscount').addEventListener('change', updateDiscountNotice);
 $('commuterStart').addEventListener('change', updateCommuterEnd);
 $('commuterMonths').addEventListener('change', updateCommuterEnd);
 $('commuterRequest').addEventListener('change', () => {
@@ -435,7 +533,7 @@ $('form').addEventListener('submit', event => {
       if (!$('commuterPrice').value) $('commuterPrice').value = commuterMasterFare(routeInfo, $('commuterCategory').value, Number($('commuterMonths').value || 1));
     }
     let result;
-    if (type === 'ordinary') result = ordinaryRefund(oneWayFare);
+    if (type === 'ordinary') result = ordinaryRefund(oneWayFare, routeInfo);
     else if (type === 'coupon') result = couponRefund(oneWayFare);
     else if (type === 'commuter') result = commuterRefund(oneWayFare, routeInfo);
     else {
