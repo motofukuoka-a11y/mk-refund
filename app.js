@@ -167,7 +167,14 @@ function commuterRefund(calculatedOneWayFare, routeInfo) {
 
   const end = addDays(addMonths(start, months), -1);
   $('commuterEnd').value = formatDateInput(end);
-  if (compareDate(request, end) > 0) return { ok: false, price, fee: 0, refund: 0, formula: '有効期間終了後のため自動計算対象外です。', reason: `申出日が有効期間終了日（${end.toLocaleDateString('ja-JP')}）を過ぎています。` };
+  if (compareDate(request, end) > 0) return {
+    ok: false,
+    price,
+    fee: 0,
+    refund: 0,
+    formula: '有効期間終了後のため自動計算対象外です。',
+    reason: `申出日が有効期間終了日（${end.toLocaleDateString('ja-JP')}）を過ぎています。`
+  };
 
   const fee = 220;
   if (compareDate(request, start) < 0) {
@@ -178,7 +185,7 @@ function commuterRefund(calculatedOneWayFare, routeInfo) {
       fee,
       refund,
       formula: `有効期間開始前：${yen(price)} − 220円 ＝ ${yen(refund)}`,
-      reason: `申出日が有効期間開始日前のため、使用経過相当額および旬割使用額を差し引かず、券面金額から払戻手数料のみを差し引きました。有効期間終了日は${end.toLocaleDateString('ja-JP')}です。`,
+      reason: `申出日が有効期間開始日前のため、使用経過相当額を差し引かず、券面金額から払戻手数料のみを差し引きました。有効期間終了日は${end.toLocaleDateString('ja-JP')}です。`,
       extra: [
         { label: '片道普通運賃', value: oneWayFare },
         { label: '使用日数', value: '0日' },
@@ -192,35 +199,83 @@ function commuterRefund(calculatedOneWayFare, routeInfo) {
   const elapsedEquivalentAmount = roundTripFare * usedDays;
   const usageRefund = Math.max(0, price - elapsedEquivalentAmount - fee);
 
+  // 旬割運賃は、選択した定期期間そのものの券面金額を基礎に算出する。
+  // 1箇月：1箇月定期運賃 ÷ 30 × 10
+  // 3箇月：3箇月定期運賃 ÷ 90 × 10
+  // 6箇月：6箇月定期運賃 ÷ 180 × 10
+  // 2・4・5箇月は、選択期間の券面金額 ÷（期間月数 × 30）× 10 とする。
   const periods = createJunPeriods(start, end);
   const index = periods.findIndex(period => compareDate(request, period.start) >= 0 && compareDate(request, period.end) <= 0);
   const usedJun = index >= 0 ? index + 1 : periods.length;
-  const oneMonthFare = oneMonthCommuterFare(routeInfo, category);
-  // 旬額は「1箇月定期運賃 ÷ 30日 × 10日」の結果を10円未満切捨て。
-  // 例：7,690円 ÷ 30 × 10 ＝ 2,563.33…円 → 2,560円
-  const oneJunAmount = floor10((oneMonthFare / 30) * 10);
+  const periodDays = months * 30;
+  const oneJunAmount = floor10((price / periodDays) * 10);
   const junUsedAmount = oneJunAmount * usedJun;
   const junRefund = Math.max(0, price - junUsedAmount - fee);
-  const useJun = junRefund > usageRefund;
-  const refund = Math.max(usageRefund, junRefund);
+
+  // 1箇月超え払戻計算
+  // 完了した1箇月ごとに1箇月定期運賃を差し引く。
+  // 端数日については「往復普通運賃×残日数」と「1箇月定期運賃」を比較し、
+  // 控除額が少ない方（＝払戻額が多い方）を採用する。
+  const oneMonthFare = oneMonthCommuterFare(routeInfo, category);
+  let completedMonths = 0;
+  while (completedMonths < months) {
+    const nextMonthStart = addMonths(start, completedMonths + 1);
+    if (compareDate(request, nextMonthStart) < 0) break;
+    completedMonths += 1;
+  }
+
+  const remainderStart = addMonths(start, completedMonths);
+  const remainingDays = Math.max(0, Math.floor((request - remainderStart) / 86400000) + 1);
+  const completedMonthAmount = oneMonthFare * completedMonths;
+  const remainingDayAmount = roundTripFare * remainingDays;
+  const remainingMonthAmount = remainingDays > 0 ? oneMonthFare : 0;
+  const appliedRemainderAmount = remainingDays > 0
+    ? Math.min(remainingDayAmount, remainingMonthAmount)
+    : 0;
+  const overOneMonthUsedAmount = completedMonthAmount + appliedRemainderAmount;
+  const overOneMonthRefund = Math.max(0, price - overOneMonthUsedAmount - fee);
+  const overOneMonthAvailable = months > 1 && completedMonths >= 1;
+
+  const candidates = [
+    { name: '使用経過計算', refund: usageRefund },
+    { name: '旬割計算', refund: junRefund }
+  ];
+  if (overOneMonthAvailable) {
+    candidates.push({ name: '1箇月超え払戻計算', refund: overOneMonthRefund });
+  }
+
+  const adopted = candidates.reduce((best, current) => current.refund > best.refund ? current : best);
+  const refund = adopted.refund;
+
+  const overOneMonthFormula = overOneMonthAvailable
+    ? `1箇月超え払戻計算：${yen(price)} −（1箇月定期運賃 ${yen(oneMonthFare)} × ${completedMonths}箇月）−（残${remainingDays}日分：${yen(remainingDayAmount)} と 1箇月定期運賃 ${yen(remainingMonthAmount)} の少ない方 ${yen(appliedRemainderAmount)}）− 220円 ＝ ${yen(overOneMonthRefund)}`
+    : '';
+
   return {
     ok: refund > 0,
     price,
     fee,
     refund,
     formula: `使用経過計算：${yen(price)} −（片道普通運賃 ${yen(oneWayFare)} × 2 × ${usedDays}日）− 220円 ＝ ${yen(usageRefund)}
-旬割計算：${yen(price)} −（1箇月定期運賃 ${yen(oneMonthFare)} ÷ 30日 × 10日・10円未満切捨て × ${usedJun}旬）− 220円 ＝ ${yen(junRefund)}
-採用：${useJun ? '旬割計算' : '使用経過計算'} ${yen(refund)}`,
-    reason: `券面金額は定期運賃マスタから自動算出し、入力欄で修正可能です。${months}箇月定期の旬割計算には、同一区間・同一定期種別の1箇月定期運賃${yen(oneMonthFare)}をマスタから取得しました。使用経過計算と旬割計算を比較し、払戻額が多い${useJun ? '旬割計算' : '使用経過計算'}を採用しました。有効期間終了日は${end.toLocaleDateString('ja-JP')}です。`,
+旬割計算：${yen(price)} −（${months}箇月定期運賃 ${yen(price)} ÷ ${periodDays}日 × 10日・10円未満切捨て ${yen(oneJunAmount)} × ${usedJun}旬）− 220円 ＝ ${yen(junRefund)}
+${overOneMonthFormula ? `${overOneMonthFormula}
+` : ''}採用：${adopted.name} ${yen(refund)}`,
+    reason: `${months}箇月定期の旬割運賃は、選択した期間の定期運賃${yen(price)}を${periodDays}日で除し、10日分に換算して10円未満を切り捨てました。${overOneMonthAvailable ? `また、使用期間が1箇月を超えているため「1箇月超え払戻計算」も行い、完了${completedMonths}箇月分の1箇月定期運賃と、残${remainingDays}日分について普通運賃計算と追加1箇月分計算の有利な方を適用しました。` : ''}各計算結果を比較し、払戻額が最も多い${adopted.name}を採用しました。有効期間終了日は${end.toLocaleDateString('ja-JP')}です。`,
     extra: [
       { label: '片道普通運賃', value: oneWayFare },
       { label: '往復普通運賃', value: roundTripFare },
       { label: '使用日数', value: `${usedDays}日` },
       { label: '使用経過相当額', value: elapsedEquivalentAmount },
       { label: '使用経過計算', value: usageRefund },
-      { label: '1箇月定期運賃', value: oneMonthFare },
+      { label: '1旬運賃', value: oneJunAmount },
       { label: '旬割計算', value: junRefund },
-      { label: '使用旬数', value: `${usedJun}旬` }
+      { label: '使用旬数', value: `${usedJun}旬` },
+      ...(overOneMonthAvailable ? [
+        { label: '経過月数', value: `${completedMonths}箇月` },
+        { label: '残日数', value: `${remainingDays}日` },
+        { label: '1箇月定期運賃', value: oneMonthFare },
+        { label: '1箇月超え払戻計算', value: overOneMonthRefund }
+      ] : [])
     ]
   };
 }
