@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ACCIDENT_CANCEL_BEFORE",
+    "label": "運休・旅行開始前／使用開始前",
+    "reference": "JR北海道 旅客営業規則 第282条第2項・第282条の2",
+    "source": "JR北海道 旅客営業規則",
+    "fare": "full",
+    "charge": "full",
+    "fee": 0,
+    "note": "事故発生前に購入した乗車券類が不要となった場合の旅行中止による払戻し。"
+  },
+  {
+    "id": "ACCIDENT_CANCEL_AFTER_FARE",
+    "label": "運休・旅行開始後／乗車券",
+    "reference": "JR北海道 旅客営業規則 第282条第1項第1号・第282条の2第1号",
+    "source": "JR北海道 旅客営業規則",
+    "fare": "remaining_section",
+    "charge": null,
+    "fee": 0,
+    "note": "旅行中止駅・着駅間に対する普通旅客運賃。"
+  },
+  {
+    "id": "ACCIDENT_CANCEL_AFTER_CHARGE",
+    "label": "運休・旅行開始後／料金券",
+    "reference": "JR北海道 旅客営業規則 第282条第1項第1号・第282条の2第2号～第6号",
+    "source": "JR北海道 旅客営業規則",
+    "fare": null,
+    "charge": "full",
+    "fee": 0,
+    "note": "指定急行列車等に全区間または一部区間を乗車できなくなった場合の当該料金全額。"
+  },
+  {
+    "id": "ACCIDENT_SUSPEND_COMMUTER",
+    "label": "運休・定期乗車券・5日以上使用不能",
+    "reference": "JR北海道 旅客営業規則 第282条第1項第1号ヘ・第288条",
+    "source": "JR北海道 旅客営業規則",
+    "fare": "same_period_commuter_fare_divided_by_30_90_180",
+    "charge": null,
+    "fee": 0,
+    "note": "使用しない区間の同一種類・同一有効期間の定期旅客運賃を日割りし、1円未満を日額で切り上げ、休止日数を乗じた後に10円未満を端数整理する。"
+  }
+]

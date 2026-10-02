@@ -23,6 +23,12 @@
       </div>
       <label>経由駅<input id="via" placeholder="複数は「,」または「、」で区切る"></label>
       <div class="grid">
+        <label>払戻種別
+          <select id="refundMode" required>
+            <option value="regular">通常払戻</option>
+            <option value="accident">事故払戻（運休）</option>
+          </select>
+        </label>
         <label>券種
           <select id="type" required>
             <option value="">選択してください</option>
@@ -38,25 +44,49 @@
         <label>旅客区分<select id="passenger"><option value="adult">大人</option><option value="child">小児</option></select></label>
       </div>
 
-      <div id="ordinaryBox" class="conditional hidden">
+      <div id="accidentBox" class="conditional accident-panel hidden">
+        <h3>事故払戻：運休</h3>
+        <p class="muted">JR北海道の旅客営業規則第282条・第282条の2・第288条を基準に、運休による払戻しだけを計算します。事故発生前に購入したことを確認できない場合は自動計算しません。</p>
         <div class="grid">
-          <label>使用状態
-            <select id="ordinaryStatus"><option value="before">使用開始前</option><option value="after">使用開始後</option></select>
+          <label>事故種別
+            <select id="accidentReason"><option value="cancellation">運休・運行不能</option></select>
           </label>
-          <label>割引種別
-            <select id="ordinaryDiscount">
-              <option value="none">割引なし</option>
-              <option value="student">学生割引</option>
-              <option value="disability_type1_accompanied">障害者第1種（本人・介護者同行）</option>
-              <option value="disability_type1_single">障害者第1種（本人単独）</option>
-              <option value="disability_type2_single">障害者第2種（本人単独）</option>
-              <option value="caregiver_type1">介護者（第1種本人と同行）</option>
+          <label>事故発生前に購入済み
+            <select id="accidentPurchased">
+              <option value="not-confirmed">未確認／不明（自動計算しない）</option>
+              <option value="yes">はい（確認済み）</option>
+              <option value="no">いいえ</option>
             </select>
           </label>
         </div>
-        <p id="discountNotice" class="muted discount-notice"></p>
+        <p class="notice">定期券の事故払戻を自動計算する場合は、事故発生前に購入済みであることを確認して「はい（確認済み）」を選択してください。未確認のまま計算すると、誤払戻防止のため自動計算対象外になります。</p>
+        <div class="grid">
+          <label id="accidentStatusBox">運休時の状態
+            <select id="accidentStatus">
+              <option value="before">旅行開始前／使用開始前</option>
+              <option value="after">旅行開始後／使用開始後</option>
+            </select>
+          </label>
+          <label id="accidentChargeBox" class="hidden">料金券の利用状況
+            <select id="accidentChargeCondition">
+              <option value="not-confirmed">未確認／不明</option>
+              <option value="unavailable">指定列車・対象区間を利用できなかった</option>
+            </select>
+          </label>
+        </div>
+        <label id="accidentStopBox" class="hidden">旅行中止駅（乗車券・旅行開始後）
+          <input id="accidentStop" list="stations" placeholder="例：札幌">
+        </label>
+        <p id="accidentUnsupportedNotice" class="notice hidden">普通回数乗車券は運休事故払戻の自動計算対象外です。休止日数・券片数等を含む個別取扱いを確認してください。</p>
+        <p id="accidentTravelNotice" class="notice">この画面は「旅行中止による払戻し」のみを扱います。無賃送還、他経路乗車、不乗証明、有効期間延長は自動計算せず、駅係員の取扱いが必要です。</p>
+      </div>
+
+      <div id="ordinaryBox" class="conditional hidden">
+        <label>使用状態
+          <select id="ordinaryStatus"><option value="before">使用開始前</option><option value="after">使用開始後</option></select>
+        </label>
         <div id="ordinaryAfterBox" class="hidden grid">
-          <label>未使用区間の普通運賃（割引前）<input id="unusedFare" type="number" min="0" step="10" placeholder="円"></label>
+          <label>未使用区間の運賃<input id="unusedFare" type="number" min="0" step="10" placeholder="円"></label>
           <label>未使用区間の営業キロ<input id="remainingKm" type="number" min="0" step="0.1" placeholder="101km以上"></label>
         </div>
       </div>
@@ -99,7 +129,28 @@
         <div class="grid">
           <label>片道普通運賃<input id="commuterOneWayFare" type="number" min="0" step="10" placeholder="発着駅から自動計算"></label>
         </div>
-        <p class="muted">券面金額と片道普通運賃は発駅・着駅から自動入力され、必要に応じて手動で修正できます。使用経過計算と旬割計算を比較し、払戻額が多い方を表示します。</p>
+        <p id="commuterRegularNote" class="muted">券面金額と片道普通運賃は発駅・着駅から自動入力され、必要に応じて手動で修正できます。使用経過計算と旬割計算を比較し、払戻額が多い方を表示します。</p>
+        <section id="commuterAccidentBox" class="conditional hidden">
+          <h3>定期券の事故払戻（運休）</h3>
+          <p class="muted">運休により定期券が5日以上使用できなかった場合の、第288条に基づく有効期間延長・払戻しのうち、払戻し計算を行います。</p>
+          <div class="grid">
+            <label>使用不能日数<input id="commuterAccidentDays" type="number" min="0" step="1" placeholder="5日以上"></label>
+            <label>使用不能区間
+              <select id="commuterAccidentScope">
+                <option value="full">定期券区間全体</option>
+                <option value="partial">一部区間（1区間）</option>
+              </select>
+            </label>
+          </div>
+          <div id="commuterAccidentPartialBox" class="hidden">
+            <div class="grid">
+              <label>使用不能区間・発駅<input id="commuterAccidentUnusedFrom" list="stations" placeholder="例：札幌"></label>
+              <label>使用不能区間・着駅<input id="commuterAccidentUnusedTo" list="stations" placeholder="例：長万部"></label>
+            </div>
+            <label>使用不能区間・経由駅<input id="commuterAccidentUnusedVia" placeholder="複数は「,」または「、」で区切る"></label>
+          </div>
+          <p class="notice">2区間以上の使用不能、定期券の有効期間延長、特別な定期券・割引商品は自動計算せず、駅係員の取扱いを確認してください。1・3・6箇月以外の期間も要確認です。</p>
+        </section>
         <div class="jun-detail-actions">
           <button id="junDetailsButton" class="sub" type="button" aria-expanded="false" aria-controls="junDetailsPanel">旬数詳細</button>
         </div>

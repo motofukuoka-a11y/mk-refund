@@ -13,57 +13,11 @@ const formatDateInput = date => {
 };
 const formatJapaneseDate = date => `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
 
-const DISCOUNT_RULES = new Map();
-
-function discountRule(type) {
-  const rule = DISCOUNT_RULES.get(type);
-  if (!rule) throw new Error('割引種別の設定を確認できません。');
-  return rule;
-}
-
-function validateDiscount(type, businessKm) {
-  const rule = discountRule(type);
-  if (rule.minimumBusinessKmExclusive !== null && businessKm <= Number(rule.minimumBusinessKmExclusive)) {
-    return {
-      ok: false,
-      message: `${rule.label}は、片道の営業キロが100kmを超える区間に限り適用できます。現在の営業キロは${businessKm.toFixed(1)}kmです。`
-    };
-  }
-  return { ok: true, message: '' };
-}
-
-function applyOrdinaryDiscount(normalFare, type, businessKm) {
-  const rule = discountRule(type);
-  const validation = validateDiscount(type, businessKm);
-  if (!validation.ok) throw new Error(validation.message);
-  const discountedFare = rule.rate > 0 ? ceil10(normalFare * (1 - Number(rule.rate))) : normalFare;
-  return {
-    type,
-    label: rule.label,
-    rate: Number(rule.rate),
-    normalFare,
-    discountedFare,
-    conditionNote: rule.requiresCompanion ? '本人と介護者が同一種類・同一区間を同時に利用する場合として計算します。' : ''
-  };
-}
-
-function updateDiscountNotice() {
-  const type = $('ordinaryDiscount').value;
-  const rule = DISCOUNT_RULES.get(type);
-  if (!rule) return;
-  const notes = [];
-  if (rule.rate > 0) notes.push(`${Math.round(rule.rate * 100)}％引`);
-  if (rule.minimumBusinessKmExclusive !== null) notes.push('片道の営業キロが100kmを超える場合に適用');
-  if (rule.requiresCompanion) notes.push('本人・介護者が同一種類・同一区間を同行する場合');
-  $('discountNotice').textContent = notes.length ? `${rule.label}：${notes.join('／')}` : '普通運賃をそのまま払戻計算に使用します。';
-}
-
-const [segments, stations, mainFares, localFares, charges, commuterFares, discountRuleData] = await Promise.all(
-  ['segments', 'stations', 'ordinary_fares_main', 'ordinary_fares_local', 'charges', 'teiki_fare_master', 'discount_rules']
+const [segments, stations, mainFares, localFares, charges, commuterFares, accidentRules] = await Promise.all(
+  ['segments', 'stations', 'ordinary_fares_main', 'ordinary_fares_local', 'charges', 'teiki_fare_master', 'accident_refund_rules']
     .map(name => fetch(`./data/${name}.json`).then(response => response.json()))
 );
-
-discountRuleData.discounts.forEach(rule => DISCOUNT_RULES.set(rule.id, rule));
+const accidentRuleMap = new Map(accidentRules.map(rule => [rule.id, rule]));
 
 stations.forEach(station => { const option = document.createElement('option'); option.value = station; $('stations').append(option); });
 const graph = new Map();
@@ -238,61 +192,203 @@ function toggleJunDetails() {
   if (willOpen) renderJunDetails(true);
 }
 
-function ordinaryRefund(normalFare, routeInfo) {
-  const discountType = $('ordinaryDiscount').value;
-  const discount = applyOrdinaryDiscount(normalFare, discountType, routeInfo.business);
-  const fee = 220;
+function ordinaryRefund(price) {
+  if ($('ordinaryStatus').value === 'before') return { ok: true, price, fee: 220, refund: Math.max(0, price - 220), formula: `${yen(price)} − 220円 ＝ ${yen(price - 220)}`, reason: '使用開始前・有効期間内として計算しました。' };
+  const unusedFare = Number($('unusedFare').value || 0), remainingKm = Number($('remainingKm').value || 0);
+  if (remainingKm < 101) return { ok: false, price, fee: 0, refund: 0, formula: '未使用区間が101km未満のため自動払戻対象外です。', reason: '旅行開始後の普通乗車券は、未使用区間の営業キロが101km以上の場合を対象とします。' };
+  if (unusedFare <= 0) throw new Error('未使用区間の運賃を入力してください。');
+  return { ok: true, price: unusedFare, fee: 220, refund: Math.max(0, unusedFare - 220), formula: `${yen(unusedFare)} − 220円 ＝ ${yen(unusedFare - 220)}`, reason: '旅行開始後の未使用区間額から払戻手数料を差し引きました。' };
+}
 
-  if ($('ordinaryStatus').value === 'before') {
-    const refund = Math.max(0, discount.discountedFare - fee);
-    const discountFormula = discount.rate > 0
-      ? `${yen(normalFare)} × ${Math.round((1 - discount.rate) * 100)}％ ＝ ${yen(discount.discountedFare)}（10円単位に切上げ）`
-      : `${yen(normalFare)}（割引なし）`;
+function accidentRule(id) {
+  const rule = accidentRuleMap.get(id);
+  if (!rule) throw new Error(`事故払戻ルール（${id}）が見つかりません。`);
+  return rule;
+}
+
+function manualAccidentResult(reason, formula, price = 0) {
+  return {
+    ok: false,
+    manual: true,
+    price,
+    fee: 0,
+    refund: 0,
+    formula: formula || `自動計算対象外：${reason}\n駅係員の取扱いが必要です。`,
+    reason
+  };
+}
+
+function accidentPurchaseCheck() {
+  if ($('accidentPurchased').value !== 'yes') {
+    return manualAccidentResult('事故発生前に購入した乗車券類であることを確認できないため、自動計算を停止しました。');
+  }
+  return null;
+}
+
+function remainingRoute(routeSegments, stop, destination) {
+  if (stop === destination) return [];
+  const startIndex = routeSegments.findIndex(segment => segment.from === stop);
+  if (startIndex < 0) throw new Error('旅行中止駅は発着区間の経路上の駅を入力してください。');
+  const remaining = routeSegments.slice(startIndex);
+  if (!remaining.length || remaining[remaining.length - 1].to !== destination) {
+    throw new Error('旅行中止駅から着駅までの経路を特定できません。経由駅を確認してください。');
+  }
+  return remaining;
+}
+
+function accidentFareRefund(oneWayFare, routeSegments, destination) {
+  const purchaseCheck = accidentPurchaseCheck();
+  if (purchaseCheck) return purchaseCheck;
+
+  const status = $('accidentStatus').value;
+  if (status === 'before') {
+    const rule = accidentRule('ACCIDENT_CANCEL_BEFORE');
     return {
-      ok: refund > 0,
-      price: discount.discountedFare,
-      fee,
-      refund,
-      formula: `普通運賃：${yen(normalFare)}
-割引：${discount.label}
-発売額：${discountFormula}
-払戻額：${yen(discount.discountedFare)} − 220円 ＝ ${yen(refund)}`,
-      reason: `使用開始前・有効期間内として、${discount.label}適用後の発売額から払戻手数料を差し引きました。${discount.conditionNote}`,
-      extra: [
-        { label: '割引前普通運賃', value: normalFare },
-        { label: '割引種別', value: discount.label },
-        { label: '割引後発売額', value: discount.discountedFare }
-      ]
+      ok: true,
+      price: oneWayFare,
+      fee: 0,
+      refund: oneWayFare,
+      formula: `${yen(oneWayFare)} − 払戻手数料0円 ＝ ${yen(oneWayFare)}`,
+      reason: '運休により旅行開始前の旅行を中止するものとして、普通乗車券の運賃全額を無手数料で計算しました。',
+      source: `${rule.source}（${rule.reference}）`,
+      extra: [{ label: '対象', value: '乗車券・運賃全額' }]
     };
   }
 
-  const unusedNormalFare = Number($('unusedFare').value || 0);
-  const remainingKm = Number($('remainingKm').value || 0);
-  if (remainingKm < 101) return { ok: false, price: discount.discountedFare, fee: 0, refund: 0, formula: '未使用区間が101km未満のため自動払戻対象外です。', reason: '旅行開始後の普通乗車券は、未使用区間の営業キロが101km以上の場合を対象とします。' };
-  if (unusedNormalFare <= 0) throw new Error('未使用区間の普通運賃（割引前）を入力してください。');
-
-  const unusedDiscount = applyOrdinaryDiscount(unusedNormalFare, discountType, remainingKm);
-  const refund = Math.max(0, unusedDiscount.discountedFare - fee);
-  const discountFormula = unusedDiscount.rate > 0
-    ? `${yen(unusedNormalFare)} × ${Math.round((1 - unusedDiscount.rate) * 100)}％ ＝ ${yen(unusedDiscount.discountedFare)}（10円単位に切上げ）`
-    : `${yen(unusedNormalFare)}（割引なし）`;
+  const stop = $('accidentStop').value.trim();
+  if (!stop || !stations.includes(stop)) throw new Error('旅行中止駅は登録駅から入力してください。');
+  const remainingSegments = remainingRoute(routeSegments, stop, destination);
+  if (!remainingSegments.length) {
+    const rule = accidentRule('ACCIDENT_CANCEL_AFTER_FARE');
+    return manualAccidentResult('旅行中止駅が着駅のため、未使用区間の運賃はありません。', '旅行中止駅・着駅間の普通運賃 0円。払戻額は0円です。', oneWayFare);
+  }
+  const remainingInfo = totals(remainingSegments);
+  const remainingFare = fare(remainingInfo.table, remainingInfo.km, $('passenger').value);
+  const rule = accidentRule('ACCIDENT_CANCEL_AFTER_FARE');
   return {
-    ok: refund > 0,
-    price: unusedDiscount.discountedFare,
-    fee,
-    refund,
-    formula: `未使用区間の普通運賃：${yen(unusedNormalFare)}
-割引：${unusedDiscount.label}
-未使用区間相当額：${discountFormula}
-払戻額：${yen(unusedDiscount.discountedFare)} − 220円 ＝ ${yen(refund)}`,
-    reason: `旅行開始後として、未使用区間の普通運賃に${unusedDiscount.label}を適用した額から払戻手数料を差し引きました。${unusedDiscount.conditionNote}`,
+    ok: remainingFare > 0,
+    price: oneWayFare,
+    fee: 0,
+    refund: remainingFare,
+    formula: `旅行中止駅・着駅間の普通運賃 ${yen(remainingFare)} − 払戻手数料0円 ＝ ${yen(remainingFare)}`,
+    reason: `旅行開始後の運休として、旅行中止駅（${stop}）から着駅までの未使用区間の普通運賃を計算しました。元の券面額から既乗区間の運賃を差し引く方式ではなく、規則上の未使用区間運賃を採用しています。`,
+    source: `${rule.source}（${rule.reference}）`,
     extra: [
-      { label: '元の割引後発売額', value: discount.discountedFare },
-      { label: '割引種別', value: unusedDiscount.label },
-      { label: '未使用区間・割引前', value: unusedNormalFare },
-      { label: '未使用区間相当額', value: unusedDiscount.discountedFare }
+      { label: '対象', value: '乗車券・未使用区間' },
+      { label: '旅行中止駅・着駅間', value: remainingFare },
+      { label: '未使用区間営業キロ', value: `${remainingInfo.business.toFixed(1)}km` }
     ]
   };
+}
+
+function commuterAccidentRefund(routeInfo, routeSegments) {
+  const purchaseCheck = accidentPurchaseCheck();
+  if (purchaseCheck) return purchaseCheck;
+
+  const rule = accidentRule('ACCIDENT_SUSPEND_COMMUTER');
+  const months = Number($('commuterMonths').value || 1);
+  const days = Number($('commuterAccidentDays').value || 0);
+  const price = Number($('commuterPrice').value || 0);
+  const category = $('commuterCategory').value;
+  const periodDays = { 1: 30, 3: 90, 6: 180 }[months];
+
+  if (![1, 3, 6].includes(months)) {
+    return manualAccidentResult('定期券の事故払戻は、現行の自動計算では1・3・6箇月定期のみを対象とします。2・4・5箇月定期は個別確認が必要です。', undefined, price);
+  }
+  if (!Number.isInteger(days) || days < 5) {
+    return manualAccidentResult('定期券の運休事故払戻は、使用不能日数が5日以上の場合を対象とします。', undefined, price);
+  }
+  if (days > periodDays) {
+    return manualAccidentResult(`使用不能日数が定期期間の日数（${periodDays}日）を超えています。入力と個別取扱いを確認してください。`, undefined, price);
+  }
+  if (price <= 0) throw new Error('定期券の券面金額を確認してください。');
+
+  let standardFare;
+  try {
+    standardFare = commuterMasterFare(routeInfo, category, months);
+  } catch (error) {
+    return manualAccidentResult(`標準定期運賃を特定できないため自動計算できません。${error.message}`, undefined, price);
+  }
+  if (price !== standardFare) {
+    return manualAccidentResult(`入力された券面金額（${yen(price)}）と標準定期運賃（${yen(standardFare)}）が一致しないため、特殊な定期券・割引商品の可能性があります。券面を確認してください。`, undefined, price);
+  }
+
+  let basisFare = standardFare;
+  let scopeLabel = '定期券区間全体';
+  if ($('commuterAccidentScope').value === 'partial') {
+    const unusedFrom = $('commuterAccidentUnusedFrom').value.trim();
+    const unusedTo = $('commuterAccidentUnusedTo').value.trim();
+    if (!unusedFrom || !unusedTo || !stations.includes(unusedFrom) || !stations.includes(unusedTo)) {
+      return manualAccidentResult('使用不能区間の発駅・着駅を登録駅から入力してください。', undefined, price);
+    }
+    const originalStations = [routeSegments[0]?.from, ...routeSegments.map(segment => segment.to)];
+    const fromIndex = originalStations.indexOf(unusedFrom);
+    const toIndex = originalStations.indexOf(unusedTo);
+    if (fromIndex < 0 || toIndex < 0 || fromIndex >= toIndex) {
+      return manualAccidentResult('使用不能区間は、元の定期券経路上で発駅から着駅へ向かう順序で入力してください。', undefined, price);
+    }
+    const unusedVia = $('commuterAccidentUnusedVia').value.split(/[,、]/).map(value => value.trim()).filter(Boolean);
+    if (unusedVia.length) {
+      return manualAccidentResult('使用不能区間の経由駅を入力した場合は、複数区間の個別取扱いとなるため自動計算しません。', undefined, price);
+    }
+    const unusedSegments = routeSegments.slice(fromIndex, toIndex);
+    const unusedInfo = totals(unusedSegments);
+    basisFare = commuterMasterFare(unusedInfo, category, months);
+    scopeLabel = `${unusedFrom}〜${unusedTo}（1区間）`;
+  }
+
+  const dailyAmount = Math.ceil(basisFare / periodDays);
+  const rawRefund = Math.min(price, dailyAmount * days);
+  const refund = floor10(rawRefund);
+  const roundingText = rawRefund === refund
+    ? `端数整理後 ${yen(refund)}`
+    : `${yen(rawRefund)} → 10円未満切捨て → ${yen(refund)}`;
+  return {
+    ok: refund > 0,
+    price,
+    fee: 0,
+    refund,
+    formula: `${scopeLabel}の${months}箇月定期運賃 ${yen(basisFare)} ÷ ${periodDays}日 ＝ ${yen(dailyAmount)}／日 × 使用不能${days}日 ＝ ${roundingText}`,
+    reason: `運休により${scopeLabel}が${days}日間使用できなかったものとして、定期券の同一種類・同一期間の運賃を日割り計算しました。第288条に基づく事故払戻のため、手数料は0円です。`,
+    source: `${rule.source}（${rule.reference}）`,
+    extra: [
+      { label: '対象', value: '定期券・使用不能区間' },
+      { label: '計算基礎定期運賃', value: basisFare },
+      { label: '使用不能日数', value: `${days}日` },
+      { label: '1日あたり', value: dailyAmount },
+      ...(rawRefund !== refund ? [{ label: '端数整理前', value: rawRefund }] : [])
+    ]
+  };
+}
+
+function accidentChargeRefund(type, price) {
+  const purchaseCheck = accidentPurchaseCheck();
+  if (purchaseCheck) return purchaseCheck;
+  if ($('accidentChargeCondition').value !== 'unavailable') {
+    return manualAccidentResult('指定列車または対象区間を利用できなかったことを確認できないため、料金券の自動計算を停止しました。', undefined, price);
+  }
+
+  const rule = $('accidentStatus').value === 'before'
+    ? accidentRule('ACCIDENT_CANCEL_BEFORE')
+    : accidentRule('ACCIDENT_CANCEL_AFTER_CHARGE');
+  const label = type === 'green' ? '特急料金・グリーン料金' : '特急料金';
+  return {
+    ok: price > 0,
+    price,
+    fee: 0,
+    refund: price,
+    formula: `${label} ${yen(price)} − 払戻手数料0円 ＝ ${yen(price)}`,
+    reason: `運休により${label}の指定列車・対象区間を利用できなかったものとして、料金券相当額の全額を無手数料で計算しました。`,
+    source: `${rule.source}（${rule.reference}）`,
+    extra: [{ label: '対象', value: `${label}・全額` }]
+  };
+}
+
+function accidentRefund(type, oneWayFare, routeSegments, destination, price, routeInfo) {
+  if (type === 'ordinary') return accidentFareRefund(oneWayFare, routeSegments, destination);
+  if (['unreserved', 'reserved', 'green', 'unassigned'].includes(type)) return accidentChargeRefund(type, price);
+  if (type === 'commuter') return commuterAccidentRefund(routeInfo, routeSegments);
+  return manualAccidentResult('普通回数乗車券はこの運休事故払戻の自動計算対象外です。休止日数・券片数等を含む個別取扱いを確認してください。', undefined, price);
 }
 
 function expressRefund(type, price, request, departure) {
@@ -468,24 +564,32 @@ function updateCommuterAutoAmounts() {
 }
 
 function conditional() {
-  const type = $('type').value;
+  const type = $('type').value, accident = $('refundMode').value === 'accident';
   const isExpress = ['unreserved', 'reserved', 'green', 'unassigned'].includes(type);
-  $('ordinaryBox').classList.toggle('hidden', type !== 'ordinary');
-  $('dateBox').classList.toggle('hidden', !isExpress);
-  $('departureBox').classList.toggle('hidden', !['reserved', 'green'].includes(type));
+  $('accidentBox').classList.toggle('hidden', !accident);
+  $('accidentStatusBox').classList.toggle('hidden', !accident || type === 'commuter');
+  $('accidentTravelNotice').classList.toggle('hidden', !accident || type === 'commuter');
+  $('ordinaryBox').classList.toggle('hidden', type !== 'ordinary' || accident);
+  $('dateBox').classList.toggle('hidden', !isExpress || accident);
+  $('departureBox').classList.toggle('hidden', !['reserved', 'green'].includes(type) || accident);
   $('commuterBox').classList.toggle('hidden', type !== 'commuter');
-  $('couponBox').classList.toggle('hidden', type !== 'coupon');
-  if (type !== 'commuter') {
+  $('commuterRegularNote').classList.toggle('hidden', accident || type !== 'commuter');
+  $('couponBox').classList.toggle('hidden', type !== 'coupon' || accident);
+  $('accidentChargeBox').classList.toggle('hidden', !accident || !isExpress);
+  $('accidentStopBox').classList.toggle('hidden', !accident || type !== 'ordinary' || $('accidentStatus').value !== 'after');
+  $('accidentUnsupportedNotice').classList.toggle('hidden', !accident || type !== 'coupon');
+  $('commuterAccidentBox').classList.toggle('hidden', !accident || type !== 'commuter');
+  $('commuterAccidentPartialBox').classList.toggle('hidden', !accident || type !== 'commuter' || $('commuterAccidentScope').value !== 'partial');
+  if (type !== 'commuter' || accident) {
     $('junDetailsPanel').classList.add('hidden');
     $('junDetailsButton').setAttribute('aria-expanded', 'false');
   }
   $('ordinaryAfterBox').classList.toggle('hidden', $('ordinaryStatus').value !== 'after');
-  updateDiscountNotice();
 }
 
 function renderResult(result, routeInfo, routeSegments) {
   $('result').classList.remove('hidden');
-  $('status').textContent = result.ok ? '払戻可能' : '払戻不可・要確認';
+  $('status').textContent = result.manual ? '事故払戻・要確認' : result.ok ? '払戻可能' : '払戻不可・要確認';
   $('status').className = `badge ${result.ok ? '' : 'no'}`;
   const metrics = [
     { label: '券面額・料金', value: yen(result.price) },
@@ -499,14 +603,17 @@ function renderResult(result, routeInfo, routeSegments) {
 `\n幹線営業キロ：${routeInfo.mainBusiness.toFixed(1)}km\n地方交通線営業キロ：${routeInfo.localBusiness.toFixed(1)}km\n地方交通線換算キロ：${routeInfo.conversion.toFixed(1)}km\n運賃計算キロ：${routeInfo.mainBusiness.toFixed(1)} + ${routeInfo.conversion.toFixed(1)} = ${routeInfo.fareCalculationKm.toFixed(1)}km\n運賃参照：${routeInfo.label}\n検索距離：${routeInfo.km}km`
 :
 `\n営業キロ：${routeInfo.business.toFixed(1)}km\n運賃参照：${routeInfo.label}\n検索距離：${routeInfo.km}km`) : '';
-  $('reason').textContent = `${result.reason}${distanceText}`;
+  const sourceText = result.source ? `\n\n制度根拠：${result.source}` : '';
+  $('reason').textContent = `${result.reason}${sourceText}${distanceText}`;
   $('routeDetails').classList.toggle('hidden', !routeSegments);
   if (routeSegments) $('route').innerHTML = `<table><thead><tr><th>区間</th><th>線名</th><th>営業キロ</th><th>換算キロ</th></tr></thead><tbody>${routeSegments.map(segment => `<tr><td>${segment.from} → ${segment.to}</td><td>${segment.line}</td><td>${segment.business_km}km</td><td>${segment.conversion_km ?? '—'}km</td></tr>`).join('')}</tbody></table>`;
 }
 
 $('type').addEventListener('change', conditional);
 $('ordinaryStatus').addEventListener('change', conditional);
-$('ordinaryDiscount').addEventListener('change', updateDiscountNotice);
+$('refundMode').addEventListener('change', conditional);
+$('accidentStatus').addEventListener('change', conditional);
+$('commuterAccidentScope').addEventListener('change', conditional);
 $('commuterStart').addEventListener('change', updateCommuterEnd);
 $('commuterMonths').addEventListener('change', updateCommuterEnd);
 $('commuterRequest').addEventListener('change', () => {
@@ -521,19 +628,30 @@ $('type').addEventListener('change', () => { updateCommuterEnd(); updateCommuter
 $('form').addEventListener('submit', event => {
   event.preventDefault();
   try {
-    const from = $('from').value.trim(), to = $('to').value.trim(), type = $('type').value;
+    const from = $('from').value.trim(), to = $('to').value.trim(), type = $('type').value, mode = $('refundMode').value;
     if (!type) throw new Error('券種を選択してください。');
     if (!stations.includes(from) || !stations.includes(to)) throw new Error('発駅・着駅は候補から正確に入力してください。');
     const vias = $('via').value.split(/[,、]/).map(value => value.trim()).filter(Boolean);
     if (vias.some(value => !stations.includes(value))) throw new Error('経由駅に未登録の駅名があります。');
     const routeSegments = route(from, to, vias), routeInfo = totals(routeSegments), passenger = $('passenger').value;
     const oneWayFare = fare(routeInfo.table, routeInfo.km, passenger);
-    if (type === 'commuter') {
+    if (type === 'commuter' && mode !== 'accident') {
       if (!$('commuterOneWayFare').value) $('commuterOneWayFare').value = oneWayFare;
       if (!$('commuterPrice').value) $('commuterPrice').value = commuterMasterFare(routeInfo, $('commuterCategory').value, Number($('commuterMonths').value || 1));
     }
     let result;
-    if (type === 'ordinary') result = ordinaryRefund(oneWayFare, routeInfo);
+    if (mode === 'accident') {
+      let accidentPrice = 0;
+      if (type === 'ordinary') accidentPrice = oneWayFare;
+      else if (type === 'unreserved') accidentPrice = charge('limited_express_unreserved', Math.ceil(routeInfo.business), passenger);
+      else if (['reserved', 'unassigned'].includes(type)) accidentPrice = charge('limited_express_reserved', Math.ceil(routeInfo.business), passenger);
+      else if (type === 'green') accidentPrice = charge('limited_express_reserved', Math.ceil(routeInfo.business), passenger) + charge('green_charge', Math.ceil(routeInfo.business), passenger);
+      else if (type === 'commuter') {
+        if (!$('commuterPrice').value) $('commuterPrice').value = commuterMasterFare(routeInfo, $('commuterCategory').value, Number($('commuterMonths').value || 1));
+        accidentPrice = Number($('commuterPrice').value || 0);
+      }
+      result = accidentRefund(type, oneWayFare, routeSegments, to, accidentPrice, routeInfo);
+    } else if (type === 'ordinary') result = ordinaryRefund(oneWayFare);
     else if (type === 'coupon') result = couponRefund(oneWayFare);
     else if (type === 'commuter') result = commuterRefund(oneWayFare, routeInfo);
     else {
