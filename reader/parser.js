@@ -1,8 +1,10 @@
+import {classifyTicket,mergeTicketKinds} from './ticket-kind.js?v=3';
 export function parseTicket(raw, stations) {
   const text=raw.normalize('NFKC').replace(/[‐‑−ー]/g,'ー');
   const compact=text.replace(/[ \t]/g,'');
   const warnings=[];
-  const unsupported=/特急券|グリーン券|定期券|回数券|フリーパス|往復|連続|企画乗車券|入場券|団体乗車券|観光パス|かえり|かよエール|トクだ値/.test(text);
+  const ticketKind=classifyTicket(raw);
+  const unsupported=ticketKind.id!=='unknown'&&!ticketKind.calculable;
   const candidates=[];
   for (const line of compact.split('\n')) {
     const parts=line.split(/[→⇒➜]|\s+から\s+/);
@@ -35,10 +37,11 @@ export function parseTicket(raw, stations) {
   if(discount===null) warnings.push('割引表示があります。本人・介護者などの種別を選択してください。');
   warnings.push('経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。');
   if(unsupported) warnings.unshift('普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。');
-  return {from:route.from||'',to:route.to||'',price,discount,passenger:/小児|小人/.test(compact)?'child':'adult',warnings,unsupported};
+  return {from:route.from||'',to:route.to||'',price,discount,passenger:/小児|小人/.test(compact)?'child':'adult',warnings,unsupported,ticketKind};
 }
 
 export function mergeReadings(readings){
+ const ticketKind=mergeTicketKinds(readings);
  const unique=key=>[...new Set(readings.map(r=>r[key]).filter(v=>v!==null&&v!==''&&v!==undefined))];
  const routes=[...new Map(readings.filter(r=>r.from&&r.to).map(r=>[r.from+'|'+r.to,{from:r.from,to:r.to}])).values()];
  const amounts=unique('price'),discounts=unique('discount'),passengers=unique('passenger');
@@ -46,5 +49,5 @@ export function mergeReadings(readings){
  if(routes.length>1)warnings.unshift('駅名の読取結果が一致しません。券面を確認して入力してください。');
  if(amounts.length>1)warnings.unshift('金額の読取結果が一致しません。発売額を入力してください。');
  if(discounts.length>1)warnings.unshift('割引の読取結果が一致しません。割引種別を選択してください。');
- return {from:routes.length===1?routes[0].from:'',to:routes.length===1?routes[0].to:'',price:amounts.length===1?amounts[0]:null,discount:discounts.length===1&&!(discounts[0]==='none'&&readings.some(r=>r.discount===null&&r.warnings.length))?discounts[0]:null,passenger:passengers.includes('child')?'child':'adult',unsupported:readings.some(r=>r.unsupported),warnings};
+ return {from:routes.length===1?routes[0].from:'',to:routes.length===1?routes[0].to:'',price:amounts.length===1?amounts[0]:null,discount:discounts.length===1&&!(discounts[0]==='none'&&readings.some(r=>r.discount===null&&r.warnings.length))?discounts[0]:null,passenger:passengers.includes('child')?'child':'adult',unsupported:readings.some(r=>r.unsupported)||ticketKind.id==='conflict',warnings,ticketKind};
 }
