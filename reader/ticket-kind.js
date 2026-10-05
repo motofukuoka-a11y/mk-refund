@@ -4,9 +4,9 @@ export function classifyTicket(raw){
  // Printed instructions mentioning another ticket are not ticket titles.
  const headings=lines.filter(line=>line.length<=28&&! /お求め|お手持ち|有効|無効|です|ます|ご利用|必要|場合|乗車でき|払戻|別に|別途|申し受|発売|変更|ください|ません|旅客|取扱|につい|乗り継/.test(line));
  const text=headings.join('\n'),top=headings.slice(0,8).join('');
- const ordinary=/乗車券/.test(top),express=/特急券|特急・グリーン券/.test(top),green=/グリーン券/.test(top)||(express&&/グリーン/.test(top));
+ const breakdown=/内[訳议].*乗[0-9,.]+.*特[0-9,.]+/.test(lines.join('')),ordinary=/乗車券/.test(top)||breakdown,express=/特急券|特急・グリーン券/.test(top)||breakdown,green=/グリーン券/.test(top)||(express&&/グリーン/.test(top));
  const kinds=[];if(ordinary)kinds.push('ordinary');if(express)kinds.push('limited_express');if(green)kinds.push('green');
- const other=/定期券|回数券|フリーパス|往復|連続|企画乗車券|入場券|団体乗車券|観光パス|かえり|かよエール|トクだ値/.test(lines.join(''));
+ const other=/北海道[&＆]東日本[パバ]ス|周遊[パバ]ス|定期券|回数券|フリーパス|往復|連続|企画乗車券|入場券|団体乗車券|観光パス|かえり|かよエール|トクだ値/.test(lines.join(''));
  const seat=green?'green':/自由席|自由特急券/.test(top)?'unreserved':/指定席/.test(top)?'reserved':'unknown';
  if(kinds.length) return {id:kinds.join('+'),kinds,label:kinds.map(k=>labels[k]).join('＋'),seat,calculable:kinds.length===1&&kinds[0]==='ordinary'&&!other};
  const id=/指定料金券/.test(text)?'seat_fee':other?'other':'unknown';return {id,kinds:id==='unknown'?[]:[id],label:labels[id],seat,calculable:false};

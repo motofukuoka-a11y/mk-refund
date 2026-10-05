@@ -1,0 +1,850 @@
+{
+  "date": "2026-10-05",
+  "count": 25,
+  "measurement": "Original uncropped public photos. Same 1600px limit, confidence filtering, conditional contrast retry and local price-band recovery as browser; no model retraining; convenience sample, not population accuracy.",
+  "ordinaryFareSubset": 6,
+  "correctFareV2": 4,
+  "correctFareV4": 4,
+  "registeredRouteSubset": 2,
+  "correctRouteV2": 1,
+  "correctRouteV4": 2,
+  "results": [
+    {
+      "file": "sample-00.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:A_commuter_pass_with_Limited_Express_seat.JPG",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "東室蘭",
+        "to": "札幌",
+        "price": 50910,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": false,
+        "warnings": [
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "unknown",
+          "kinds": [],
+          "label": "判別できません",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-01.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Group-ticket.JR-Hokkaido.jpg",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": true
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 5780,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "ordinary",
+          "kinds": [
+            "ordinary"
+          ],
+          "label": "普通乗車券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-02.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Group-ticket.JR-Hokkaido1.jpg",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "岩見沢",
+        "to": "上幌向",
+        "price": 5780,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "ordinary",
+          "kinds": [
+            "ordinary"
+          ],
+          "label": "普通乗車券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-03.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Group-ticket.JR-Hokkaido2.jpg",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 5780,
+        "discount": null,
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "割引表示があります。本人・介護者などの種別を選択してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "other",
+          "kinds": [
+            "other"
+          ],
+          "label": "その他の券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-04.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Group-ticket.JR-Hokkaido3.jpg",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "発売額を特定できません。乗車券単体の実際の発売額を入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "other",
+          "kinds": [
+            "other"
+          ],
+          "label": "その他の券",
+          "seat": "reserved",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-05.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:JR_Soya-Main-Line_Osashima_Station_Rigid_ticket.jpg",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": true
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 170,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "other",
+          "kinds": [
+            "other"
+          ],
+          "label": "その他の券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-06.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:JR-Kanayama-Hokkaido-ticket.jpg",
+      "expected": [
+        "金山",
+        "下金山",
+        220
+      ],
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": 220,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 220,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": false,
+        "warnings": [
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "ordinary",
+          "kinds": [
+            "ordinary"
+          ],
+          "label": "普通乗車券",
+          "seat": "unknown",
+          "calculable": true
+        }
+      }
+    },
+    {
+      "file": "sample-07.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:JR-Yubari-ticket-2.jpg",
+      "expected": [
+        "夕張",
+        "鹿ノ谷",
+        170
+      ],
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": 170,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 170,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": false,
+        "warnings": [
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "ordinary",
+          "kinds": [
+            "ordinary"
+          ],
+          "label": "普通乗車券",
+          "seat": "unknown",
+          "calculable": true
+        }
+      }
+    },
+    {
+      "file": "sample-08.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:JR-Yubari-ticket.jpg",
+      "expected": [
+        "夕張",
+        "鹿ノ谷",
+        170
+      ],
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": false,
+        "warnings": [
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "発売額を特定できません。乗車券単体の実際の発売額を入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "ordinary",
+          "kinds": [
+            "ordinary"
+          ],
+          "label": "普通乗車券",
+          "seat": "unknown",
+          "calculable": true
+        }
+      }
+    },
+    {
+      "file": "sample-09.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:MARS%E5%88%B8.jpg",
+      "expected": [
+        "恵み野",
+        "札幌",
+        620
+      ],
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": 620,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "恵み野",
+        "to": "札幌",
+        "price": 620,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": false,
+        "warnings": [
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "ordinary",
+          "kinds": [
+            "ordinary"
+          ],
+          "label": "普通乗車券",
+          "seat": "unknown",
+          "calculable": true
+        }
+      }
+    },
+    {
+      "file": "sample-10.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Platform_ticket_Wakkanai_Sta.jpg",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 160,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "other",
+          "kinds": [
+            "other"
+          ],
+          "label": "その他の券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-11.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:RailwayTicket_Mashu-Kushiro.jpg",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": 3200,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "摩周",
+        "to": "釧路",
+        "price": 3200,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "ordinary",
+          "kinds": [
+            "ordinary"
+          ],
+          "label": "普通乗車券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-12.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Reserved_seat_ticket_%28Hokuto_zashiki%29.jpg",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": 510,
+        "unsupported": true
+      },
+      "v4": {
+        "from": "東室蘭",
+        "to": "札幌",
+        "price": 510,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "seat_fee",
+          "kinds": [
+            "seat_fee"
+          ],
+          "label": "指定料金券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-13.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Two_way_Ticket_Naka-Yubetsu_and_Yubetsu.jpg",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": 5,
+        "unsupported": true
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "発売額を特定できません。乗車券単体の実際の発売額を入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "other",
+          "kinds": [
+            "other"
+          ],
+          "label": "その他の券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-14.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%8E%9F%E7%94%9F%E8%8A%B1%E5%9C%92-%E7%9F%A5%E5%BA%8A%E6%96%9C%E9%87%8C_%28%E5%B0%8F%29.jpg",
+      "expected": [
+        "原生花園",
+        "知床斜里",
+        220
+      ],
+      "v2": {
+        "from": "原生花園",
+        "to": "知床斜里",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "原生花園",
+        "to": "知床斜里",
+        "price": null,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": false,
+        "warnings": [
+          "発売額を特定できません。乗車券単体の実際の発売額を入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "ordinary",
+          "kinds": [
+            "ordinary"
+          ],
+          "label": "普通乗車券",
+          "seat": "unknown",
+          "calculable": true
+        }
+      }
+    },
+    {
+      "file": "sample-15.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%A2%97%E6%AF%9B%E9%A7%85%E8%A8%98%E5%BF%B5%E5%88%87%E7%AC%A6.JPG",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": true
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "discount": "none",
+        "passenger": "child",
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "発売額を特定できません。乗車券単体の実際の発売額を入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "other",
+          "kinds": [
+            "other"
+          ],
+          "label": "その他の券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-16.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%80%A3%E7%B6%9A%E4%B9%97%E8%BB%8A%E5%88%B8%EF%BC%88%E5%8B%87%E7%9F%A5%E2%87%92%E5%8D%97%E7%A8%9A%E5%86%85%E2%87%92%E8%B1%8A%E5%AF%8C%EF%BC%89.jpg",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "発売額を特定できません。乗車券単体の実際の発売額を入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "conflict",
+          "kinds": [],
+          "label": "券種の読取結果が一致しません",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-17.jpg",
+      "source": "https://rgc83.blog.fc2.com/blog-entry-86.html",
+      "expected": [
+        "札幌",
+        "母子里",
+        3250
+      ],
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": 3250,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 3250,
+        "discount": "student",
+        "passenger": null,
+        "unsupported": false,
+        "warnings": [
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "ordinary",
+          "kinds": [
+            "ordinary"
+          ],
+          "label": "普通乗車券",
+          "seat": "unknown",
+          "calculable": true
+        }
+      }
+    },
+    {
+      "file": "sample-18.jpg",
+      "source": "https://www.geni-tetsutabi.com/trip/tokyo29/cdr02.html",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": 7680,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 7680,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": false,
+        "warnings": [
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "unknown",
+          "kinds": [],
+          "label": "判別できません",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-19.jpg",
+      "source": "https://www.geni-tetsutabi.com/trip/tokyo29/cdr02.html",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "発売額を特定できません。乗車券単体の実際の発売額を入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "other",
+          "kinds": [
+            "other"
+          ],
+          "label": "その他の券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-20.jpg",
+      "source": "https://travel.watch.impress.co.jp/docs/series/inoue/1525192.html",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "discount": null,
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "発売額を特定できません。乗車券単体の実際の発売額を入力してください。",
+          "割引表示があります。本人・介護者などの種別を選択してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "conflict",
+          "kinds": [],
+          "label": "券種の読取結果が一致しません",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-21.jpg",
+      "source": "https://ameblo.jp/hakodatebus183/entry-12516005163.html",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": 190,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 180,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": false,
+        "warnings": [
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "unknown",
+          "kinds": [],
+          "label": "判別できません",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-22.jpg",
+      "source": "https://www.rail-miler.site/entry/2022/09/14/153701",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "函館",
+        "to": "札幌",
+        "price": null,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発売額を特定できません。乗車券単体の実際の発売額を入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "other",
+          "kinds": [
+            "other"
+          ],
+          "label": "その他の券",
+          "seat": "unreserved",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-23.jpg",
+      "source": "https://note.com/shirota_blog/n/nbc0f2fb5d45e",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 11330,
+        "discount": "none",
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。"
+        ],
+        "ticketKind": {
+          "id": "other",
+          "kinds": [
+            "other"
+          ],
+          "label": "その他の券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    },
+    {
+      "file": "sample-24.jpg",
+      "source": "https://4travel.jp/dm_shisetsu/11362411?page=12",
+      "expected": null,
+      "v2": {
+        "from": "",
+        "to": "",
+        "price": 8300,
+        "unsupported": false
+      },
+      "v4": {
+        "from": "",
+        "to": "",
+        "price": 8300,
+        "discount": null,
+        "passenger": null,
+        "unsupported": true,
+        "warnings": [
+          "普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。",
+          "発駅・着駅を特定できません。券面を見て入力してください。",
+          "割引表示があります。本人・介護者などの種別を選択してください。",
+          "経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。",
+          "市内制度等の表示があります。このページの普通乗車券計算には対応していません。"
+        ],
+        "ticketKind": {
+          "id": "ordinary+limited_express",
+          "kinds": [
+            "ordinary",
+            "limited_express"
+          ],
+          "label": "普通乗車券＋特急券",
+          "seat": "unknown",
+          "calculable": false
+        }
+      }
+    }
+  ]
+}

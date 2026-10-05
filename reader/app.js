@@ -1,6 +1,8 @@
+import {createLocalOcr} from './local-ocr.js?v=4';
+import {assembleLines} from './ocr-lines.js?v=4';
 import {createCalculator} from './calculator.js';
-import {cleanPixels,frameCrop,ticketBounds} from './image-processing.js?v=3';
-import {parseTicket,mergeReadings} from './parser.js?v=3';
+import {frameCrop,ticketBounds} from './image-processing.js?v=4';
+import {parseTicket,mergeReadings} from './parser.js?v=4';
 const $=id=>document.getElementById(id), yen=n=>`${n.toLocaleString('ja-JP')}円`;
 let stream=null, canvas=null, worker=null, busy=false, generation=0, detectedKind=null;
 const data=await Promise.all(['segments','stations','ordinary_fares_main','ordinary_fares_local','discount_rules'].map(async n=>{
@@ -52,31 +54,25 @@ function initialize(){
   if(!canvas||busy)return;busy=true;const run=++generation;toggleBusy(true);$('rawText').textContent='読み取り中…';$('ticketKind').hidden=true;$('warnings').hidden=true;$('confirmed').checked=false;clearResult();
   let jobWorker=null;
   try{
-   jobWorker=await Tesseract.createWorker('jpn',1,{
-    workerPath:new URL('./vendor/worker.min.js?v=3',location.href).href,
-    corePath:new URL('./vendor/core-v2/',location.href).href,
-    langPath:new URL('./vendor/lang-v2',location.href).href,
-    workerBlobURL:false,cacheMethod:'write',
-    logger:m=>{if(run!==generation)return;$('progress').value=Math.round((m.progress||0)*100);$('scanStatus').textContent=m.status==='recognizing text'?`文字を読み取り中… ${Math.round((m.progress||0)*100)}％`:'端末内の読み取りを準備しています…';}
-   });
-   if(run!==generation){await jobWorker.terminate();jobWorker=null;return;}
-   worker=jobWorker;
-   const prepared=document.createElement('canvas');prepared.width=Math.min(1400,canvas.width);prepared.height=Math.round(canvas.height*prepared.width/canvas.width);const ctx=prepared.getContext('2d');ctx.drawImage(canvas,0,0,prepared.width,prepared.height);
-   const cleaned=document.createElement('canvas');cleaned.width=prepared.width;cleaned.height=prepared.height;const pixels=ctx.getImageData(0,0,prepared.width,prepared.height);pixels.data.set(cleanPixels(pixels.data,prepared.width,prepared.height));cleaned.getContext('2d').putImageData(pixels,0,0);
-   const readings=[];let texts=[];const passes=[[cleaned,'6','背景を抑えた写真'],[prepared,'11','元の写真']];if(prepared.width/prepared.height>=1.4&&prepared.width/prepared.height<=2.2){const band=document.createElement('canvas');band.width=prepared.width;band.height=Math.round(prepared.height*.17);band.getContext('2d').drawImage(prepared,0,Math.round(prepared.height*.27),prepared.width,band.height,0,0,band.width,band.height);const bctx=band.getContext('2d'),bp=bctx.getImageData(0,0,band.width,band.height);bp.data.set(cleanPixels(bp.data,band.width,band.height,130));bctx.putImageData(bp,0,0);passes.push([band,'7','駅名の部分']);}
-   // Two independent whole-ticket passes. Conflicting fields remain blank.
-   for(const [image,psm,label] of passes){
-    if(run!==generation)return;await jobWorker.setParameters({tessedit_pageseg_mode:psm,preserve_interword_spaces:'1',user_defined_dpi:'300'});
-    $('scanStatus').textContent=`${label}から読み取り中…`;
-    const {data:read}=await jobWorker.recognize(image);if(run!==generation)return;texts.push(`${label}：\n${read.text}`);const parsedPass=parseTicket(read.text,stations);if(label==='駅名の部分'){parsedPass.price=null;parsedPass.discount=null;parsedPass.unsupported=false;parsedPass.ticketKind=null;parsedPass.warnings=[];}readings.push(parsedPass);
+   jobWorker=worker||createLocalOcr();worker=jobWorker;$('scanStatus').textContent='端末内の新しい読取エンジンを準備しています。初回は約46MBのデータを取得します…';await jobWorker.ready;
+   if(run!==generation)return;
+   const prepared=document.createElement('canvas'),scale=Math.min(1,1600/Math.max(canvas.width,canvas.height));prepared.width=Math.round(canvas.width*scale);prepared.height=Math.round(canvas.height*scale);prepared.getContext('2d').drawImage(canvas,0,0,prepared.width,prepared.height);
+   const readings=[],texts=[];
+   for(let pass=0;pass<2;pass++){
+    if(run!==generation)return;let image=prepared;
+    if(pass){image=document.createElement('canvas');image.width=prepared.width;image.height=prepared.height;const ctx=image.getContext('2d');ctx.drawImage(prepared,0,0);const pixels=ctx.getImageData(0,0,image.width,image.height);for(let i=0;i<pixels.data.length;i+=4){const gray=pixels.data[i+2];const v=Math.max(0,Math.min(255,(gray-110)*2));pixels.data[i]=pixels.data[i+1]=pixels.data[i+2]=v;}ctx.putImageData(pixels,0,0);}
+    $('progress').value=pass?60:20;$('scanStatus').textContent=pass?'文字の濃さを調整して再確認しています…':'文字の位置と向きを検出して読み取っています…';
+    const read=await jobWorker.recognize(image);if(run!==generation)return;
+    const text=assembleLines(read.items)+(read.moneyText?`\n${read.moneyText}`:'');texts.push(`${pass?'濃さ調整':'元の写真'}：\n${text}\n\n確度の低い文字を含む読取記録：\n${read.items.map(i=>`${Math.round(i.score*100)}％ ${i.text}`).join('\n')}`);const parsedPass=parseTicket(text,stations);readings.push(parsedPass);
+    if(parsedPass.from&&parsedPass.to&&parsedPass.price&&parsedPass.ticketKind.id!=='unknown')break;
    }
    $('rawText').textContent=texts.join('\n\n');const parsed=mergeReadings(readings);const kind=parsed.ticketKind;detectedKind=kind;$('ticketKind').hidden=false;$('ticketKindLabel').textContent=kind.label;$('seatKind').textContent=({green:'グリーン車',reserved:'指定席',unreserved:'自由席',unknown:'座席区分は未判別'})[kind.seat];$('kindNote').textContent=kind.calculable?'普通乗車券の入力内容を券面と照合してください。':kind.id==='unknown'?'券種が読めませんでした。写真を切り出すか、券面で普通片道乗車券であることを確認してください。':'券種を読み取りました。この券の料金は普通乗車券の旅行中止計算には使いません。払戻計算は既存のMK払戻サイトで券種を選んで行ってください。';$('ticketRoute').textContent=parsed.from&&parsed.to?`${parsed.from} → ${parsed.to}`:'区間：未判別';$('ticketAmount').textContent=parsed.price?`券面金額候補：${yen(parsed.price)}（運賃・料金の内訳は券面確認）`:'金額：未判別';
    $('from').value='';$('to').value='';$('price').value='';$('discount').value='';
-   if(!parsed.unsupported){$('from').value=parsed.from;$('to').value=parsed.to;$('price').value=parsed.price??'';$('passenger').value=parsed.passenger;$('discount').value=parsed.discount??'';}
+   if(!parsed.unsupported){$('from').value=parsed.from;$('to').value=parsed.to;$('price').value=parsed.price??'';$('passenger').value=parsed.passenger??'';$('discount').value=parsed.discount??'';}
    $('warnings').textContent=parsed.warnings.join('\n');$('warnings').hidden=false;updateDiscount();
    $('scanStatus').textContent=parsed.unsupported?`${kind.label}を検出しました。券種の表示を確認してください。`:parsed.from&&parsed.to&&parsed.price?'読み取り完了。発着駅・金額を券面と照合してください。':'一部の項目を読み取れませんでした。切符だけを切り出して再試行するか、空欄を入力してください。';$('progress').value=100;
-  }catch(error){if(run===generation){$('scanStatus').textContent='読み取りできませんでした。写真を撮り直すか手入力してください。';$('rawText').textContent=`読取エラー：${error.message||error.name}\n読み込みが止まる場合は写真のサイズを小さくして再試行してください。`;}}
-  finally{if(jobWorker){await jobWorker.terminate();if(worker===jobWorker)worker=null;}if(run===generation){busy=false;toggleBusy(false);}}
+  }catch(error){if(run===generation){jobWorker?.terminate();worker=null;$('scanStatus').textContent='読み取りできませんでした。写真を撮り直すか手入力してください。';$('rawText').textContent=`読取エラー：${error.message||error.name}\n読み込みが止まる場合は写真のサイズを小さくして再試行してください。`;}}
+  finally{if(run===generation){busy=false;toggleBusy(false);}}
  });
  $('form').addEventListener('submit',event=>{event.preventDefault();clearResult();try{
   if(detectedKind&&detectedKind.id!=='unknown'&&!detectedKind.calculable)throw new Error('読み取った券は普通片道乗車券の旅行中止計算に使えません。MK払戻サイトで券種を選んでください。');

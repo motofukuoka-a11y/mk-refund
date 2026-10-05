@@ -1,1 +1,1 @@
-{"private":true,"dependencies":{"tesseract.js":"6.0.1","sharp":"0.34.5"}}
+{"private":true,"type":"module","dependencies":{"sharp":"0.34.5"}}
