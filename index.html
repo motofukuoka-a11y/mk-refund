@@ -82,12 +82,18 @@
       </div>
 
       <div id="ordinaryBox" class="conditional hidden">
+        <h3>通常払戻：普通乗車券</h3>
         <label>使用状態
-          <select id="ordinaryStatus"><option value="before">使用開始前</option><option value="after">使用開始後</option></select>
+          <select id="ordinaryStatus"><option value="before">使用開始前</option><option value="after">旅行中止（使用開始後）</option></select>
         </label>
-        <div id="ordinaryAfterBox" class="hidden grid">
-          <label>未使用区間の運賃<input id="unusedFare" type="number" min="0" step="10" placeholder="円"></label>
-          <label>未使用区間の営業キロ<input id="remainingKm" type="number" min="0" step="0.1" placeholder="101km以上"></label>
+        <label>元券の割引種別
+          <select id="ordinaryDiscount"></select>
+        </label>
+        <p id="discountNotice" class="muted" aria-live="polite"></p>
+        <label id="discountCompanionBox" class="hidden"><input id="discountCompanion" type="checkbox">本人と介護者が同一種類・同一区間を同時に利用することを確認済み</label>
+        <div id="ordinaryAfterBox" class="hidden">
+          <label>旅行中止駅<input id="ordinaryStop" list="stations" placeholder="例：長万部"></label>
+          <p class="muted">発駅・経由駅・着駅で指定した元券経路から未使用区間を自動抽出します。未使用区間の営業キロが101km以上の場合、元券と同じ割引を適用した運賃から手数料220円を差し引きます。有効期間内の乗車券を対象とします。</p>
         </div>
       </div>
 
