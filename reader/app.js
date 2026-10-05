@@ -1,8 +1,9 @@
-import {createLocalOcr} from './local-ocr.js?v=4';
-import {assembleLines} from './ocr-lines.js?v=4';
+import {loadPhotoCanvas} from './photo-loader.js?v=5';
+import {createLocalOcr} from './local-ocr.js?v=5';
+import {assembleLines} from './ocr-lines.js?v=5';
 import {createCalculator} from './calculator.js';
-import {frameCrop,ticketBounds} from './image-processing.js?v=4';
-import {parseTicket,mergeReadings} from './parser.js?v=4';
+import {frameCrop,ticketBounds} from './image-processing.js?v=5';
+import {parseTicket,mergeReadings} from './parser.js?v=5';
 const $=id=>document.getElementById(id), yen=n=>`${n.toLocaleString('ja-JP')}円`;
 let stream=null, canvas=null, worker=null, busy=false, generation=0, detectedKind=null;
 const data=await Promise.all(['segments','stations','ordinary_fares_main','ordinary_fares_local','discount_rules'].map(async n=>{
@@ -20,7 +21,7 @@ function initialize(){
  $('confirmed').addEventListener('input',event=>event.stopPropagation());
  $('discount').addEventListener('change',()=>{$('companion').checked=false;updateDiscount();});
  $('choose').addEventListener('click',()=>{$('file').click();});
- $('file').addEventListener('change',async()=>{const file=$('file').files[0];if(!file)return;try{await loadPhoto(file);}catch(error){$('scanStatus').textContent=error.message;}finally{$('file').value='';}});
+ $('file').addEventListener('change',async()=>{const file=$('file').files[0];if(!file||busy)return;const run=++generation;busy=true;resetTicket();removePhoto();toggleBusy(true);$('scanStatus').textContent='写真を端末内で開いています…';try{const image=await loadPhotoCanvas(file,message=>{if(run===generation)$('scanStatus').textContent=message;});if(run===generation)setPhoto(image);}catch(error){if(run===generation)$('scanStatus').textContent=error.message;}finally{$('file').value='';if(run===generation){busy=false;toggleBusy(false);}}});
  $('camera').addEventListener('click',async()=>{
   try{stopCamera();if(!navigator.mediaDevices?.getUserMedia)throw new Error('このブラウザではカメラを開けません。写真選択をご利用ください。');
    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false});
@@ -66,11 +67,11 @@ function initialize(){
     const text=assembleLines(read.items)+(read.moneyText?`\n${read.moneyText}`:'');texts.push(`${pass?'濃さ調整':'元の写真'}：\n${text}\n\n確度の低い文字を含む読取記録：\n${read.items.map(i=>`${Math.round(i.score*100)}％ ${i.text}`).join('\n')}`);const parsedPass=parseTicket(text,stations);readings.push(parsedPass);
     if(parsedPass.from&&parsedPass.to&&parsedPass.price&&parsedPass.ticketKind.id!=='unknown')break;
    }
-   $('rawText').textContent=texts.join('\n\n');const parsed=mergeReadings(readings);const kind=parsed.ticketKind;detectedKind=kind;$('ticketKind').hidden=false;$('ticketKindLabel').textContent=kind.label;$('seatKind').textContent=({green:'グリーン車',reserved:'指定席',unreserved:'自由席',unknown:'座席区分は未判別'})[kind.seat];$('kindNote').textContent=kind.calculable?'普通乗車券の入力内容を券面と照合してください。':kind.id==='unknown'?'券種が読めませんでした。写真を切り出すか、券面で普通片道乗車券であることを確認してください。':'券種を読み取りました。この券の料金は普通乗車券の旅行中止計算には使いません。払戻計算は既存のMK払戻サイトで券種を選んで行ってください。';$('ticketRoute').textContent=parsed.from&&parsed.to?`${parsed.from} → ${parsed.to}`:'区間：未判別';$('ticketAmount').textContent=parsed.price?`券面金額候補：${yen(parsed.price)}（運賃・料金の内訳は券面確認）`:'金額：未判別';
+   $('rawText').textContent=texts.join('\n\n');const parsed=mergeReadings(readings);const kind=parsed.ticketKind;detectedKind=kind;$('formCard').hidden=parsed.unsupported;$('ticketKind').hidden=false;$('ticketKindLabel').textContent=kind.label;$('seatKind').textContent=({green:'グリーン車',reserved:'指定席',unreserved:'自由席',unknown:'座席区分は未判別'})[kind.seat];$('kindNote').textContent=kind.calculable?'普通乗車券の入力内容を券面と照合してください。':kind.id==='unknown'?'券種が読めませんでした。写真を切り出すか、券面で普通片道乗車券であることを確認してください。':'券種を読み取りました。この券の料金は普通乗車券の旅行中止計算には使いません。払戻計算は既存のMK払戻サイトで券種を選んで行ってください。';$('ticketRoute').textContent=parsed.from&&parsed.to?`${parsed.from} → ${parsed.to}`:'区間：未判別';$('ticketBreakdown').textContent=parsed.fees?Object.entries(parsed.fees).map(([key,value])=>`${({ordinary:'乗車券運賃',limited_express:'特急料金',green:'グリーン料金'})[key]}：${yen(value)}`).join(' ／ '):'';$('ticketBreakdown').hidden=!parsed.fees; $('ticketAmount').textContent=parsed.price?`券面金額候補：${yen(parsed.price)}（運賃・料金の内訳は券面確認）`:'金額：未判別';
    $('from').value='';$('to').value='';$('price').value='';$('discount').value='';
    if(!parsed.unsupported){$('from').value=parsed.from;$('to').value=parsed.to;$('price').value=parsed.price??'';$('passenger').value=parsed.passenger??'';$('discount').value=parsed.discount??'';}
    $('warnings').textContent=parsed.warnings.join('\n');$('warnings').hidden=false;updateDiscount();
-   $('scanStatus').textContent=parsed.unsupported?`${kind.label}を検出しました。券種の表示を確認してください。`:parsed.from&&parsed.to&&parsed.price?'読み取り完了。発着駅・金額を券面と照合してください。':'一部の項目を読み取れませんでした。切符だけを切り出して再試行するか、空欄を入力してください。';$('progress').value=100;
+   $('scanStatus').textContent=parsed.unsupported?`読み取り完了：${kind.label}。区間・合計額・内訳を下の読取結果で確認してください。払戻計算はMK払戻サイトをご利用ください。`:parsed.from&&parsed.to&&parsed.price?'読み取り完了。発着駅・金額を券面と照合してください。':'一部の項目を読み取れませんでした。切符だけを切り出して再試行するか、空欄を入力してください。';$('progress').value=100;
   }catch(error){if(run===generation){jobWorker?.terminate();worker=null;$('scanStatus').textContent='読み取りできませんでした。写真を撮り直すか手入力してください。';$('rawText').textContent=`読取エラー：${error.message||error.name}\n読み込みが止まる場合は写真のサイズを小さくして再試行してください。`;}}
   finally{if(run===generation){busy=false;toggleBusy(false);}}
  });
@@ -87,10 +88,9 @@ function initialize(){
   $('metrics').replaceChildren(...metrics.map(([label,value])=>{const div=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;div.append(dt,dd);return div;}));
   $('routeDetail').replaceChildren(...r.path.map(s=>{const p=document.createElement('p');p.textContent=`${s.from} → ${s.to}：${s.line} ${s.business_km}km`;return p;}));$('result').hidden=false;$('result').focus();$('result').scrollIntoView({behavior:'smooth',block:'start'});
  }
- function resetTicket(){ detectedKind=null;$('ticketKind').hidden=true; $('form').reset();$('warnings').hidden=true;$('rawText').textContent='まだ読み取っていません。';updateDiscount();clearResult(); }
+ function resetTicket(){ detectedKind=null;$('ticketKind').hidden=true; $('form').reset();$('formCard').hidden=false;$('warnings').hidden=true;$('rawText').textContent='まだ読み取っていません。';updateDiscount();clearResult(); }
  function setPhoto(image){canvas=image;resetTicket();$('photo').src=image.toDataURL('image/jpeg',.92);$('photo').hidden=false;$('emptyPreview').hidden=true;$('photoTools').hidden=false;$('recognize').disabled=false;$('scanStatus').textContent='切符が横向きで大きく写っているか確認してください。背景が多い場合は「切符だけを切り出す」を使ってから読み取ります。';}
- async function loadPhoto(file){if(file.size>25*1024*1024)throw new Error('写真が大きすぎます。25MB以下の画像を選択してください。');const blob=URL.createObjectURL(file);try{const img=new Image();img.src=blob;await img.decode();const image=document.createElement('canvas');const scale=Math.min(1,2200/Math.max(img.naturalWidth,img.naturalHeight));image.width=Math.round(img.naturalWidth*scale);image.height=Math.round(img.naturalHeight*scale);image.getContext('2d').drawImage(img,0,0,image.width,image.height);setPhoto(image);}finally{URL.revokeObjectURL(blob);}}
- function removePhoto(){ detectedKind=null;$('ticketKind').hidden=true;canvas=null;$('photo').removeAttribute('src');$('photo').hidden=true;$('emptyPreview').hidden=false;$('photoTools').hidden=true;$('recognize').disabled=true;$('rawText').textContent='写真と読み取り文字を消去しました。';$('warnings').hidden=true;}
+ function removePhoto(){ resetTicket();detectedKind=null;$('ticketKind').hidden=true;canvas=null;$('photo').removeAttribute('src');$('photo').hidden=true;$('emptyPreview').hidden=false;$('photoTools').hidden=true;$('recognize').disabled=true;$('rawText').textContent='写真と読み取り文字を消去しました。';$('warnings').hidden=true;}
  function toggleBusy(on){for(const id of ['camera','choose','rotate','crop','remove','resetAll'])$(id).disabled=on;$('recognize').disabled=on||!canvas;$('cancel').hidden=!on;$('progress').hidden=!on;}
  function cancelReading(){generation++;busy=false;if(worker){worker.terminate();worker=null;}toggleBusy(false);$('scanStatus').textContent='読み取りを中止しました。';}
 }
