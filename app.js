@@ -270,18 +270,21 @@ function ordinaryRefund(normalFare, routeInfo, routeSegments, destination) {
   const info = totals(unused);
   const unusedNormalFare = unused.length ? fare(info.table, info.km, $('passenger').value) : 0;
   const eligible = Math.round(info.business * 10) >= 1010;
-  const validation = validateDiscount(discountType, info.business);
-  const discount = validation.ok && unused.length ? applyOrdinaryDiscount(unusedNormalFare, discountType, info.business) : null;
-  const amount = discount?.discountedFare ?? 0;
-  const ok = eligible && validation.ok;
+  const used = routeSegments.slice(0, indices[0]);
+  const usedInfo = totals(used);
+  const usedNormalFare = used.length ? fare(usedInfo.table, usedInfo.km, $('passenger').value) : 0;
+  const usedDiscountApplies = used.length > 0 && validateDiscount(discountType, usedInfo.business).ok;
+  const usedAmount = usedDiscountApplies
+    ? applyOrdinaryDiscount(usedNormalFare, discountType, usedInfo.business).discountedFare : usedNormalFare;
+  const amount = Math.max(0, original.discountedFare - usedAmount);
+  const ok = eligible;
   const refund = ok ? Math.max(0, amount - 220) : 0;
   return { ok, price: original.discountedFare, fee: ok ? 220 : 0, refund,
     formula: ok
-      ? `${yen(unusedNormalFare)} × ${Math.round((1-original.rate)*100)}％ → ${yen(amount)}（割引時は10円単位切上げ） − 220円 ＝ ${yen(refund)}`
+      ? `元券発売額 ${yen(original.discountedFare)} − 既乗区間運賃 ${yen(usedAmount)} − 手数料220円 ＝ ${yen(refund)}（差引残額がない場合は0円）`
       : '自動計算対象外。払戻手数料の控除は行いません。',
     reason: !eligible ? '未使用区間の営業キロが101km未満のため、通常の旅行中止払戻は自動計算対象外です。'
-      : !validation.ok ? validation.message
-      : `元券の経路から未使用区間を抽出し、元券と同じ割引を適用しました。${original.conditionNote}`,
+      : `第274条に基づき、元券発売額から既乗区間運賃と手数料を差し引きました。${original.rate > 0 ? usedDiscountApplies ? "既乗区間だけで割引条件を満たすため、控除額にも元券の割引を適用しました。" : "既乗区間だけでは割引条件を満たさないため、無割引の普通運賃を控除しました。" : ""}${original.conditionNote}`,
     extra: [...baseExtra,
       { label: '旅行中止駅', value: stop },
       { label: '未使用区間', value: `${stop} → ${destination}` },
@@ -290,7 +293,14 @@ function ordinaryRefund(normalFare, routeInfo, routeSegments, destination) {
       { label: '運賃計算キロ', value: `${info.fareCalculationKm.toFixed(1)}km（運賃表検索：${info.km}km）` },
       { label: '参照運賃表', value: unused.length ? info.label : '未使用区間なし' },
       { label: '割引前未使用区間運賃', value: unusedNormalFare },
-      { label: '割引後払戻対象額', value: validation.ok ? amount : '割引条件を満たさないため算出不可' },
+      { label: '元券発売額', value: original.discountedFare },
+      { label: '既乗区間', value: `${routeSegments[0]?.from} → ${stop}` },
+      { label: '既乗区間営業キロ', value: `${usedInfo.business.toFixed(1)}km` },
+      { label: '既乗区間参照運賃表', value: used.length ? usedInfo.label : '既乗区間なし' },
+      { label: '割引前既乗区間運賃', value: usedNormalFare },
+      { label: '既乗区間の割引適用', value: original.rate > 0 && usedDiscountApplies ? original.label : '割引なし' },
+      { label: '控除する既乗区間運賃', value: usedAmount },
+      { label: '手数料控除前残額', value: amount },
       { label: '通常払戻手数料', value: '220円（自動計算対象外の場合は控除なし）' }
     ] };
 }

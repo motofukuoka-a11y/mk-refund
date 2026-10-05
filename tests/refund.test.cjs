@@ -29,8 +29,13 @@ test('original route suffix and all six discounts',async()=>{
     const result=calculate(api,'札幌','函館','長万部');
     const unused=api.route('長万部','函館',[]), info=api.totals(unused);
     const normal=api.fare(info.table,info.km,'adult');
-    const amount=discount.rate?Math.ceil(normal*(1-discount.rate)/10)*10:normal;
-    assert.equal(result.refund,amount-220);assert.equal(result.fee,220);
+    const full=api.totals(api.route('札幌','函館',[]));
+    const used=api.totals(api.route('札幌','長万部',[]));
+    const fullFare=api.fare(full.table,full.km,'adult'), usedFare=api.fare(used.table,used.km,'adult');
+    const amount=discount.rate?Math.ceil(fullFare*(1-discount.rate)/10)*10:fullFare;
+    const deduction=discount.rate?Math.ceil(usedFare*(1-discount.rate)/10)*10:usedFare;
+    assert.equal(result.refund,Math.max(0,amount-deduction-220));
+    assert.notEqual(result.refund,Math.max(0,(discount.rate?Math.ceil(normal*(1-discount.rate)/10)*10:normal)-220));assert.equal(result.fee,220);
     assert.equal(result.extra.find(x=>x.label==='未使用区間営業キロ').value,`${info.business.toFixed(1)}km`);
   }
 });
@@ -77,4 +82,25 @@ test('accident results match main for all ticket types and purchase checks',asyn
       const path=current.route('札幌','函館',[]), info=current.totals(path), fare=current.fare(info.table,info.km,'adult');
       assert.deepEqual(current.accidentRefund(type,fare,path,'函館',1000,info),baseline.accidentRefund(type,fare,path,'函館',1000,info));
     }
+});
+
+test('used segment discount conditions and zero balance',async()=>{
+  const api=await load();
+  for (const discount of ['student','disability_type1_single','disability_type2_single','caregiver_type1']) {
+    api.set({ordinaryDiscount:discount});api.get('discountCompanion').checked=true;
+    for(const km of [100,100.1,101]) {
+      const path=[{from:'札幌',to:'長万部',line_type:'幹線',business_km:km},{from:'長万部',to:'函館',line_type:'幹線',business_km:120}];
+      api.set({ordinaryStop:'長万部'}); const info=api.totals(path);
+      const result=api.ordinaryRefund(6000,info,path,'函館');
+      const normal=api.fare(api.totals(path.slice(0,1)).table,Math.ceil(km),'adult');
+      const rate=discount==='student'?0.2:0.5;
+      const applies=discount==='caregiver_type1'||km>100;
+      const deduction=applies?Math.ceil(normal*(1-rate)/10)*10:normal;
+      assert.equal(result.extra.find(x=>x.label==='控除する既乗区間運賃').value,deduction);
+      assert.equal(result.refund,Math.max(0,Math.ceil(6000*(1-rate)/10)*10-deduction-220));
+    }
+  }
+  api.set({ordinaryDiscount:'none',ordinaryStop:'長万部'});
+  const path=[{from:'札幌',to:'長万部',line_type:'幹線',business_km:100},{from:'長万部',to:'函館',line_type:'幹線',business_km:120}];
+  assert.equal(api.ordinaryRefund(100,api.totals(path),path,'函館').refund,0);
 });
