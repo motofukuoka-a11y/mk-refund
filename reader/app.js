@@ -12,6 +12,7 @@ const data=await Promise.all(['segments','stations','ordinary_fares_main','ordin
 })).catch(error=>{$('scanStatus').textContent=error.message;$('form').querySelector('button[type=submit]').disabled=true;return null;});
 if(data) initialize();
 function initialize(){
+ $('camera').disabled=false;$('choose').disabled=false;
  const [segments,stations,main,local,discounts]=data, calculator=createCalculator(segments,stations,main,local,discounts);
  const cancelCalculator=createCancellationCalculator(calculator,stations);
  stations.forEach(s=>{const option=document.createElement('option');option.value=s;$('stations').append(option);});
