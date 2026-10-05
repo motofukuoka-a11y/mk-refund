@@ -1,0 +1,48 @@
+{
+  "version": "5.2",
+  "rounding": "割引後運賃は10円単位に切り上げ",
+  "discounts": [
+    {
+      "id": "none",
+      "label": "割引なし",
+      "rate": 0,
+      "minimumBusinessKmExclusive": null,
+      "requiresCompanion": false
+    },
+    {
+      "id": "student",
+      "label": "学生割引",
+      "rate": 0.2,
+      "minimumBusinessKmExclusive": 100,
+      "requiresCompanion": false
+    },
+    {
+      "id": "disability_type1_accompanied",
+      "label": "障害者第1種（本人・介護者同行）",
+      "rate": 0.5,
+      "minimumBusinessKmExclusive": null,
+      "requiresCompanion": true
+    },
+    {
+      "id": "disability_type1_single",
+      "label": "障害者第1種（本人単独）",
+      "rate": 0.5,
+      "minimumBusinessKmExclusive": 100,
+      "requiresCompanion": false
+    },
+    {
+      "id": "disability_type2_single",
+      "label": "障害者第2種（本人単独）",
+      "rate": 0.5,
+      "minimumBusinessKmExclusive": 100,
+      "requiresCompanion": false
+    },
+    {
+      "id": "caregiver_type1",
+      "label": "介護者（第1種本人と同行）",
+      "rate": 0.5,
+      "minimumBusinessKmExclusive": null,
+      "requiresCompanion": true
+    }
+  ]
+}
