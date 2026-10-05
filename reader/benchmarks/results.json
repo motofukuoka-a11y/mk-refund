@@ -1,0 +1,462 @@
+{
+  "date": "2026-10-05",
+  "count": 25,
+  "measurement": "Original photos, without manual cropping; two whole-ticket passes plus localized station band on horizontal images; no manual cropping. Browser cropped-photo trial reported separately. Convenience sample, not population accuracy.",
+  "ordinaryFareSubset": 6,
+  "correctFareBefore": 1,
+  "correctFareAfter": 4,
+  "registeredRouteSubset": 2,
+  "correctRouteBefore": 0,
+  "correctRouteAfter": 1,
+  "results": [
+    {
+      "file": "sample-00.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:A_commuter_pass_with_Limited_Express_seat.JPG",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-01.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Group-ticket.JR-Hokkaido.jpg",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": true
+      }
+    },
+    {
+      "file": "sample-02.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Group-ticket.JR-Hokkaido1.jpg",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": 5780,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-03.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Group-ticket.JR-Hokkaido2.jpg",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": 5780,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-04.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Group-ticket.JR-Hokkaido3.jpg",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-05.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:JR_Soya-Main-Line_Osashima_Station_Rigid_ticket.jpg",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": true
+      }
+    },
+    {
+      "file": "sample-06.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:JR-Kanayama-Hokkaido-ticket.jpg",
+      "expected": [
+        "金山",
+        "下金山",
+        220
+      ],
+      "before": {
+        "from": "",
+        "to": "",
+        "price": 220,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": 220,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-07.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:JR-Yubari-ticket-2.jpg",
+      "expected": [
+        "夕張",
+        "鹿ノ谷",
+        170
+      ],
+      "before": {
+        "from": "",
+        "to": "",
+        "price": 1,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": 170,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-08.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:JR-Yubari-ticket.jpg",
+      "expected": [
+        "夕張",
+        "鹿ノ谷",
+        170
+      ],
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-09.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:MARS%E5%88%B8.jpg",
+      "expected": [
+        "恵み野",
+        "札幌",
+        620
+      ],
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": 620,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-10.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Platform_ticket_Wakkanai_Sta.jpg",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-11.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:RailwayTicket_Mashu-Kushiro.jpg",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": 3200,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": 3200,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-12.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Reserved_seat_ticket_%28Hokuto_zashiki%29.jpg",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": 510,
+        "unsupported": true
+      }
+    },
+    {
+      "file": "sample-13.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Two_way_Ticket_Naka-Yubetsu_and_Yubetsu.jpg",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": 5,
+        "unsupported": true
+      }
+    },
+    {
+      "file": "sample-14.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%8E%9F%E7%94%9F%E8%8A%B1%E5%9C%92-%E7%9F%A5%E5%BA%8A%E6%96%9C%E9%87%8C_%28%E5%B0%8F%29.jpg",
+      "expected": [
+        "原生花園",
+        "知床斜里",
+        220
+      ],
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "原生花園",
+        "to": "知床斜里",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-15.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%A2%97%E6%AF%9B%E9%A7%85%E8%A8%98%E5%BF%B5%E5%88%87%E7%AC%A6.JPG",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": true
+      }
+    },
+    {
+      "file": "sample-16.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%80%A3%E7%B6%9A%E4%B9%97%E8%BB%8A%E5%88%B8%EF%BC%88%E5%8B%87%E7%9F%A5%E2%87%92%E5%8D%97%E7%A8%9A%E5%86%85%E2%87%92%E8%B1%8A%E5%AF%8C%EF%BC%89.jpg",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-17.jpg",
+      "source": "https://rgc83.blog.fc2.com/blog-entry-86.html",
+      "expected": [
+        "札幌",
+        "母子里",
+        3250
+      ],
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": 3250,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-18.jpg",
+      "source": "https://www.geni-tetsutabi.com/trip/tokyo29/cdr02.html",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": 7680,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-19.jpg",
+      "source": "https://www.geni-tetsutabi.com/trip/tokyo29/cdr02.html",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": 2400,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-20.jpg",
+      "source": "https://travel.watch.impress.co.jp/docs/series/inoue/1525192.html",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-21.jpg",
+      "source": "https://ameblo.jp/hakodatebus183/entry-12516005163.html",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": 180,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": 190,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-22.jpg",
+      "source": "https://www.rail-miler.site/entry/2022/09/14/153701",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-23.jpg",
+      "source": "https://note.com/shirota_blog/n/nbc0f2fb5d45e",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      }
+    },
+    {
+      "file": "sample-24.jpg",
+      "source": "https://4travel.jp/dm_shisetsu/11362411?page=12",
+      "expected": null,
+      "before": {
+        "from": "",
+        "to": "",
+        "price": null,
+        "unsupported": false
+      },
+      "after": {
+        "from": "",
+        "to": "",
+        "price": 8300,
+        "unsupported": false
+      }
+    }
+  ]
+}
