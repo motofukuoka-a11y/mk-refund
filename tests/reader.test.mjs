@@ -1,5 +1,5 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
-import {createCalculator} from '../reader/calculator.js';import {parseTicket} from '../reader/parser.js';
+import {createCalculator} from '../reader/calculator.js';import {parseTicket,needsAdditionalReading,canStopAfterReading} from '../reader/parser.js';
 const read=n=>JSON.parse(fs.readFileSync(`reader/data/${n}.json`));
 const stations=read('stations');const calc=createCalculator(read('segments'),stations,read('ordinary_fares_main'),read('ordinary_fares_local'),read('discount_rules'));
 const base={from:'札幌',to:'函館',stop:'長万部',price:5020,discount:'student',valid:true};
@@ -35,6 +35,25 @@ import {assembleLines} from '../reader/ocr-lines.js';
 test('real AI detections join spaced station names without nearby instruction lines',()=>{const a=(text,x,y,w,h,score=.95)=>({text,score,poly:[[x,y],[x+w,y],[x+w,y+h],[x,y+h]]});const raw=assembleLines([a('恵み野',109,242,290,91),a('→札幌',384,258,414,89),a('经由：千歲線',114,322,250,40),a('¥620',736,374,108,48),a('不確かな文字',0,400,100,30,.4)]);const p=parseTicket(raw,stations);assert.equal(p.from,'恵み野');assert.equal(p.to,'札幌');assert.equal(p.price,620);assert.ok(!raw.includes('不確か'));});
 test('child alternative fare is not evidence of a child ticket; uncertain money and city tickets are held',()=>{assert.equal(parseTicket('乗車券\n小児180円',stations).passenger,null);assert.equal(parseTicket('乗車券\n小\n620円',stations).passenger,'child');assert.equal(parseTicket('乗車券\n360元\n小児180円',stations).price,null);assert.equal(parseTicket('乗車券\n札幌市内→函館',stations).unsupported,false);assert.equal(parseTicket('乗車券\n¥620\n2025.-8.14元きねっと',stations).price,620);});
 test('combined ticket recognized from explicit fare breakdown',()=>{assert.equal(classifyTicket('不鮮明な券名\n内訳：乗5.610·特2.690').id,'ordinary+limited_express');});
+test('real combined MARS ticket promotes partial title only after total-matching fees',()=>{
+ const raw='東C乗車券・特\n旭川 → 網走\n内訳：乗2,970・特1,470\n￥4,440\n1号車 8番A席';
+ const parsed=parseTicket(raw,stations);
+ assert.equal(parsed.ticketKind.id,'ordinary+limited_express');
+ assert.equal(parsed.ticketKind.label,'乗車券＋特急券');
+ assert.deepEqual(parsed.fees,{ordinary:2970,limited_express:1470});
+ assert.equal(parsed.chargeSeat,'reserved');
+ assert.equal(parsed.ticketKind.seat,'reserved');
+ const firstPass=parseTicket('普通乗車券\n旭川 → 網走\n￥4,440\n1号車 8番A席',stations);
+ assert.equal(mergeReadings([firstPass,parsed]).ticketKind.seat,'reserved');
+ assert.equal(canStopAfterReading(firstPass),true);
+ assert.equal(needsAdditionalReading(parseTicket('乗車券・特\n旭川 → 網走\n￥4,440',stations)),true);
+ assert.equal(needsAdditionalReading(parseTicket('乗車券\n特\n旭川 → 網走\n￥4,440',stations)),true);
+ assert.equal(canStopAfterReading(parsed),true);
+ const mismatch=parseTicket(raw.replace('1,470','1,400'),stations);
+ assert.equal(mismatch.ticketKind.id,'ordinary');
+ assert.equal(mismatch.fees,null);
+ assert.equal(needsAdditionalReading(mismatch),true);
+});
 
 import {priceBand,recoveredMoney} from '../reader/ocr-lines.js';
 test('price recovery rejects serials, uncertain currency and weak OCR',()=>{assert.equal(recoveredMoney([{text:'￥170',score:.9},{text:'￥1706',score:.99},{text:'2203',score:.99},{text:'話220',score:.99},{text:'￥220',score:.8}]),'¥170');assert.equal(recoveredMoney([{text:'￥3,250',score:.95}]),'¥3,250');assert.equal(priceBand([],800,500),null);const r=priceBand([{text:'1日間有効',score:.95,poly:[[50,100],[300,100],[300,125],[50,125]]},{text:'012345',score:.9,poly:[[700,100],[710,100],[710,300],[700,300]]}],800,500);assert.ok(r.x>300&&r.x+r.w<=700&&r.y+r.h<=500);});
