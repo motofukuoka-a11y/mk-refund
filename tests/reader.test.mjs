@@ -53,6 +53,9 @@ test('real combined MARS ticket promotes partial title only after total-matching
  assert.equal(mismatch.ticketKind.id,'ordinary');
  assert.equal(mismatch.fees,null);
  assert.equal(needsAdditionalReading(mismatch),true);
+ const ocrVariant=parseTicket('東C乗車券·特\n旭 川→網 走\n1号車 8番A席\n￥4.440内识：乘2.970·特1.470',stations);
+ assert.equal(ocrVariant.ticketKind.id,'ordinary+limited_express');
+ assert.deepEqual(ocrVariant.fees,{ordinary:2970,limited_express:1470});
 });
 
 import {priceBand,recoveredMoney} from '../reader/ocr-lines.js';

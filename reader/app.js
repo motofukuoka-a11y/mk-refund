@@ -6,7 +6,7 @@ import {createLocalOcr} from './local-ocr.js?v=6';
 import {assembleLines} from './ocr-lines.js?v=6';
 import {createCalculator} from './calculator.js?v=6.3';
 import {frameCrop,ticketBounds} from './image-processing.js?v=6';
-import {parseTicket,mergeReadings,canStopAfterReading} from './parser.js?v=7.2';
+import {parseTicket,mergeReadings,canStopAfterReading} from './parser.js?v=7.3';
 const $=id=>document.getElementById(id), yen=n=>`${n.toLocaleString('ja-JP')}円`;
 let currentKind=null,stream=null, canvas=null, worker=null, busy=false, generation=0, detectedKind=null;
 const data=await Promise.all(['segments','stations','ordinary_fares_main','ordinary_fares_local','discount_rules'].map(async n=>{

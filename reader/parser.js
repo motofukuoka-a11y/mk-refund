@@ -1,5 +1,6 @@
 import {normalizeTicketText} from './ocr-lines.js?v=6';
-import {classifyTicket,mergeTicketKinds} from './ticket-kind.js?v=7.2';
+import {classifyTicket,mergeTicketKinds} from './ticket-kind.js?v=7.3';
+const breakdownMarker=/内[訳议识識]/;
 export function parseTicket(raw, stations) {
   const text=normalizeTicketText(raw).replace(/[‐‑−ー]/g,'ー');
   const compact=text.replace(/[ \t]/g,'');
@@ -45,7 +46,7 @@ export function parseTicket(raw, stations) {
     ticketKind={...classifyTicket(text,{includeBreakdown:false}),city:{from:cityFrom,to:cityTo}};
     if(/市内|都区内|山手線内/.test(compact)&&!cityFrom&&!cityTo)ticketKind={...ticketKind,restricted:true,calculable:false};
   }
-  if(/内[訳议]/.test(compact)&&!fees)warnings.push('料金内訳を確定できません。合計額と券面の内訳を照合してください。');
+  if(breakdownMarker.test(compact)&&!fees)warnings.push('料金内訳を確定できません。合計額と券面の内訳を照合してください。');
   const unsupported=ticketKind.id!=='unknown'&&!ticketKind.calculable;
   const discount=/学割/.test(compact)?'student':/割|障|介/.test(compact)?null:'none';
   if(discount===null) warnings.push('割引表示があります。本人・介護者などの種別を選択してください。');
@@ -55,7 +56,7 @@ export function parseTicket(raw, stations) {
   const chargeSeat=/座席未指定券/.test(compact)?'unassigned':/立席特急券/.test(compact)?'standing':/自由席|自由特急券/.test(compact)?'unreserved':/指定席|[0-9]+号車[0-9]+番[A-Z]?席/.test(compact)?'reserved':null;
   if(chargeSeat)ticketKind={...ticketKind,seat:chargeSeat};
   const combinedProbe=compact.replace(/\n/g,'');
-  const combinedCandidate=ticketKind.id==='ordinary'&&(/内[訳议].*(?:特|グ)/.test(combinedProbe)||/乗車券.{0,4}(?:特|グ)|(?:特|グ).{0,4}乗車券/.test(combinedProbe));
+  const combinedCandidate=ticketKind.id==='ordinary'&&(breakdownMarker.test(combinedProbe)&&/(?:特|グ)/.test(combinedProbe)||/乗車券.{0,4}(?:特|グ)|(?:特|グ).{0,4}乗車券/.test(combinedProbe));
   return {chargeSeat,train,from:route.from||'',to:route.to||'',price,fees,discount,passenger:/(?:^|\n)[(【\[]?小(?:児|人)?[)】\]]?(?:$|\n)|小児乗車券/.test(compact)?'child':/(?:^|\n)大人(?:$|\n)/.test(compact)?'adult':null,warnings,unsupported,ticketKind,combinedCandidate};
 }
 
@@ -88,8 +89,8 @@ export function canStopAfterReading(parsed){
 // Only an explicit breakdown with a matching total is accepted; train numbers,
 // dates, seat numbers and uncertain OCR digits are never used to fill a fee.
 export function parseFeeBreakdown(text,kind,total){
- if(!total)return null;const lines=text.normalize('NFKC').replace(/[ \t]/g,'').split('\n').filter(l=>/内[訳议]/.test(l));
- const candidates=[];for(const line of lines){const tail=line.split(/内[訳议][:：]?/)[1];if(!tail)continue;
+ if(!total)return null;const lines=text.normalize('NFKC').replace(/[ \t]/g,'').split('\n').filter(l=>breakdownMarker.test(l));
+ const candidates=[];for(const line of lines){const tail=line.split(/内[訳议识識][:：]?/)[1];if(!tail)continue;
   const matches=[...tail.matchAll(/(乗|特|グ)([0-9]+(?:[,.][0-9]{3})*)(?![0-9,.])/g)];
   const fees={},keys={乗:'ordinary',特:'limited_express',グ:'green'};let valid=true;
   for(const m of matches){const key=keys[m[1]],n=Number(m[2].replace(/[,.]/g,''));if(!kind.kinds.includes(key)||Object.hasOwn(fees,key)||n<=0||n%10!==0){valid=false;break;}fees[key]=n;}

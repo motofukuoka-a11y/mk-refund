@@ -1,6 +1,7 @@
 const labels={ordinary:'普通乗車券',limited_express:'特急券',green:'グリーン券',seat_fee:'指定料金券',other:'その他の券',unknown:'判別できません',conflict:'券種の読取結果が一致しません'};
 const combinedLabels={ordinary:'乗車券',limited_express:labels.limited_express,green:labels.green};
 const labelForKinds=kinds=>kinds.length>1&&kinds.includes('ordinary')?kinds.map(k=>combinedLabels[k]||labels[k]).join('＋'):kinds.map(k=>labels[k]).join('＋');
+const breakdownMarker=/内[訳议识識]/;
 
 export function classifyTicket(raw,{includeBreakdown=true}={}){
  const lines=raw.normalize('NFKC').replace(/[ \t]/g,'').replace(/[‐‑−一]/g,'ー').split('\n').filter(Boolean);
@@ -12,7 +13,7 @@ export function classifyTicket(raw,{includeBreakdown=true}={}){
  if(/特急券|特急・グリーン券/.test(top))titleKinds.push('limited_express');
  if(/グリーン券/.test(top)||(/特急/.test(top)&&/グリーン/.test(top)))titleKinds.push('green');
  const breakdownKinds=[];
- if(/内[訳议]/.test(all)){
+ if(breakdownMarker.test(all)){
   if(/乗[0-9,.]+/.test(all))breakdownKinds.push('ordinary');
   if(/特[0-9,.]+/.test(all))breakdownKinds.push('limited_express');
   if(/グ[0-9,.]+/.test(all))breakdownKinds.push('green');
