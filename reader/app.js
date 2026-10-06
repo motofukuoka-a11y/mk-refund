@@ -19,7 +19,7 @@ function initialize(){
  const cancelCalculator=createReaderRefundCalculator(calculator,stations);
  for(const id of ['actualFrom','actualTo'])for(const s of sapporoCityStations){const o=document.createElement('option');o.value=s;o.textContent=s;$(id).append(o);}
  stations.forEach(s=>{const option=document.createElement('option');option.value=s;$('stations').append(option);});
- discounts.discounts.forEach(r=>{const option=document.createElement('option');option.value=r.id;option.textContent=r.label;$('discount').append(option);});
+ discounts.discounts.forEach(r=>{const option=document.createElement('option');option.value=r.id;option.textContent=r.label;option.selected=r.id==='none';$('discount').append(option);});
  const clearResult=()=>{$('result').hidden=true;$('error').hidden=true;};
  function updateDiscount(){const r=discounts.discounts.find(r=>r.id===$('discount').value);$('companionBox').hidden=!r?.requiresCompanion;$('discountNote').textContent=r?`${r.label}${r.rate?`：${r.rate*100}％引` : ''}${r.minimumBusinessKmExclusive!==null?'／営業キロ100km超が条件':''}`:'';}
  function updateCityFields(){for(const end of ['From','To']){const on=$('city'+end).checked&&$('usage').value!=='before';$('actual'+end+'Label').hidden=!on;$('actual'+end).required=on;$('actual'+end).disabled=!on;}}
@@ -102,7 +102,7 @@ function initialize(){
    $('from').value='';$('to').value='';$('price').value='';$('discount').value='';
    $('chargeSeat').value=parsed.chargeSeat||'';
    $('cityFrom').checked=Boolean(kind.city?.from);$('cityTo').checked=Boolean(kind.city?.to);$('actualFrom').value='';$('actualTo').value='';
-   if(kind.id==='unknown'||supportsCancellation(kind)){$('from').value=parsed.from;$('to').value=parsed.to;$('price').value=parsed.price??'';$('passenger').value=parsed.passenger??'';$('discount').value=parsed.discount??'';$('via').value=suggestedVias(parsed.train,parsed.from,parsed.to,calculator).join('、');for(const [type,id] of [['ordinary','ordinary'],['limited_express','express'],['green','green']])$(id+'Component').value=parsed.fees?.[type]??'';}updateCancellationFields();
+   if(kind.id==='unknown'||supportsCancellation(kind)){$('from').value=parsed.from;$('to').value=parsed.to;$('price').value=parsed.price??'';$('passenger').value=parsed.passenger??'adult';$('discount').value=parsed.discount??'none';$('via').value=suggestedVias(parsed.train,parsed.from,parsed.to,calculator).join('、');for(const [type,id] of [['ordinary','ordinary'],['limited_express','express'],['green','green']])$(id+'Component').value=parsed.fees?.[type]??'';}updateCancellationFields();
    $('ticketDetails').open=!parsed.from||!parsed.to||!parsed.price||(kind.kinds.length>1&&!parsed.fees)||($('usage').value==='after'&&kind.kinds.includes('ordinary')&&(!parsed.passenger||!parsed.discount));
    $('warnings').textContent=parsed.warnings.filter(w=>!supportsCancellation(kind)||!w.startsWith('普通片道乗車券以外')).join('\n');$('warnings').hidden=false;updateDiscount();
    $('scanStatus').textContent=blocked?'読み取り完了。「02 内容を確認する」に読取内容と自動計算対象外の理由を表示しています。':parsed.unsupported?`読み取り完了：${kind.label}。区間・合計額・内訳を下の読取結果で確認してください。使用状態と払戻の理由を選んでください。`:parsed.from&&parsed.to&&parsed.price?'読み取り完了。発着駅・金額を券面と照合してください。':'一部の項目を読み取れませんでした。きっぷだけを切り出して再試行するか、空欄を入力してください。';$('progress').value=100;
