@@ -69,3 +69,5 @@ test('Sapporo city destination accident uses centre, city bounds and restricted 
  assert.equal(supportsCancellation(parseTicket('トクだ值35（乗車券つき）\n乗車券・特急券\n札幌（市内）→網走',stations).ticketKind),false);
  assert.equal(mergeReadings([parseTicket('乗車券\n札幌市内→函館',stations),parseTicket('乗車券\n札幌→函館',stations)]).ticketKind.city.from,true);
 });
+
+test('seat classification auto-fills only explicit seat evidence and withholds conflicts',()=>{const a=parseTicket('特急券・グリーン券\n札幌→長万部\n1号車5番D席\n3,300円',stations);assert.equal(a.chargeSeat,'reserved');assert.equal(parseTicket('特急券\n札幌→函館',stations).chargeSeat,null);assert.equal(parseTicket('座席未指定券\n特急券',stations).chargeSeat,'unassigned');assert.equal(mergeReadings([a,parseTicket('自由席特急券',stations)]).chargeSeat,null);});

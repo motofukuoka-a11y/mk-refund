@@ -30,12 +30,19 @@ export function createReaderRefundCalculator(calculator,stations){
   }
   let late=false;
   if(mode==='normal'&&feeTypes.length&&['reserved','standing'].includes(chargeSeat)){
+   if(Object.hasOwn(input,'timingBand')){
+    if(!['early','late','changed','departed'].includes(input.timingBand))throw new Error('出発日の2日前まで・前日当日など、払戻時期を選択してください。');
+    if(input.timingBand==='departed')throw new Error('出発時刻を過ぎた指定券は通常の使用開始前払戻の対象外です。');
+    if(chargeSeat==='standing'&&input.timingBand==='changed')throw new Error('立席特急券は出発前の時期を確認してください。');
+    late=input.timingBand==='late'||input.timingBand==='changed';
+   }else{
    const request=jstDate(input.requestDate),departure=jstDate(input.departureDate);
    if(request>=departure)throw new Error('指定列車の出発時刻以降は通常の使用開始前払戻の対象外です。');
    if(chargeSeat==='reserved'){
     if(!['yes','no'].includes(input.changedLate))throw new Error('出発日・前日に変更した指定券か確認してください。');
     const day=v=>Date.UTC(...v.slice(0,10).split('-').map((n,i)=>Number(n)-(i===1?1:0)));
     late=(day(input.departureDate)-day(input.requestDate))/86400000<2||input.changedLate==='yes';
+   }
    }
   }
   const rows=kind.kinds.map(type=>{
@@ -51,6 +58,6 @@ export function createReaderRefundCalculator(calculator,stations){
    const refund=Math.max(0,paid-fee);return {type,label:cancellationLabels[type],paid,fee,refund,eligible,reason,source,formula:`${yen(paid)} − ${yen(fee)} ＝ ${yen(refund)}${paid<fee?'（払戻額は0円を下限）':''}`};
   });
   const path=calculator.route(from,to,vias),refund=rows.reduce((n,r)=>n+r.refund,0),fee=rows.reduce((n,r)=>n+r.fee,0);
-  return {usage:'before',from,to,price,mode,path,rows,refund,fee,eligible:true,city:input.city,chargeSeat,requestDate:input.requestDate,departureDate:input.departureDate,reason:mode==='normal'?'使用開始前の通常払戻。券種別の手数料を控除しています。':'使用開始前の運休による事故払戻。確認した条件により全額・無手数料。',formula:rows.map(r=>`${r.label}：${r.formula}`).join('\n')+(rows.length>1?`\n合計払戻額：${yen(refund)}`:'')};
+  return {usage:'before',from,to,price,mode,path,rows,refund,fee,eligible:true,city:input.city,chargeSeat,timingBand:input.timingBand,requestDate:input.requestDate,departureDate:input.departureDate,reason:mode==='normal'?'使用開始前の通常払戻。券種別の手数料を控除しています。':'使用開始前の運休による事故払戻。確認した条件により全額・無手数料。',formula:rows.map(r=>`${r.label}：${r.formula}`).join('\n')+(rows.length>1?`\n合計払戻額：${yen(refund)}`:'')};
  };
 }

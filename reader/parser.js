@@ -43,7 +43,8 @@ export function parseTicket(raw, stations) {
   warnings.push('経由駅・有効期間・割引種別は券面と照合してください。読取金額は必ず確認してください。');
   if(unsupported) warnings.unshift('普通片道乗車券以外の表示を検出しました。このサイトの自動計算対象を確認してください。');
   const train=/^北斗[0-9]+号/m.test(compact)?'北斗':null;
-  return {train,from:route.from||'',to:route.to||'',price,fees,discount,passenger:/(?:^|\n)[(【\[]?小(?:児|人)?[)】\]]?(?:$|\n)|小児乗車券/.test(compact)?'child':/(?:^|\n)大人(?:$|\n)/.test(compact)?'adult':null,warnings,unsupported,ticketKind};
+  const chargeSeat=/座席未指定券/.test(compact)?'unassigned':/立席特急券/.test(compact)?'standing':/自由席|自由特急券/.test(compact)?'unreserved':/指定席|[0-9]+号車[0-9]+番[A-Z]?席/.test(compact)?'reserved':null;
+  return {chargeSeat,train,from:route.from||'',to:route.to||'',price,fees,discount,passenger:/(?:^|\n)[(【\[]?小(?:児|人)?[)】\]]?(?:$|\n)|小児乗車券/.test(compact)?'child':/(?:^|\n)大人(?:$|\n)/.test(compact)?'adult':null,warnings,unsupported,ticketKind};
 }
 
 export function mergeReadings(readings){
@@ -57,7 +58,7 @@ export function mergeReadings(readings){
  if(feeCandidates.length>1)warnings.unshift('料金内訳の読取結果が一致しません。券面を確認してください。');
  if(amounts.length>1)warnings.unshift('金額の読取結果が一致しません。発売額を入力してください。');
  if(discounts.length>1)warnings.unshift('割引の読取結果が一致しません。割引種別を選択してください。');
- return {train:unique('train').length===1?unique('train')[0]:null,from:routes.length===1?routes[0].from:'',to:routes.length===1?routes[0].to:'',price:amounts.length===1?amounts[0]:null,fees:feeCandidates.length===1&&amounts.length===1&&Object.values(feeCandidates[0]).reduce((a,b)=>a+b,0)===amounts[0]?feeCandidates[0]:null,discount:discounts.length===1&&!(discounts[0]==='none'&&readings.some(r=>r.discount===null&&r.warnings.length))?discounts[0]:null,passenger:passengers.length===1?passengers[0]:null,unsupported:readings.some(r=>r.unsupported)||ticketKind.id==='conflict',warnings,ticketKind};
+ return {chargeSeat:unique('chargeSeat').length===1?unique('chargeSeat')[0]:null,train:unique('train').length===1?unique('train')[0]:null,from:routes.length===1?routes[0].from:'',to:routes.length===1?routes[0].to:'',price:amounts.length===1?amounts[0]:null,fees:feeCandidates.length===1&&amounts.length===1&&Object.values(feeCandidates[0]).reduce((a,b)=>a+b,0)===amounts[0]?feeCandidates[0]:null,discount:discounts.length===1&&!(discounts[0]==='none'&&readings.some(r=>r.discount===null&&r.warnings.length))?discounts[0]:null,passenger:passengers.length===1?passengers[0]:null,unsupported:readings.some(r=>r.unsupported)||ticketKind.id==='conflict',warnings,ticketKind};
 }
 
 // Only an explicit breakdown with a matching total is accepted; train numbers,
