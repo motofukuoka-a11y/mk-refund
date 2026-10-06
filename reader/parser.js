@@ -1,13 +1,14 @@
 import {normalizeTicketText} from './ocr-lines.js?v=6';
-import {classifyTicket,mergeTicketKinds} from './ticket-kind.js?v=6';
+import {classifyTicket,mergeTicketKinds} from './ticket-kind.js?v=6.3';
 export function parseTicket(raw, stations) {
   const text=normalizeTicketText(raw).replace(/[‐‑−ー]/g,'ー');
   const compact=text.replace(/[ \t]/g,'');
   const warnings=[];
-  let ticketKind=classifyTicket(text);if(/市内|都区内|山手線内/.test(compact)){ticketKind={...ticketKind,restricted:true,calculable:false};warnings.push('市内制度等の表示があります。このページの普通乗車券計算には対応していません。');}
+  const cityFrom=/札幌(?:[（(]市内[）)]|市内)\s*[→⇒➜]/.test(compact),cityTo=/[→⇒➜]\s*札幌(?:[（(]市内[）)]|市内)/.test(compact);
+  let ticketKind={...classifyTicket(text),city:{from:cityFrom,to:cityTo}};if(/市内|都区内|山手線内/.test(compact)&&!cityFrom&&!cityTo){ticketKind={...ticketKind,restricted:true,calculable:false};warnings.push('市内制度等の表示があります。このページの普通乗車券計算には対応していません。');}
   const unsupported=ticketKind.id!=='unknown'&&!ticketKind.calculable;
   const candidates=[];
-  for (const line of compact.split('\n')) {
+  for (const line of compact.replace(/札幌(?:[（(]市内[）)]|市内)/g,'札幌').split('\n')) {
     const parts=line.split(/[→⇒➜]|\s+から\s+/);
     if(parts.length!==2) {
       if(/経由|発行|MR|MV/.test(line)) continue;

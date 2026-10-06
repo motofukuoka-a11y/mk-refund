@@ -74,15 +74,15 @@ function calculate(input) {
   if (!rule) throw new Error('割引種別を確認してください。');
   if (passenger==='child' && discount!=='none') throw new Error('小児の割引併用条件は自動判定できません。個別取扱いを確認してください。');
   if (rule.requiresCompanion&&!companion) throw new Error('本人・介護者の同一種類・同一区間での同行を確認してください。');
-  const path=route(from,to,vias), originalInfo=totals(path);
+  const path=input.cityContext?.path||route(from,to,vias), originalInfo=totals(input.cityContext?.original||path);
   const qualifies=info=>rule.minimumBusinessKmExclusive===null||Math.round(info.business*10)>Number(rule.minimumBusinessKmExclusive)*10;
   if (!qualifies(originalInfo)) throw new Error('元券区間が選択した割引の距離条件を満たしません。');
-  const points=[from,...path.map(s=>s.to)];
+  const points=[input.cityContext?.actualFrom||from,...path.map(s=>s.to)];
   const positions=points.flatMap((s,i)=>s===stop?[i]:[]);
   if (!positions.length) throw new Error('旅行中止駅が元券の経路上にありません。経由駅を確認してください。');
   if (positions.length>1) throw new Error('同じ旅行中止駅を複数回通るため中止位置を特定できません。');
   const used=path.slice(0,positions[0]), unused=path.slice(positions[0]);
-  const usedInfo=totals(used), unusedInfo=totals(unused);
+  const usedInfo=totals(input.cityContext?.usedFarePath||used), unusedInfo=totals(input.cityContext?.unusedFarePath||unused);
   const usedFare=used.length?fare(usedInfo.table,usedInfo.km,passenger):0;
   const usedDiscount=used.length>0 && qualifies(usedInfo) && Number(rule.rate)>0;
   const deduction=usedDiscount?Math.ceil(usedFare*(1-Number(rule.rate))/10)*10:usedFare;

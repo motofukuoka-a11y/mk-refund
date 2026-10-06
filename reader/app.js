@@ -1,10 +1,11 @@
-import {createCancellationCalculator,supportsCancellation,suggestedVias} from './cancellation.js?v=6';
+import {sapporoCityStations} from './city-zone.js?v=6.3';
+import {createCancellationCalculator,supportsCancellation,suggestedVias} from './cancellation.js?v=6.3';
 import {loadPhotoCanvas} from './photo-loader.js?v=6';
 import {createLocalOcr} from './local-ocr.js?v=6';
 import {assembleLines} from './ocr-lines.js?v=6';
-import {createCalculator} from './calculator.js';
+import {createCalculator} from './calculator.js?v=6.3';
 import {frameCrop,ticketBounds} from './image-processing.js?v=6';
-import {parseTicket,mergeReadings} from './parser.js?v=6';
+import {parseTicket,mergeReadings} from './parser.js?v=6.3';
 const $=id=>document.getElementById(id), yen=n=>`${n.toLocaleString('ja-JP')}円`;
 let currentKind=null,stream=null, canvas=null, worker=null, busy=false, generation=0, detectedKind=null;
 const data=await Promise.all(['segments','stations','ordinary_fares_main','ordinary_fares_local','discount_rules'].map(async n=>{
@@ -15,11 +16,15 @@ function initialize(){
  $('camera').disabled=false;$('choose').disabled=false;
  const [segments,stations,main,local,discounts]=data, calculator=createCalculator(segments,stations,main,local,discounts);
  const cancelCalculator=createCancellationCalculator(calculator,stations);
+ for(const id of ['actualFrom','actualTo'])for(const s of sapporoCityStations){const o=document.createElement('option');o.value=s;o.textContent=s;$(id).append(o);}
  stations.forEach(s=>{const option=document.createElement('option');option.value=s;$('stations').append(option);});
  discounts.discounts.forEach(r=>{const option=document.createElement('option');option.value=r.id;option.textContent=r.label;$('discount').append(option);});
  const clearResult=()=>{$('result').hidden=true;$('error').hidden=true;};
  function updateDiscount(){const r=discounts.discounts.find(r=>r.id===$('discount').value);$('companionBox').hidden=!r?.requiresCompanion;$('discountNote').textContent=r?`${r.label}${r.rate?`：${r.rate*100}％引` : ''}${r.minimumBusinessKmExclusive!==null?'／営業キロ100km超が条件':''}`:'';}
+ function updateCityFields(){for(const end of ['From','To']){const on=$('city'+end).checked;$('actual'+end+'Label').hidden=!on;$('actual'+end).required=on;$('actual'+end).disabled=!on;}}
+ for(const id of ['cityFrom','cityTo'])$(id).addEventListener('change',updateCityFields);
  function updateCancellationFields(){
+  updateCityFields();
   const kind=currentKind||{kinds:['ordinary']},ordinary=kind.kinds.includes('ordinary'),accident=$('refundMode').value==='accident',multiple=kind.kinds.length>1;
   $('calculationTicket').textContent=currentKind?`計算する券種：${currentKind.label}`:'普通片道乗車券として計算します。券種を確認してください。';
   $('discountFields').hidden=!ordinary;$('discount').required=ordinary;$('discount').disabled=!ordinary;$('passengerBox').hidden=!ordinary;$('passenger').required=ordinary;$('passenger').disabled=!ordinary;
@@ -33,7 +38,7 @@ function initialize(){
   if(!$('confirmed').checked)throw new Error('券面と入力内容が一致することを確認してください。');
   const kind=currentKind||{kinds:['ordinary'],label:'普通乗車券'};
   const components={};for(const [type,id] of [['ordinary','ordinary'],['limited_express','express'],['green','green']])if(kind.kinds.includes(type))components[type]=Number($(id+'Component').value);
-  return cancelCalculator({kind,mode:$('refundMode').value,from:$('from').value.trim(),to:$('to').value.trim(),stop:$('stop').value.trim(),price:Number($('price').value),components,vias:$('via').value.split(/[,、]/).map(s=>s.trim()).filter(Boolean),discount:$('discount').value,passenger:$('passenger').value,companion:$('companion').checked,valid:$('valid').checked,started:$('started').checked,purchasedBefore:$('purchasedBefore').checked,unavailable:{limited_express:$('expressUnavailable').value,green:$('greenUnavailable').value}});
+  return cancelCalculator({kind,city:{from:$('cityFrom').checked,to:$('cityTo').checked},actualFrom:$('actualFrom').value,actualTo:$('actualTo').value,mode:$('refundMode').value,from:$('from').value.trim(),to:$('to').value.trim(),stop:$('stop').value.trim(),price:Number($('price').value),components,vias:$('via').value.split(/[,、]/).map(s=>s.trim()).filter(Boolean),discount:$('discount').value,passenger:$('passenger').value,companion:$('companion').checked,valid:$('valid').checked,started:$('started').checked,purchasedBefore:$('purchasedBefore').checked,unavailable:{limited_express:$('expressUnavailable').value,green:$('greenUnavailable').value}});
  }
  updateCancellationFields();
  function autoCalculate(){if(busy||!$('confirmed').checked||!$('form').checkValidity())return;try{renderResult(calculateCancellation());$('result').scrollIntoView({behavior:'smooth',block:'start'});}catch(error){clearResult();$('error').textContent=error.message;$('error').hidden=false;}}
@@ -91,6 +96,7 @@ function initialize(){
    }
    $('rawText').textContent=texts.join('\n\n');const parsed=mergeReadings(readings);const kind=parsed.ticketKind;$('confirmed').checked=false;detectedKind=kind;currentKind=kind.id==='unknown'?null:kind;$('formCard').hidden=false;const blocked=kind.id!=='unknown'&&!supportsCancellation(kind);$('form').hidden=blocked;$('reviewNotice').hidden=!blocked;const reviewReason=kind.id==='conflict'?'券種の読取結果が一致していません。切符だけを切り出して再度読み取ってください。':kind.restricted?'企画券・往復券・市内制度など、個別条件の確認が必要な券として判定しました。普通乗車券と同じ方法では自動計算できません。':'この券種は読取サイトの自動計算対象外です。券面の商品名と個別の払戻条件を確認してください。';$('reviewNotice').textContent=blocked?`読み取った内容：${kind.label}\n区間：${parsed.from&&parsed.to?`${parsed.from} → ${parsed.to}`:'未判別'}\n券面金額候補：${parsed.price?yen(parsed.price):'未判別'}\n${reviewReason}\n判定が券面と違う場合は、写真を切り出して再度読み取ってください。`:'';$('ticketKind').hidden=false;$('ticketKindLabel').textContent=kind.label;$('seatKind').textContent=({green:'グリーン車',reserved:'指定席',unreserved:'自由席',unknown:'座席区分は未判別'})[kind.seat];$('kindNote').textContent=kind.calculable?'普通乗車券の入力内容を券面と照合してください。':kind.id==='unknown'?'券種が読めませんでした。写真を切り出すか、券面で普通片道乗車券であることを確認してください。':supportsCancellation(kind)?'中止理由と旅行中止駅を入力し、払戻条件を確認してください。':'この券は読取サイトの自動計算対象外です。個別取扱いを確認してください。';$('ticketRoute').textContent=parsed.from&&parsed.to?`${parsed.from} → ${parsed.to}`:'区間：未判別';$('ticketBreakdown').textContent=parsed.fees?Object.entries(parsed.fees).map(([key,value])=>`${({ordinary:'乗車券運賃',limited_express:'特急料金',green:'グリーン料金'})[key]}：${yen(value)}`).join(' ／ '):'';$('ticketBreakdown').hidden=!parsed.fees; $('ticketAmount').textContent=parsed.price?`券面金額候補：${yen(parsed.price)}（運賃・料金の内訳は券面確認）`:'金額：未判別';
    $('from').value='';$('to').value='';$('price').value='';$('discount').value='';
+   $('cityFrom').checked=Boolean(kind.city?.from);$('cityTo').checked=Boolean(kind.city?.to);$('actualFrom').value='';$('actualTo').value='';
    if(kind.id==='unknown'||supportsCancellation(kind)){$('from').value=parsed.from;$('to').value=parsed.to;$('price').value=parsed.price??'';$('passenger').value=parsed.passenger??'';$('discount').value=parsed.discount??'';$('via').value=suggestedVias(parsed.train,parsed.from,parsed.to,calculator).join('、');for(const [type,id] of [['ordinary','ordinary'],['limited_express','express'],['green','green']])$(id+'Component').value=parsed.fees?.[type]??'';}updateCancellationFields();
    $('warnings').textContent=parsed.warnings.filter(w=>!supportsCancellation(kind)||!w.startsWith('普通片道乗車券以外')).join('\n');$('warnings').hidden=false;updateDiscount();
    $('scanStatus').textContent=blocked?'読み取り完了。「02 内容を確認する」に読取内容と自動計算対象外の理由を表示しています。':parsed.unsupported?`読み取り完了：${kind.label}。区間・合計額・内訳を下の読取結果で確認してください。中止理由と旅行中止駅を入力してください。`:parsed.from&&parsed.to&&parsed.price?'読み取り完了。発着駅・金額を券面と照合してください。':'一部の項目を読み取れませんでした。切符だけを切り出して再試行するか、空欄を入力してください。';$('progress').value=100;
@@ -103,7 +109,8 @@ function initialize(){
  }catch(error){$('error').textContent=error.message;$('error').hidden=false;}});
  function renderResult(r){
   $('refundTotal').textContent=yen(r.refund);$('resultTitle').textContent=r.eligible?'旅行中止の払戻額':'一部の券が自動計算対象外';$('resultReason').textContent=r.reason;$('formula').textContent=r.formula;
-  const metrics=[['中止理由',r.mode==='normal'?'お客様都合（通常払戻）':'列車の運休（事故払戻）'],['元券区間',`${r.from} → ${r.to}`],['旅行中止駅',r.stop],['券面発売額（合計）',yen(r.price)],['既乗区間',`${r.from} → ${r.stop}`],['既乗区間営業キロ',`${r.usedInfo.business.toFixed(1)}km`],['未使用区間',`${r.stop} → ${r.to}`],['未使用区間営業キロ',`${r.unusedInfo.business.toFixed(1)}km`],['地方交通線換算キロ',`${(r.unusedInfo.localBusiness?r.unusedInfo.conversion:0).toFixed(1)}km`],['運賃計算キロ',`${r.unusedInfo.fareCalculationKm.toFixed(1)}km`],['払戻手数料（合計）',yen(r.fee)]];
+  const metrics=[['中止理由',r.mode==='normal'?'お客様都合（通常払戻）':'列車の運休（事故払戻）'],['元券区間',`${r.from} → ${r.to}`],['旅行中止駅',r.stop],['券面発売額（合計）',yen(r.price)],['既乗区間',`${r.cityContext?.actualFrom||r.from} → ${r.stop}`],['既乗区間営業キロ',`${r.usedInfo.business.toFixed(1)}km`],['未使用区間（計算基準）',`${r.stop} → ${r.cityContext&&r.mode==='normal'?r.cityContext.actualTo:r.to}`],['未使用区間営業キロ',`${r.unusedInfo.business.toFixed(1)}km`],['地方交通線換算キロ',`${(r.unusedInfo.localBusiness?r.unusedInfo.conversion:0).toFixed(1)}km`],['運賃計算キロ',`${r.unusedInfo.fareCalculationKm.toFixed(1)}km`],['払戻手数料（合計）',yen(r.fee)]];
+  if(r.cityContext){const c=r.cityContext;metrics.push(['券面区間',`${c.city.from?'札幌市内':r.from} → ${c.city.to?'札幌市内':r.to}`],['実際の乗車駅',c.actualFrom],['下車予定駅',c.actualTo],['市内制度の中心駅','札幌'],['既乗区間運賃の計算基準',c.basis],['市内制度の根拠','第86条・第274条／事故払戻の市内着は第282条の2第1号ロ']);}
   const ordinary=r.rows.find(row=>row.type==='ordinary');if(ordinary){const o=ordinary.ordinary;metrics.push(['元券の割引種別',o.rule.label],['割引前既乗区間運賃',yen(o.usedFare)],['控除する既乗区間運賃（通常）',yen(o.deduction)],['既乗区間参照運賃表',o.usedInfo.business?o.usedInfo.label:'既乗区間なし'],['未使用区間参照運賃表',r.unusedInfo.business?r.unusedInfo.label:'未使用区間なし']);if(r.mode==='accident')metrics.push(['割引前未使用区間運賃',yen(ordinary.before)]);}
   $('metrics').replaceChildren(...metrics.map(([label,value])=>{const div=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;div.append(dt,dd);return div;}));
   $('componentResults').replaceChildren(...r.rows.map(row=>{const section=document.createElement('section'),h=document.createElement('h3'),p=document.createElement('p'),source=document.createElement('p');h.textContent=`${row.label}：${yen(row.refund)}`;p.textContent=`発売額 ${yen(row.paid)}／手数料 ${yen(row.fee)}\n${row.reason}`;source.textContent=`根拠：${row.source}`;section.append(h,p,source);return section;}));
