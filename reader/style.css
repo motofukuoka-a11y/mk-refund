@@ -5,3 +5,5 @@
 #cropCanvas{max-height:none;height:auto;object-fit:fill}
 
 #componentBox{border:1px solid var(--line);border-radius:12px;padding:14px;margin:16px 0}#componentBox legend{font-size:13px;font-weight:650}#componentResults section{border-top:1px solid var(--line);padding:12px 0}#componentResults p{white-space:pre-line;font-size:13px}#componentResults h3{font-size:18px;margin:0}
+
+#reviewNotice { white-space: pre-line; }

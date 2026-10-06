@@ -102,3 +102,7 @@ HEICライブラリのライセンス・ソース・再ビルド案内はvendor/
 根拠：https://www.jrhokkaido.co.jp/network/guide/pdf/yakkan_02_07.pdf
 料金券使用開始前条件：https://www.jrhokkaido.co.jp/network/guide/pdf/rule_19.pdf
 北斗の経路参考（2026年3月改正）：https://www.jrhokkaido.co.jp/CM/Info/press/pdf/20251212_KO_kaisei.pdf
+
+## 確認欄の表示（6.2）
+
+文字を読み取れても券種が計算対象外の場合、以前は「02 内容を確認する」全体を非表示にしていました。確認欄を常に表示し、対象外券・個別条件のある券・券種の読取不一致では読取区間、金額候補、判定理由、再読取の案内を表示します。対象外の計算フォームは非表示とし、計算対象を拡張しません。写真の削除・入替時に案内とフォーム表示をリセットします。
