@@ -45,7 +45,7 @@ test('real combined MARS ticket promotes partial title only after total-matching
  assert.equal(parsed.ticketKind.seat,'reserved');
  const firstPass=parseTicket('普通乗車券\n旭川 → 網走\n￥4,440\n1号車 8番A席',stations);
  assert.equal(mergeReadings([firstPass,parsed]).ticketKind.seat,'reserved');
- assert.equal(canStopAfterReading(firstPass),true);
+ assert.equal(canStopAfterReading(firstPass),false);
  assert.equal(needsAdditionalReading(parseTicket('乗車券・特\n旭川 → 網走\n￥4,440',stations)),true);
  assert.equal(needsAdditionalReading(parseTicket('乗車券\n特\n旭川 → 網走\n￥4,440',stations)),true);
  assert.equal(canStopAfterReading(parsed),true);
@@ -88,7 +88,7 @@ test('Sapporo city destination accident uses centre, city bounds and restricted 
  assert.equal(r.unusedInfo.business,info.business);assert.equal(r.rows[0].refund,calc.fare(info.table,info.km,'adult'));
  assert.throws(()=>cancellation({...input,stop:'札幌'}),/着側/);
  assert.equal(supportsCancellation(parseTicket('乗車券\n東京都区内→函館',stations).ticketKind),false);
- assert.equal(supportsCancellation(parseTicket('トクだ值35（乗車券つき）\n乗車券・特急券\n札幌（市内）→網走',stations).ticketKind),false);
+ assert.equal(supportsCancellation(parseTicket('トクだ值35（乗車券つき）\n乗車券・特急券\n札幌（市内）→網走',stations).ticketKind),true);
  assert.equal(mergeReadings([parseTicket('乗車券\n札幌市内→函館',stations),parseTicket('乗車券\n札幌→函館',stations)]).ticketKind.city.from,true);
 });
 

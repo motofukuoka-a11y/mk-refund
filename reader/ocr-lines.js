@@ -5,7 +5,7 @@ export function assembleLines(items,minScore=.72){
  for(const word of words){let row=rows.find(r=>Math.abs(word.cy-r.cy)<=Math.min(word.height,r.height)*.48);if(!row){row={words:[],cy:word.cy,height:word.height};rows.push(row);}row.words.push(word);row.cy=row.words.reduce((s,w)=>s+w.cy,0)/row.words.length;row.height=Math.min(...row.words.map(w=>w.height));}
  return rows.sort((a,b)=>a.cy-b.cy).map(r=>r.words.sort((a,b)=>a.left-b.left).map(w=>w.text).join(' ')).join('\n');
 }
-export function normalizeTicketText(raw){return raw.normalize('NFKC').replaceAll('乘','乗').replaceAll('经','経').replaceAll('团','団').replaceAll('歲','歳').replaceAll('惠','恵');}
+export function normalizeTicketText(raw){return raw.normalize('NFKC').replaceAll('乘','乗').replaceAll('经','経').replaceAll('团','団').replaceAll('歲','歳').replaceAll('惠','恵').replaceAll('內','内').replaceAll('网','網');}
 
 // A price on a MARS ticket is often beside its validity line. A vertical serial
 // stamp can cause the detector to merge it with the amount; inspect that band.

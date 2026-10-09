@@ -1,4 +1,5 @@
-import {supportsCancellation,cancellationLabels,createCancellationCalculator} from './cancellation.js?v=7';
+import {supportsCancellation,cancellationLabels,createCancellationCalculator} from './cancellation.js?v=7.4.0';
+import {calculateTokudane} from './tokudane.js?v=7.4.0';
 const yen=n=>`${n.toLocaleString('ja-JP')}円`;
 function jstDate(value){
  if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value||''))throw new Error('申出日時・列車出発日時を入力してください。');
@@ -8,7 +9,8 @@ function jstDate(value){
 }
 export function createReaderRefundCalculator(calculator,stations){
  const after=createCancellationCalculator(calculator,stations);
- return input=>{
+  return input=>{
+  if(input.kind?.product==='tokudane')return calculateTokudane(input,calculator,stations);
   if(input.usage==='after')return {...after(input),usage:'after'};
   if(input.usage!=='before')throw new Error('使用開始前・使用開始後を選択してください。');
   const {kind,mode,price,components,from,to,vias=[],chargeSeat,unavailable={}}=input;

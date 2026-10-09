@@ -1,4 +1,12 @@
 // Pure pixel helpers shared by browser capture and the sample benchmark.
+export function enhanceOcrPixels(rgba,channel='blue'){
+ const values=new Uint8Array(rgba.length/4),hist=new Uint32Array(256);
+ for(let j=0;j<values.length;j++){const i=j*4,v=channel==='blue'?rgba[i+2]:Math.round(.299*rgba[i]+.587*rgba[i+1]+.114*rgba[i+2]);values[j]=v;hist[v]++;}
+ const percentile=ratio=>{let sum=0;for(let v=0;v<256;v++){sum+=hist[v];if(sum>=values.length*ratio)return v;}return 255;};
+ const low=percentile(.03),high=percentile(.90),range=Math.max(60,high-low),output=new Uint8ClampedArray(rgba.length);
+ for(let j=0;j<values.length;j++){const i=j*4,v=Math.round(Math.max(0,Math.min(255,(values[j]-low)*255/range)));output[i]=output[i+1]=output[i+2]=v;output[i+3]=255;}
+ return output;
+}
 export function ticketBounds(rgba,width,height) {
   const mask=new Uint8Array(width*height),seen=new Uint8Array(mask.length),components=[];
   for(let i=0;i<mask.length;i++){const r=rgba[i*4],g=rgba[i*4+1],b=rgba[i*4+2];mask[i]=Math.min(r,g,b)>90&&((g-r>=-6&&b-r>0)||(Math.max(r,g,b)-Math.min(r,g,b)<28&&r>140))?1:0;}

@@ -10,6 +10,7 @@ export function suggestedVias(train,from,to,calculator){
 export function createCancellationCalculator(calculator,stations){
  return function(input){
   const {kind,mode,from,to,stop,vias=[],price,components,started,valid,purchasedBefore,unavailable={}}=input;
+  if(kind?.product==='tokudane')throw new Error('トクだ値には通常乗車券の使用開始後計算を適用できません。駅窓口で確認してください。');
   if(!supportsCancellation(kind))throw new Error('この券種は自動計算対象外です。普通片道乗車券・特急券・グリーン券を確認してください。');
   if(!['normal','accident'].includes(mode))throw new Error('旅行中止の理由を選択してください。');
   if(!started)throw new Error('この券の使用を開始した後の旅行中止であることを確認してください。使用開始前はMK払戻サイトをご利用ください。');
