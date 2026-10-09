@@ -1,5 +1,5 @@
-import {normalizeTicketText} from './ocr-lines.js?v=7.4.1';
-import {classifyTicket,mergeTicketKinds} from './ticket-kind.js?v=7.4.1';
+import {normalizeTicketText} from './ocr-lines.js?v=7.4.2';
+import {classifyTicket,mergeTicketKinds} from './ticket-kind.js?v=7.4.2';
 const breakdownMarker=/内[訳议识識]/;
 const numberValue=s=>/^(?:\d+|\d{1,3}(?:[,.]\d{3})+)$/.test(s)?Number(s.replace(/[,.]/g,'')):null;
 const feePattern=/(乗車券(?:運賃)?|乗車運賃|乗運賃|乗|特急(?:券|料金)?|特|グリーン(?:券|料金)?|グ)[:：]?[¥￥]?([0-9]+(?:[,.][0-9]{3})*)(?![0-9,.])/g;

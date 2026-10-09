@@ -10,7 +10,7 @@ const read=n=>JSON.parse(fs.readFileSync(`reader/data/${n}.json`)),stations=read
 const calculator=createCalculator(read('segments'),stations,read('ordinary_fares_main'),read('ordinary_fares_local'),read('discount_rules'));
 const refund=createReaderRefundCalculator(calculator,stations);
 const p=text=>parseTicket(text,stations);
-const base={kind:editableTicketKind('tokudane'),usage:'before',mode:'normal',from:'旭川',to:'網走',price:6000,tokudaneRate:'30',tokudanePaper:true,tokudaneDeparture:'before',unused:true,valid:true};
+const base={kind:editableTicketKind('tokudane'),usage:'before',mode:'normal',from:'旭川',to:'網走',price:6000,components:{ordinary:4000,limited_express:2000},tokudaneRate:'30',tokudanePaper:true,tokudaneDeparture:'before',unused:true,valid:true};
 test('legacy printed percentages and current booking-deadline names stay distinct',()=>{
  for(const rate of [10,20,30,35,50,55])assert.equal(readTokudane(`トクだ値${rate}`).rate,rate);
  for(const name of ['特急トクだ値1','トクだ値14','トクだ値スペシャル28','新幹線eチケット（トクだ値1）'])assert.equal(readTokudane(name).rate,null);
@@ -29,10 +29,38 @@ test('a second reading cannot downgrade Tokudane into an ordinary ticket',()=>{
  const conflict=mergeReadings([p('トクだ値30'),p('トクだ値20')]);assert.equal(conflict.ticketKind.rate,null);assert.equal(conflict.ticketKind.rateConflict,true);
  assert.equal(mergeReadings([p('トクだ値30'),p('団体乗車券')]).ticketKind.restricted,true);
 });
-test('received paper Tokudane uses the paid total and rate with a 560 yen minimum',()=>{
+test('received paper Tokudane uses both paid components without applying the discount again',()=>{
  assert.equal(refund(base).fee,1800);assert.equal(refund(base).refund,4200);assert.equal(refund({...base,tokudaneRate:'20'}).fee,1200);
- assert.equal(refund({...base,price:2000,tokudaneRate:'20'}).fee,560);assert.equal(refund({...base,price:300,tokudaneRate:'20'}).refund,0);
- const r=refund({...base,price:4440});assert.equal(r.fee,1332);assert.equal(r.estimate,true);assert.match(r.reason,/端数処理前/);
+ assert.deepEqual(refund(base).rows.map(row=>[row.type,row.fee,row.refund]),[['ordinary',1200,2800],['limited_express',600,1400]]);
+});
+test('the supplied ticket rounds each fee before summing, rather than rounding the combined fee',()=>{
+ const r=refund({...base,from:'札幌',to:'長万部',vias:['南千歳','東室蘭'],price:5440,components:{ordinary:3380,limited_express:2060}});
+ assert.deepEqual(r.rows.map(row=>[row.paid,row.fee,row.refund]),[[3380,1010,2370],[2060,610,1450]]);
+ assert.equal(r.fee,1620);assert.equal(r.refund,3820);assert.equal(r.estimate,undefined);
+ assert.match(r.formula,/1,010円 ＋ 610円 ＝ 1,620円/);assert.match(r.formula,/5,440円 − 1,620円 ＝ 3,820円/);assert.match(r.reason,/それぞれ/);
+ const twenty=refund({...base,price:5440,components:{ordinary:3380,limited_express:2060},tokudaneRate:'20'});
+ assert.deepEqual(twenty.rows.map(row=>row.fee),[670,410]);assert.equal(twenty.refund,4360);
+ const exactTotal=refund({...base,components:{ordinary:3710,limited_express:2290}});
+ assert.equal(exactTotal.fee,1790);assert.equal(exactTotal.refund,4210);
+});
+test('Tokudane applies the 220 and 340 yen minima separately and never refunds a negative amount',()=>{
+ const small=refund({...base,price:2000,components:{ordinary:1000,limited_express:1000},tokudaneRate:'20'});
+ assert.deepEqual(small.rows.map(row=>row.fee),[220,340]);assert.equal(small.fee,560);assert.equal(small.refund,1440);
+ for(const [parts,expected] of [[{ordinary:1000,limited_express:2000},[220,400]],[{ordinary:2000,limited_express:1000},[400,340]]]){
+  const r=refund({...base,price:3000,components:parts,tokudaneRate:'20'});assert.deepEqual(r.rows.map(row=>row.fee),expected);assert.equal(r.refund,3000-expected[0]-expected[1]);
+ }
+ const tiny=refund({...base,price:300,components:{ordinary:100,limited_express:200},tokudaneRate:'20'});
+ assert.equal(tiny.refund,0);assert.equal(tiny.fee,300);assert.ok(tiny.rows.every(row=>row.refund===0));
+});
+test('Tokudane requires complete integer components matching the paid total',()=>{
+ for(const components of [undefined,{}, {ordinary:6000},{ordinary:4000,limited_express:0},{ordinary:4000,limited_express:-1},{ordinary:4000,limited_express:2000.5},{ordinary:4000,limited_express:NaN},{ordinary:4000,limited_express:'2000'},{ordinary:4000,limited_express:Number.MAX_SAFE_INTEGER+1},{ordinary:4000,limited_express:2000,green:500}])assert.throws(()=>refund({...base,components}),/それぞれ/);
+ assert.throws(()=>refund({...base,components:{ordinary:4000,limited_express:1990}}),/内訳合計/);
+});
+test('integer percentage rounding keeps exact ten-yen boundaries',()=>{
+ const r=refund({...base,price:10000,components:{ordinary:5000,limited_express:5000},tokudaneRate:'29'});
+ assert.deepEqual(r.rows.map(row=>row.fee),[1450,1450]);assert.equal(r.refund,7100);
+ const large=refund({...base,price:Number.MAX_SAFE_INTEGER,components:{ordinary:9007199254730991,limited_express:10000},tokudaneRate:'99'});
+ assert.equal(large.fee,8917127262193580);assert.equal(large.price-large.fee,large.refund);
 });
 test('Tokudane cannot silently enter the ordinary before/after or accident rules',()=>{
  for(const [patch,pattern] of [[{tokudanePaper:false},/紙/],[{tokudaneDeparture:''},/出発/],[{tokudaneDeparture:'departed'},/出発/],[{tokudaneRate:''},/割引率/],[{tokudaneRate:'14.5'},/割引率/],[{tokudaneRate:'100'},/割引率/],[{unused:false},/未使用/],[{valid:false},/有効/],[{usage:'after'},/使用開始後/],[{mode:'accident'},/運休/]])assert.throws(()=>refund({...base,...patch}),pattern);

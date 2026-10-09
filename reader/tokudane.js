@@ -32,13 +32,22 @@ export function calculateTokudane(input,calculator,stations){
  if(input.tokudaneDeparture!=='before')throw new Error(input.tokudaneDeparture==='departed'?'指定列車の出発時刻を過ぎたトクだ値は、この未使用払戻計算の対象外です。':'指定列車の出発時刻前であることを選択してください。');
  const rate=Number(input.tokudaneRate);
  if(!Number.isInteger(rate)||rate<=0||rate>=100)throw new Error('券面・申込内容の割引率を1〜99％で入力してください。商品名の1・14・28は割引率ではありません。');
- const percentageFee=price*rate/100;
- // Public guidance does not specify rounding or component minima. Do not
- // silently reuse ordinary reserved-ticket rounding for this special product.
- const exact=percentageFee<=560||Number.isInteger(percentageFee)&&percentageFee%10===0;
- const fee=Math.min(price,Math.max(560,percentageFee)),refund=Math.max(0,price-fee);
- const format=n=>`${n.toLocaleString('ja-JP',{maximumFractionDigits:2})}円`;
- const reason=`受取後の紙のトクだ値：発売額×割引率${rate}％（1席につき最低560円）。${exact?'':'端数処理前の参考額です。窓口で実際の手数料を確認してください。'}`;
- const row={type:'tokudane',label:'トクだ値（乗車券＋特急券）',paid:price,fee,refund,eligible:true,reason,source:'えきねっと公式・紙のきっぷお受取り後',formula:`${format(price)} × ${rate}％ ＝ ${format(percentageFee)}／最低560円\n${format(price)} − ${format(fee)} ＝ ${format(refund)}`};
- return {usage:'before',product:'tokudane',from,to,price,mode,path:calculator.route(from,to,vias),rows:[row],refund,fee,eligible:true,estimate:!exact,tokudaneRate:rate,city:input.city,reason,formula:row.formula,sourceUrl:tokudaneSource};
+ const parts=input.components;
+ if(!parts||Object.keys(parts).length!==2||!kind.kinds.every(type=>Number.isSafeInteger(parts[type])&&parts[type]>0))throw new Error('トクだ値は乗車券運賃と特急料金の実発売額を、それぞれ円単位で入力してください。');
+ if(parts.ordinary+parts.limited_express!==price)throw new Error('乗車券運賃と特急料金の内訳合計を、券面の発売額に合わせてください。');
+ const format=n=>`${n.toLocaleString('ja-JP')}円`;
+ const rows=[['ordinary','乗車券',220],['limited_express','特急券',340]].map(([type,label,minimum])=>{
+  const paid=parts[type];
+  // Round each component before adding. Integer arithmetic avoids losing
+  // another 10 yen when a floating-point product lies below an exact boundary.
+  const roundedFee=Number(BigInt(paid)*BigInt(rate)/1000n)*10;
+  const fee=Math.min(paid,Math.max(minimum,roundedFee)),refund=paid-fee;
+  const reason=`実発売額×割引率${rate}％。10円未満切捨て、最低${minimum}円。${paid<minimum?'手数料の控除はこの内訳の発売額が上限です。':''}`;
+  const formula=`${format(paid)} × ${rate}％ → ${format(roundedFee)}（10円未満切捨て）／最低${minimum}円\n${format(paid)} − ${format(fee)} ＝ ${format(refund)}`;
+  return {type,label,paid,roundedFee,fee,refund,eligible:true,reason,source:'トクだ値（受取後の紙券）',formula};
+ });
+ const fee=rows.reduce((sum,row)=>sum+row.fee,0),refund=rows.reduce((sum,row)=>sum+row.refund,0);
+ const reason=`受取後の紙のトクだ値：乗車券・特急券それぞれの実発売額に割引率${rate}％を掛け、10円未満を切り捨ててから合計。最低手数料は乗車券220円・特急券340円。`;
+ const formula=rows.map(row=>`${row.label}：${row.formula}`).join('\n')+`\n手数料合計：${rows.map(row=>format(row.fee)).join(' ＋ ')} ＝ ${format(fee)}\n合計払戻額：${format(price)} − ${format(fee)} ＝ ${format(refund)}`;
+ return {usage:'before',product:'tokudane',from,to,price,mode,path:calculator.route(from,to,vias),rows,refund,fee,eligible:true,tokudaneRate:rate,city:input.city,reason,formula,sourceUrl:tokudaneSource};
 }

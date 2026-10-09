@@ -1,15 +1,15 @@
-import {createReaderRefundCalculator} from './before-refund.js?v=7.4.1';
+import {createReaderRefundCalculator} from './before-refund.js?v=7.4.2';
 import {sapporoCityStations} from './city-zone.js?v=6.3';
-import {attachStationSuggestions} from './station-suggestions.js?v=7.4.1';
-import {componentFields,componentTotal} from './review-amounts.js?v=7.4.1';
-import {supportsCancellation,suggestedVias} from './cancellation.js?v=7.4.1';
+import {attachStationSuggestions} from './station-suggestions.js?v=7.4.2';
+import {componentFields,componentTotal} from './review-amounts.js?v=7.4.2';
+import {supportsCancellation,suggestedVias} from './cancellation.js?v=7.4.2';
 import {loadPhotoCanvas} from './photo-loader.js?v=6';
 import {createLocalOcr} from './local-ocr.js?v=6';
-import {editableTicketKind} from './ticket-kind.js?v=7.4.1';
-import {assembleLines} from './ocr-lines.js?v=7.4.1';
+import {editableTicketKind} from './ticket-kind.js?v=7.4.2';
+import {assembleLines} from './ocr-lines.js?v=7.4.2';
 import {createCalculator} from './calculator.js?v=6.3';
-import {frameCrop,ticketBounds,enhanceOcrPixels,stationBand,cleanPixels} from './image-processing.js?v=7.4.1';
-import {parseTicket,mergeReadings,stationOnlyReading} from './parser.js?v=7.4.1';
+import {frameCrop,ticketBounds,enhanceOcrPixels,stationBand,cleanPixels} from './image-processing.js?v=7.4.2';
+import {parseTicket,mergeReadings,stationOnlyReading} from './parser.js?v=7.4.2';
 const $=id=>document.getElementById(id), yen=n=>`${n.toLocaleString('ja-JP',{maximumFractionDigits:2})}円`;
 let currentKind=null,stream=null,canvas=null,worker=null,busy=false,generation=0;
 const data=await Promise.all(['segments','stations','ordinary_fares_main','ordinary_fares_local','discount_rules'].map(async n=>{
@@ -31,13 +31,13 @@ function initialize(){
  for(const id of ['cityFrom','cityTo'])$(id).addEventListener('change',updateCityFields);
  function updateCancellationFields(){
   updateCityFields();
-  const kind=currentKind||{kinds:['ordinary']},ordinary=kind.kinds.includes('ordinary'),accident=$('refundMode').value==='accident',tokudane=kind.product==='tokudane',multiple=kind.kinds.length>1&&!tokudane,before=$('usage').value==='before',charge=kind.kinds.some(k=>k!=='ordinary'),seat=$('chargeSeat').value,timed=before&&!accident&&charge&&!tokudane&&['reserved','standing'].includes(seat);
+  const kind=currentKind||{kinds:['ordinary']},ordinary=kind.kinds.includes('ordinary'),accident=$('refundMode').value==='accident',tokudane=kind.product==='tokudane',multiple=kind.kinds.length>1,before=$('usage').value==='before',charge=kind.kinds.some(k=>k!=='ordinary'),seat=$('chargeSeat').value,timed=before&&!accident&&charge&&!tokudane&&['reserved','standing'].includes(seat);
   $('stopSection').hidden=false;$('stop').required=!before&&!tokudane;$('stop').disabled=false;$('stopNote').textContent=before||tokudane?'使用開始後の旅行中止で使う駅です。今の計算条件では入力は任意です。':'元券の経路上から候補駅を選んでください。';$('startedLabel').hidden=before||tokudane;$('started').required=!before&&!tokudane;$('started').disabled=before||tokudane;$('unusedLabel').hidden=true;$('unused').required=false;$('unused').disabled=true;$('validLabel').hidden=before||tokudane;$('valid').required=!before&&!tokudane;$('valid').disabled=before||tokudane;$('confirmText').textContent=before?'未使用・有効期間内（前売りは開始前を含む）で、読取内容と選択した条件が券面・実際の状況に一致しています':'券種・発売額・経路・割引・料金内訳などの入力内容が券面と一致しています';
   $('beforeFields').hidden=!before||!charge||accident||tokudane;$('chargeSeat').required=before&&charge&&!accident&&!tokudane;$('chargeSeat').disabled=!before||!charge||accident||tokudane;$('timingFields').hidden=!timed;$('seatSummary').textContent=seat?'座席区分：'+({reserved:'指定席',unreserved:'自由席',unassigned:'座席未指定券',standing:'立席特急券'})[seat]+'（修正）':'座席区分を選択してください';$('seatDetails').open=!seat;
   $('timingBand').required=timed;$('timingBand').disabled=!timed;$('tripCancelledLabel').hidden=!before;$('tripCancelled').required=before&&accident;$('tripCancelled').disabled=!before||!accident;
   $('calculationTicket').textContent=currentKind?`計算する券種：${currentKind.label}`:'計算する券種・商品を券面で確認して選択してください。';
   $('discountFields').hidden=false;$('discount').required=true;$('discount').disabled=false;$('passengerBox').hidden=!ordinary||before||tokudane;$('passenger').required=ordinary&&!before&&!tokudane;$('passenger').disabled=!ordinary||before||tokudane;
-  $('componentBox').hidden=false;const labels={ordinary:'乗車券運賃',limited_express:'特急料金',green:'グリーン料金'},applicable=currentKind?.kinds.map(k=>labels[k]).filter(Boolean)||[];$('componentNote').textContent=applicable.length?'計算する券種の内訳：'+applicable.join('・')+'。':'券種を選び、対応する料金を確認してください。';
+  $('componentBox').hidden=false;const labels={ordinary:'乗車券運賃',limited_express:'特急料金',green:'グリーン料金'},applicable=currentKind?.kinds.map(k=>labels[k]).filter(Boolean)||[];$('componentNote').textContent=tokudane?'乗車券運賃・特急料金を両方入力してください。それぞれの手数料を10円未満切捨てで計算して合計します。':applicable.length?'計算する券種の内訳：'+applicable.join('・')+'。':'券種を選び、対応する料金を確認してください。';
   $('tokudaneFields').hidden=!tokudane;$('tokudaneScope').textContent=!before?'この商品の計算は使用開始前が対象です。未使用なら「使用状態」を使用開始前に変更してください。':accident?'トクだ値の運休払戻は個別条件を駅窓口で確認してください。通常手数料は適用しません。':'受取後の紙券・未使用・出発前の通常払戻を計算します。';for(const id of ['tokudanePaper','tokudaneRate']){$(id).disabled=!tokudane;$(id).required=tokudane&&before&&!accident;}const departure=tokudane&&before&&!accident;$('tokudaneDepartureLabel').hidden=!departure;$('tokudaneDeparture').disabled=!departure;$('tokudaneDeparture').required=departure;
   const blocked=currentKind&&!supportsCancellation(currentKind);$('reviewNotice').hidden=!blocked;$('reviewNotice').textContent=blocked?'この商品には個別条件の確認が必要です。読取内容は修正できます。判定が誤っている場合は「計算する券種・商品」を券面に合わせて修正してください。':'';
   for(const [type,id] of [['ordinary','ordinary'],['limited_express','express'],['green','green']]){const present=kind.kinds.includes(type);$(id+'ComponentLabel').hidden=false;$(id+'Component').required=multiple&&present;$(id+'Component').disabled=false;}
@@ -158,7 +158,7 @@ function initialize(){
   renderResult(result);$('result').focus();$('result').scrollIntoView({behavior:'smooth',block:'start'});
  }catch(error){$('error').textContent=error.message;$('error').hidden=false;}});
  function renderResult(r){
-  $('refundTotal').textContent=yen(r.refund);$('resultTitle').textContent=r.estimate?'トクだ値の払戻参考額（端数処理前）':r.eligible?(r.usage==='before'?'使用開始前の払戻額':'旅行中止の払戻額'):'一部の券が自動計算対象外';$('resultReason').textContent=r.reason;$('formula').textContent=r.formula;
+  $('refundTotal').textContent=yen(r.refund);$('resultTitle').textContent=r.eligible?(r.usage==='before'?'使用開始前の払戻額':'旅行中止の払戻額'):'一部の券が自動計算対象外';$('resultReason').textContent=r.reason;$('formula').textContent=r.formula;
   const metrics=r.usage==='before'?[['使用状態','使用開始前（未使用）'],['払戻の理由',r.mode==='normal'?'お客様都合（通常払戻）':'列車の運休（事故払戻）'],['元券区間',`${r.city?.from?'札幌市内':r.from} → ${r.city?.to?'札幌市内':r.to}`],['券面発売額（合計）',yen(r.price)],['払戻手数料（合計）',yen(r.fee)],...(r.mode==='normal'&&r.timingBand?[['払戻時期',({early:'出発日の2日前まで（出発日・前日の変更なし）',late:'出発日の前日・当日（出発時刻前）',changed:'変更済みきっぷ（出発時刻前）'})[r.timingBand]]]:[])]:[['中止理由',r.mode==='normal'?'お客様都合（通常払戻）':'列車の運休（事故払戻）'],['元券区間',`${r.from} → ${r.to}`],['旅行中止駅',r.stop],['券面発売額（合計）',yen(r.price)],['既乗区間',`${r.cityContext?.actualFrom||r.from} → ${r.stop}`],[r.cityContext?'既乗区間運賃の計算用営業キロ':'既乗区間営業キロ',`${r.usedInfo.business.toFixed(1)}km`],['未使用区間（計算基準）',`${r.stop} → ${r.cityContext&&r.mode==='normal'?r.cityContext.actualTo:r.to}`],['未使用区間営業キロ',`${r.unusedInfo.business.toFixed(1)}km`],['地方交通線換算キロ',`${(r.unusedInfo.localBusiness?r.unusedInfo.conversion:0).toFixed(1)}km`],['運賃計算キロ',`${r.unusedInfo.fareCalculationKm.toFixed(1)}km`],['払戻手数料（合計）',yen(r.fee)]];
   if(r.product==='tokudane')metrics.push(['商品','トクだ値（受取後の紙券・1席分）'],['割引率',r.tokudaneRate+'％'],['払戻の申出','指定列車の出発時刻前・窓口営業時間内']);
   if(r.cityContext){const c=r.cityContext;metrics.push(['券面区間',`${c.city.from?'札幌市内':r.from} → ${c.city.to?'札幌市内':r.to}`],['実際の乗車駅',c.actualFrom],['下車予定駅',c.actualTo],['市内制度の中心駅','札幌'],['既乗区間運賃の計算基準',c.basis],['市内制度の根拠','第86条・第274条／事故払戻の市内着は第282条の2第1号ロ']);}
@@ -166,7 +166,7 @@ function initialize(){
   $('metrics').replaceChildren(...metrics.map(([label,value])=>{const div=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;div.append(dt,dd);return div;}));
   $('componentResults').replaceChildren(...r.rows.map(row=>{const section=document.createElement('section'),h=document.createElement('h3'),p=document.createElement('p'),source=document.createElement('p');h.textContent=`${row.label}：${yen(row.refund)}`;p.textContent=`発売額 ${yen(row.paid)}／手数料 ${yen(row.fee)}\n${row.reason}`;source.textContent=`根拠：${row.source}`;section.append(h,p,source);return section;}));
   const source=$('resultSource');source.href=r.sourceUrl||'https://www.jrhokkaido.co.jp/network/guide/pdf/yakkan_02_07.pdf';source.textContent=r.product==='tokudane'?'えきねっと公式（トクだ値の払戻条件）':'JR北海道 旅客営業規則（払戻条件）';
-  $('resultScope').textContent=r.product==='tokudane'?'紙のトクだ値の受取後・未使用・出発前の通常払戻。駅窓口での取扱いです。端数がある場合は窓口で手数料を確認してください。':r.usage==='before'?'使用開始前は未使用・有効期間等の条件確認が必要です。他の企画商品は個別確認対象です。':'普通乗車券の通常払戻は未使用101km以上が対象です。料金券は使用開始後のお客様都合では払戻0円、運休では指定列車・設備を一部利用できなかった場合に当該料金全額。遅延だけの払戻はここでは計算しません。';
+  $('resultScope').textContent=r.product==='tokudane'?'紙のトクだ値の受取後・未使用・出発前の通常払戻。乗車券・特急券はセットで同時に払戻します。手続きは出発時刻前かつ駅窓口の営業時間内です。':r.usage==='before'?'使用開始前は未使用・有効期間等の条件確認が必要です。他の企画商品は個別確認対象です。':'普通乗車券の通常払戻は未使用101km以上が対象です。料金券は使用開始後のお客様都合では払戻0円、運休では指定列車・設備を一部利用できなかった場合に当該料金全額。遅延だけの払戻はここでは計算しません。';
   $('routeDetail').replaceChildren(...r.path.map(s=>{const p=document.createElement('p');p.textContent=`${s.from} → ${s.to}：${s.line} ${s.business_km}km`;return p;}));$('result').hidden=false;
  }
  function resetTicket(){ currentKind=null;$('ticketKind').hidden=true; const usage=$('usage').value,mode=$('refundMode').value;$('form').reset();currentKind=editableTicketKind($('ticketType').value);$('recognizedText').value='';$('usage').value=usage;$('refundMode').value=mode;$('formCard').hidden=false;$('form').hidden=false;$('reviewNotice').hidden=true;$('reviewNotice').textContent='';$('warnings').hidden=true;$('rawText').textContent='まだ読み取っていません。';updateDiscount();updateCancellationFields();clearResult(); }
