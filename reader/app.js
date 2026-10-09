@@ -28,7 +28,7 @@ function initialize(){
  const clearResult=()=>{$('result').hidden=true;$('error').hidden=true;};
  function updateDiscount(){const r=discounts.discounts.find(r=>r.id===$('discount').value);$('companionBox').hidden=!r?.requiresCompanion;const note=currentKind?.product==='tokudane'?'トクだ値は下の専用の割引率を使います。':$('usage').value==='before'?'使用開始前の払戻は入力済みの実発売額を使います。割引の選択で発売額を再割引しません。':!currentKind?.kinds.includes('ordinary')?'この割引は乗車券運賃に適用します。':'乗車券の既乗区間・未使用区間の運賃計算に使います。';$('discountNote').textContent=$('discount').value==='tokudane'?note:(r?`${r.label}${r.rate?`：${r.rate*100}％引` : ''}${r.minimumBusinessKmExclusive!==null?'／営業キロ100km超が条件':''}。`:'券面を確認して選択してください。')+note;}
  function updateCityFields(){for(const end of ['From','To']){const on=$('city'+end).checked&&$('usage').value!=='before';$('actual'+end+'Label').hidden=false;$('actual'+end).required=on;$('actual'+end).disabled=false;}}
- for(const id of ['cityFrom','cityTo'])$(id).addEventListener('change',updateCityFields);
+ for(const [city,station] of [['cityFrom','from'],['cityTo','to']])$(city).addEventListener('change',()=>{if($(city).checked)$(station).value='札幌';updateCityFields();});
  function updateCancellationFields(){
   updateCityFields();
   const kind=currentKind||{kinds:['ordinary']},ordinary=kind.kinds.includes('ordinary'),accident=$('refundMode').value==='accident',tokudane=kind.product==='tokudane',multiple=kind.kinds.length>1,before=$('usage').value==='before',charge=kind.kinds.some(k=>k!=='ordinary'),seat=$('chargeSeat').value,timed=before&&!accident&&charge&&!tokudane&&['reserved','standing'].includes(seat);
@@ -148,7 +148,7 @@ function initialize(){
   $('ticketBreakdown').textContent=parsed.fees?[...Object.entries(parsed.fees).map(([key,value])=>`${feeLabels[key]} ${yen(value)}`),`合計 ${yen(parsed.price)}`].join('／'):'';$('ticketBreakdown').hidden=!parsed.fees;
   $('ticketProduct').hidden=kind.product!=='tokudane';$('ticketProduct').textContent=kind.product==='tokudane'?`商品：トクだ値／割引率：${kind.rate!==null?kind.rate+'％':'確認して入力'}`:'';
   $('kindNote').textContent=kind.restricted?'商品固有の条件確認が必要です。読み取った内容は下の入力欄で修正できます。':kind.id==='unknown'?'券種が読めませんでした。下の「計算する券種・商品」を券面に合わせて選択してください。':'読み取った内容を下の入力欄に反映しました。券面と照合し、使用状態と払戻の理由を選んでください。';
-  for(const id of ['from','to'])$(id).value=parsed[id];$('price').value=parsed.price??'';
+  for(const id of ['from','to'])$(id).value=kind.city?.[id]?'札幌':parsed[id];$('price').value=parsed.price??'';
   $('chargeSeat').value=parsed.chargeSeat||(['reserved','unreserved','standing','unassigned'].includes(kind.seat)?kind.seat:'');
   $('cityFrom').checked=Boolean(kind.city?.from);$('cityTo').checked=Boolean(kind.city?.to);$('actualFrom').value='';$('actualTo').value='';
   $('passenger').value=parsed.passenger??'adult';$('discount').value=kind.product==='tokudane'?'tokudane':parsed.discountNeedsReview?'':parsed.discount??'none';$('companion').checked=false;
