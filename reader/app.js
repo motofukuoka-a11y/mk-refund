@@ -1,27 +1,27 @@
-import {createReaderRefundCalculator} from './before-refund.js?v=7.4.2';
+import {createReaderRefundCalculator} from './before-refund.js?v=7.5.0';
 import {sapporoCityStations} from './city-zone.js?v=6.3';
-import {attachStationSuggestions} from './station-suggestions.js?v=7.4.2';
-import {componentFields,componentTotal} from './review-amounts.js?v=7.4.2';
-import {supportsCancellation,suggestedVias} from './cancellation.js?v=7.4.2';
+import {attachStationSuggestions} from './station-suggestions.js?v=7.5.0';
+import {componentFields,componentTotal} from './review-amounts.js?v=7.5.0';
+import {supportsCancellation,suggestedVias} from './cancellation.js?v=7.5.0';
 import {loadPhotoCanvas} from './photo-loader.js?v=6';
 import {createLocalOcr} from './local-ocr.js?v=6';
-import {editableTicketKind} from './ticket-kind.js?v=7.4.2';
-import {assembleLines} from './ocr-lines.js?v=7.4.2';
+import {editableTicketKind} from './ticket-kind.js?v=7.5.0';
+import {assembleLines} from './ocr-lines.js?v=7.5.0';
 import {createCalculator} from './calculator.js?v=6.3';
-import {frameCrop,ticketBounds,enhanceOcrPixels,stationBand,cleanPixels} from './image-processing.js?v=7.4.2';
-import {parseTicket,mergeReadings,stationOnlyReading} from './parser.js?v=7.4.2';
+import {frameCrop,ticketBounds,enhanceOcrPixels,stationBand,titleBand,cleanPixels,removeLongRules} from './image-processing.js?v=7.5.0';
+import {parseTicket,mergeReadings,stationOnlyReading,titleOnlyReading} from './parser.js?v=7.5.0';
 const $=id=>document.getElementById(id), yen=n=>`${n.toLocaleString('ja-JP',{maximumFractionDigits:2})}円`;
 let currentKind=null,stream=null,canvas=null,worker=null,busy=false,generation=0;
-const data=await Promise.all(['segments','stations','ordinary_fares_main','ordinary_fares_local','discount_rules'].map(async n=>{
+const data=await Promise.all(['segments','stations','ordinary_fares_main','ordinary_fares_local','discount_rules','station-readings'].map(async n=>{
   const response=await fetch(`./data/${n}.json`); if(!response.ok) throw new Error('計算用データを読み込めません。再読み込みしてください。');return response.json();
 })).catch(error=>{$('scanStatus').textContent=error.message;$('form').querySelector('button[type=submit]').disabled=true;return null;});
 if(data) initialize();
 function initialize(){
  currentKind=editableTicketKind($('ticketType').value);
  $('camera').disabled=false;$('choose').disabled=false;
- const [segments,stations,main,local,discounts]=data, calculator=createCalculator(segments,stations,main,local,discounts);
+ const [segments,stations,main,local,discounts,stationReadings]=data, calculator=createCalculator(segments,stations,main,local,discounts);
  const cancelCalculator=createReaderRefundCalculator(calculator,stations);
- for(const id of ['from','to','stop','via','actualFrom','actualTo'])attachStationSuggestions($(id),id.startsWith('actual')?sapporoCityStations:stations,{multiple:id==='via'});
+ for(const id of ['from','to','stop','via','actualFrom','actualTo'])attachStationSuggestions($(id),id.startsWith('actual')?sapporoCityStations:stations,{multiple:id==='via',readings:stationReadings});
  stations.forEach(s=>{const option=document.createElement('option');option.value=s;$('stations').append(option);});
  discounts.discounts.forEach(r=>{const option=document.createElement('option');option.value=r.id;option.textContent=r.label;option.defaultSelected=r.id==='none';option.selected=r.id==='none';$('discount').append(option);});
  const tokudaneOption=document.createElement('option');tokudaneOption.value='tokudane';tokudaneOption.textContent='トクだ値（割引率を入力）';$('discount').append(tokudaneOption);
@@ -103,21 +103,32 @@ function initialize(){
    jobWorker=worker||createLocalOcr();worker=jobWorker;$('scanStatus').textContent='端末内の新しい読取エンジンを準備しています。初回は約46MBのデータを取得します…';await jobWorker.ready;
    if(run!==generation)return;
    const prepared=document.createElement('canvas'),scale=Math.min(2,2000/Math.max(canvas.width,canvas.height),Math.max(1,1400/Math.max(canvas.width,canvas.height)));prepared.width=Math.round(canvas.width*scale);prepared.height=Math.round(canvas.height*scale);prepared.getContext('2d').drawImage(canvas,0,0,prepared.width,prepared.height);
-   const readings=[],texts=[],plainTexts=[];let routeItems=[];
+   const readings=[],texts=[],plainTexts=[],passItems=[];
    for(let pass=0;pass<3;pass++){
     if(run!==generation)return;if(pass===2){const merged=mergeReadings(readings);if(merged.from&&merged.to&&merged.price&&merged.ticketKind.id!=='unknown'&&(merged.ticketKind.product==='tokudane'?merged.ticketKind.rate!==null:merged.ticketKind.kinds.length===1||merged.fees))break;}let image=prepared;
     if(pass){image=document.createElement('canvas');image.width=prepared.width;image.height=prepared.height;const ctx=image.getContext('2d');ctx.drawImage(prepared,0,0);const pixels=ctx.getImageData(0,0,image.width,image.height);pixels.data.set(enhanceOcrPixels(pixels.data,pass===1?'blue':'gray'));ctx.putImageData(pixels,0,0);}
     $('progress').value=pass===2?85:pass?55:20;$('scanStatus').textContent=pass===2?'薄い文字を補正して追加確認しています…':pass?'文字の濃さを調整して再確認しています…':'文字の位置と向きを検出して読み取っています…';
-    const read=await jobWorker.recognize(image);if(run!==generation)return;if(pass===0)routeItems=read.items;
+    const read=await jobWorker.recognize(image);if(run!==generation)return;passItems.push(read.items);
     const text=assembleLines(read.items)+(read.moneyText?`\n${read.moneyText}`:'');plainTexts.push(text);texts.push(`${pass===2?'薄い文字の補正':pass?'濃さ調整':'元の写真'}：\n${text}\n\n確度の低い文字を含む読取記録：\n${read.items.map(i=>`${Math.round(i.score*100)}％ ${i.text}`).join('\n')}`);const parsedPass=parseTicket(text,stations);readings.push(parsedPass);
     // Always compare the original and contrast-adjusted readings.
    }
-   const initial=mergeReadings(readings),band=(!initial.from||!initial.to)&&stationBand(routeItems,prepared.width,prepared.height);
+   const initial=mergeReadings(readings),band=(!initial.from||!initial.to)&&passItems.map(items=>stationBand(items,prepared.width,prepared.height)).find(Boolean);
    if(band)for(let pass=0;pass<2;pass++){
     if(run!==generation)return;$('scanStatus').textContent='大きく離れた駅名を部分読取で確認しています…';$('progress').value=92;
     const image=document.createElement('canvas'),compressed=pass===1?.65:1;image.width=Math.round(band.w*compressed)+80;image.height=band.h+80;const ctx=image.getContext('2d');ctx.fillStyle='white';ctx.fillRect(0,0,image.width,image.height);ctx.drawImage(prepared,band.x,band.y,band.w,band.h,40,40,image.width-80,band.h);
     if(pass){const pixels=ctx.getImageData(0,0,image.width,image.height);pixels.data.set(cleanPixels(pixels.data,image.width,image.height));ctx.putImageData(pixels,0,0);}
     const read=await jobWorker.recognize(image);if(run!==generation)return;const text=assembleLines(read.items);plainTexts.push(text);texts.push(`駅名の部分読取${pass?'（間隔・背景補正）':''}：\n${text}\n\n確度の低い文字を含む読取記録：\n${read.items.map(i=>`${Math.round(i.score*100)}％ ${i.text}`).join('\n')}`);readings.push(stationOnlyReading(parseTicket(text,stations)));const merged=mergeReadings(readings);if(merged.from&&merged.to)break;
+   }
+   if(mergeReadings(readings).ticketKind.id==='unknown'){
+    const bands=passItems.map(items=>titleBand(items,prepared.width,prepared.height)).filter(Boolean);
+    for(const [pass,band] of bands.entries()){
+     if(run!==generation)return;$('scanStatus').textContent='券名を部分読取で確認しています…';$('progress').value=96;
+     const part=document.createElement('canvas');part.width=band.w;part.height=band.h;const pc=part.getContext('2d');pc.drawImage(prepared,band.x,band.y,band.w,band.h,0,0,band.w,band.h);const pixels=pc.getImageData(0,0,band.w,band.h);
+     // Measure the ticket pixels before adding white padding, especially for dark photos.
+     pixels.data.set(enhanceOcrPixels(pixels.data,'blue'));pixels.data.set(cleanPixels(pixels.data,band.w,band.h));pixels.data.set(removeLongRules(pixels.data,band.w,band.h));pc.putImageData(pixels,0,0);
+     const image=document.createElement('canvas');image.width=Math.round(band.w*.65)+80;image.height=band.h+80;const ctx=image.getContext('2d');ctx.fillStyle='white';ctx.fillRect(0,0,image.width,image.height);ctx.drawImage(part,40,40,image.width-80,band.h);
+     const read=await jobWorker.recognize(image);if(run!==generation)return;const text=assembleLines(read.items);plainTexts.push(text);texts.push(`券名の部分読取${pass+1}（背景・間隔・線の補正）：\n${text}\n\n確度の低い文字を含む読取記録：\n${read.items.map(i=>`${Math.round(i.score*100)}％ ${i.text}`).join('\n')}`);readings.push(titleOnlyReading(parseTicket(text,stations)));if(mergeReadings(readings).ticketKind.id!=='unknown')break;
+    }
    }
    $('rawText').textContent=texts.join('\n\n');const parsed=mergeReadings(readings);const ranked=readings.map((r,i)=>({i,score:Number(Boolean(r.from&&r.to))*2+Number(Boolean(r.price))*2+Number(Boolean(r.fees))*3+Number(r.ticketKind.id!=='unknown')+Number(r.ticketKind.product==='tokudane')*2})).sort((a,b)=>b.score-a.score);$('recognizedText').value=(plainTexts[ranked[0].i]||'')+(parsed.from&&parsed.to?`\n${parsed.from}${parsed.ticketKind.city.from?'（市内）':''} → ${parsed.to}${parsed.ticketKind.city.to?'（市内）':''}`:'');applyParsedTicket(parsed);$('progress').value=100;
   }catch(error){if(run===generation){jobWorker?.terminate();worker=null;$('scanStatus').textContent='読み取りできませんでした。写真を撮り直すか手入力してください。';$('rawText').textContent=`読取エラー：${error.message||error.name}\n読み込みが止まる場合は写真のサイズを小さくして再試行してください。`;}}

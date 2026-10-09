@@ -1,20 +1,23 @@
-import {normalizeTicketText} from './ocr-lines.js?v=7.4.2';
-import {classifyTicket,mergeTicketKinds} from './ticket-kind.js?v=7.4.2';
+import {normalizeTicketText} from './ocr-lines.js?v=7.5.0';
+import {classifyTicket,mergeTicketKinds} from './ticket-kind.js?v=7.5.0';
 const breakdownMarker=/内[訳议识識]/;
 const numberValue=s=>/^(?:\d+|\d{1,3}(?:[,.]\d{3})+)$/.test(s)?Number(s.replace(/[,.]/g,'')):null;
 const feePattern=/(乗車券(?:運賃)?|乗車運賃|乗運賃|乗|特急(?:券|料金)?|特|グリーン(?:券|料金)?|グ)[:：]?[¥￥]?([0-9]+(?:[,.][0-9]{3})*)(?![0-9,.])/g;
 export function parseTicket(raw,stations){
  const text=normalizeTicketText(raw).replace(/[‐‑−ー]/g,'ー'),compact=text.replace(/[ \t]/g,''),warnings=[];
- const cityLabel='札幌(?:[（(]市内[）)]|市内)',lines=compact.split('\n');
+ // One or two stray glyphs beside the city marker are common around the arrow.
+ // This only normalizes an explicit 札幌 + 市内 label; it never invents a station.
+ const cityLabel='札幌(?:[^札幌\\n→⇒➜()（）]{0,2}[（(]市内[）)]|市内)',lines=compact.split('\n');
  const cityFrom=new RegExp(cityLabel+'[→⇒➜]').test(compact)||lines.some(line=>new RegExp('^'+cityLabel).test(line)&&stations.some(s=>s!=='札幌'&&line.endsWith(s))),cityTo=new RegExp('[→⇒➜]'+cityLabel).test(compact)||lines.some(line=>new RegExp(cityLabel+'$').test(line)&&stations.some(s=>s!=='札幌'&&line.startsWith(s)));
  const cityRestricted=/市内|都区内|山手線内/.test(compact)&&!cityFrom&&!cityTo;
+ const cityUnresolved=cityRestricted&&new RegExp(cityLabel).test(compact)&&!/市内|都区内|山手線内/.test(compact.replace(new RegExp(cityLabel,'g'),''));
  let ticketKind={...classifyTicket(text),city:{from:cityFrom,to:cityTo}};
- if(cityRestricted){ticketKind={...ticketKind,restricted:true,calculable:false};warnings.push('市内制度等の表示があります。このページの登録経路で計算できるか確認してください。');}
+ if(cityRestricted){ticketKind={...ticketKind,restricted:true,calculable:false,cityUnresolved:!ticketKind.restricted&&cityUnresolved};warnings.push('市内制度等の表示があります。このページの登録経路で計算できるか確認してください。');}
  const candidates=[];
- for(const line of compact.replace(/札幌(?:[（(]市内[）)]|市内)/g,'札幌').split('\n')){
+ for(const line of compact.replace(new RegExp(cityLabel,'g'),'札幌').split('\n')){
+  if(/経由|発行|発券|MR|MV|お求め|ご利用|場合|線[・·]/.test(line))continue;
   const parts=line.split(/[→⇒➜]|から/);
   if(parts.length!==2){
-   if(/経由|発行|MR|MV|お求め|ご利用|場合/.test(line))continue;
    const hits=[];
    for(const station of [...stations].sort((a,b)=>b.length-a.length)){
     const index=line.indexOf(station);
@@ -23,9 +26,17 @@ export function parseTicket(raw,stations){
    hits.sort((a,b)=>a.index-b.index);if(hits.length===2)candidates.push({from:hits[0].station,to:hits[1].station});
    continue;
   }
-  const left=stations.filter(s=>parts[0].endsWith(s)||parts[0].endsWith(s+'駅')),right=stations.filter(s=>parts[1].startsWith(s));
-  const longest=arr=>arr.sort((a,b)=>b.length-a.length)[0];
-  if(left.length||right.length)candidates.push({from:longest(left)||'',to:longest(right)||''});
+  const sideStation=part=>{
+   const hits=[];
+   for(const station of [...stations].sort((a,b)=>b.length-a.length)){
+    const index=part.indexOf(station);
+    if(index>=0&&!hits.some(h=>index<h.end&&index+station.length>h.index))hits.push({station,index,end:index+station.length});
+   }
+   // Retain a printed station beside a noisy arrow, but reject multiple names.
+   return hits.length===1?hits[0].station:'';
+  };
+  const from=sideStation(parts[0]),to=sideStation(parts[1]);
+  if(from||to)candidates.push({from,to});
  }
  const distinct=[...new Map(candidates.map(r=>[r.from+'|'+r.to,r])).values()],origins=[...new Set(distinct.map(r=>r.from).filter(Boolean))],destinations=[...new Set(distinct.map(r=>r.to).filter(Boolean))],route=origins.length<=1&&destinations.length<=1?{from:origins[0],to:destinations[0]}:{};
  if(!route.from||!route.to)warnings.push('発駅・着駅を特定できません。券面を見て入力してください。');
@@ -38,7 +49,7 @@ export function parseTicket(raw,stations){
  if(uncertainCurrency)warnings.push('金額の通貨表記が不鮮明です。券面の発売額を入力してください。');
  if(price===null)warnings.push('発売額を特定できません。券面の合計発売額を入力してください。');
  const fees=parseFeeBreakdown(compact,ticketKind,price);
- if(ticketKind.breakdownOnly&&!fees){ticketKind={...classifyTicket(text,{includeBreakdown:false}),city:{from:cityFrom,to:cityTo}};if(cityRestricted)ticketKind={...ticketKind,restricted:true,calculable:false};}
+ if(ticketKind.breakdownOnly&&!fees){ticketKind={...classifyTicket(text,{includeBreakdown:false}),city:{from:cityFrom,to:cityTo}};if(cityRestricted)ticketKind={...ticketKind,restricted:true,calculable:false,cityUnresolved:!ticketKind.restricted&&cityUnresolved};}
  if(breakdownMarker.test(compact)&&!fees)warnings.push('料金内訳を確定できません。合計額と券面の内訳を照合してください。');
  const unsupported=ticketKind.id!=='unknown'&&!ticketKind.calculable;
  const discountNeedsReview=ticketKind.product!=='tokudane'&&/割|障|介/.test(compact)&&! /学割/.test(compact);
@@ -61,6 +72,7 @@ export function parseTicket(raw,stations){
 // A station-only crop is evidence for stations and city notation, not prices,
 // ticket type or discounts printed in adjacent parts of the ticket.
 export function stationOnlyReading(parsed){return {from:parsed.from,to:parsed.to,ticketKind:{id:'unknown',kinds:[],city:parsed.ticketKind.city},warnings:[],price:null,fees:null,discount:null,discountNeedsReview:false,chargeSeat:null,seatConflict:false,passenger:null,train:null,unsupported:false};}
+export function titleOnlyReading(parsed){return {...stationOnlyReading(parsed),from:'',to:'',ticketKind:{...parsed.ticketKind,city:{from:false,to:false}},unsupported:parsed.unsupported};}
 export function mergeReadings(readings){
  const unique=key=>[...new Set(readings.map(r=>r[key]).filter(v=>v!==null&&v!==''&&v!==undefined))];
  const chargeSeats=unique('chargeSeat'),seatConflict=chargeSeats.length>1||readings.some(r=>r.seatConflict);

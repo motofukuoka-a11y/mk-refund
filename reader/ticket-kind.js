@@ -1,4 +1,4 @@
-import {readTokudane} from './tokudane.js?v=7.4.2';
+import {readTokudane} from './tokudane.js?v=7.5.0';
 const labels={ordinary:'普通乗車券',limited_express:'特急券',green:'グリーン券',seat_fee:'指定料金券',other:'その他・個別条件のある券',unknown:'判別できません',conflict:'券種の読取結果が一致しません'};
 const combinedLabels={ordinary:'乗車券',limited_express:labels.limited_express,green:labels.green};
 const labelForKinds=kinds=>kinds.length>1&&kinds.includes('ordinary')?kinds.map(k=>combinedLabels[k]||labels[k]).join('＋'):kinds.map(k=>labels[k]).join('＋');
@@ -37,14 +37,18 @@ export function mergeTicketKinds(readings){
  if(product){
   const rates=[...new Set(known.filter(r=>r.product==='tokudane').map(r=>r.rate).filter(n=>n!==null))];
   const rateConflict=rates.length>1||known.some(r=>r.rateConflict);
-  return {...product,city:mergeCity(known),rate:!rateConflict&&rates.length===1?rates[0]:null,rateConflict,restricted:known.some(r=>r.restricted)||known.some(r=>r.kinds.some(k=>!product.kinds.includes(k)))};
+  return {...product,city:mergeCity(known),rate:!rateConflict&&rates.length===1?rates[0]:null,rateConflict,restricted:mergeRestricted(known,readings)||known.some(r=>r.kinds.some(k=>!product.kinds.includes(k)))};
  }
  const ids=new Set(known.map(r=>r.id));
  const seats=new Set(known.map(r=>r.seat).filter(s=>s!=='unknown'));
  const combined=known.find(r=>r.kinds.length>1);
- if(combined&&known.every(r=>r.kinds.every(k=>combined.kinds.includes(k))))return {...combined,city:mergeCity(known),restricted:known.some(r=>r.restricted),seat:seats.size===1?[...seats][0]:'unknown'};
+ if(combined&&known.every(r=>r.kinds.every(k=>combined.kinds.includes(k))))return {...combined,city:mergeCity(known),restricted:mergeRestricted(known,readings),seat:seats.size===1?[...seats][0]:'unknown'};
  if(ids.size>1)return {id:'conflict',kinds:[],label:labels.conflict,seat:'unknown',calculable:false,restricted:true};
- return {...known[0],city:mergeCity(known),restricted:known.some(r=>r.restricted),seat:seats.size===1?[...seats][0]:'unknown',calculable:known.every(r=>r.calculable)};
+ return {...known[0],city:mergeCity(known),restricted:mergeRestricted(known,readings),seat:seats.size===1?[...seats][0]:'unknown',calculable:known.every(r=>r.calculable)};
+}
+function mergeRestricted(known,readings){
+ const cityResolved=readings.some(r=>r.from&&r.to&&(r.ticketKind.city?.from||r.ticketKind.city?.to));
+ return known.some(r=>r.restricted&&(!r.cityUnresolved||!cityResolved));
 }
 function mergeCity(known){return {from:known.some(r=>r.city?.from),to:known.some(r=>r.city?.to)};}
 

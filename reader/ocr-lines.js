@@ -1,11 +1,16 @@
 // Assemble spatially separated words on the same printed line (MARS station spacing).
-export function assembleLines(items,minScore=.72){
+export function assembleRows(items,minScore=.72){
  const words=items.filter(i=>i.score>=minScore&&i.text?.trim()&&i.poly?.length===4).map(i=>{const xs=i.poly.map(p=>p[0]),ys=i.poly.map(p=>p[1]);return {...i,left:Math.min(...xs),top:Math.min(...ys),height:Math.max(...ys)-Math.min(...ys),cy:ys.reduce((a,b)=>a+b,0)/4};}).sort((a,b)=>a.cy-b.cy||a.left-b.left);
  const rows=[];
  for(const word of words){let row=rows.find(r=>Math.abs(word.cy-r.cy)<=Math.min(word.height,r.height)*.48);if(!row){row={words:[],cy:word.cy,height:word.height};rows.push(row);}row.words.push(word);row.cy=row.words.reduce((s,w)=>s+w.cy,0)/row.words.length;row.height=Math.min(...row.words.map(w=>w.height));}
- return rows.sort((a,b)=>a.cy-b.cy).map(r=>r.words.sort((a,b)=>a.left-b.left).map(w=>w.text).join(' ')).join('\n');
+ return rows.sort((a,b)=>a.cy-b.cy).map(r=>{
+  const words=r.words.sort((a,b)=>a.left-b.left),xs=words.flatMap(w=>w.poly.map(p=>p[0])),ys=words.flatMap(w=>w.poly.map(p=>p[1]));
+  const left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
+  return {text:words.map(w=>w.text).join(' '),score:words.reduce((s,w)=>s+w.score,0)/words.length,poly:[[left,top],[right,top],[right,bottom],[left,bottom]],words};
+ });
 }
-export function normalizeTicketText(raw){return raw.normalize('NFKC').replaceAll('乘','乗').replaceAll('经','経').replaceAll('团','団').replaceAll('歲','歳').replaceAll('惠','恵').replaceAll('內','内').replaceAll('网','網');}
+export function assembleLines(items,minScore=.72){return assembleRows(items,minScore).map(r=>r.text).join('\n');}
+export function normalizeTicketText(raw){return raw.normalize('NFKC').replaceAll('乘','乗').replaceAll('经','経').replaceAll('經','経').replaceAll('团','団').replaceAll('歲','歳').replaceAll('惠','恵').replaceAll('內','内').replaceAll('网','網');}
 
 // A price on a MARS ticket is often beside its validity line. A vertical serial
 // stamp can cause the detector to merge it with the amount; inspect that band.

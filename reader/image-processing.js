@@ -1,20 +1,52 @@
 // Pure pixel helpers shared by browser capture and the sample benchmark.
+import {assembleRows} from './ocr-lines.js?v=7.5.0';
 // Large, widely spaced station characters can be missed by a whole-ticket
 // detector. Locate their band above an actual travel date, never an issue date.
 export function stationBand(items,width,height){
- const date=items.find(item=>item.score>=.85&&/\d+月\d+日/.test(item.text.normalize('NFKC').replace(/\s/g,''))&&item.poly?.length===4);
+ const date=assembleRows(items).find(item=>item.score>=.85&&/\d+月\d+日|\d{1,2}:\d{2}発/.test(item.text.normalize('NFKC').replace(/\s/g,''))&&!/発券|発行/.test(item.text));
  if(!date)return null;
  const ys=date.poly.map(p=>p[1]),top=Math.min(...ys),h=Math.max(...ys)-top;
  if(h<10||top<height*.15||top>height*.7)return null;
  const y=Math.max(0,Math.floor(top-h*2.8)),bottom=Math.min(height,Math.ceil(top+h*.08));
  return {x:0,y,w:width,h:bottom-y};
 }
+// Inspect a damaged title at its native scale instead of inferring the ticket
+// type from the train, fare or seat number. Do not crop instruction text.
+export function titleBand(items,width,height){
+ const title=items.find(item=>item.score>=.72&&/^(?:[CＣ]制)?(?:特|乗車券|グリーン券)/.test(item.text.normalize('NFKC').replace(/\s/g,''))&&!/有効|変更|必要|別途|ください|\d/.test(item.text)&&item.poly?.length===4&&Math.min(...item.poly.map(p=>p[1]))<height*.5);
+ if(!title)return null;
+ const xs=title.poly.map(p=>p[0]),ys=title.poly.map(p=>p[1]),h=Math.max(...ys)-Math.min(...ys);
+ const x=Math.max(0,Math.floor(Math.min(...xs)-h)),y=Math.max(0,Math.floor(Math.min(...ys)-h*.45));
+ const right=Math.min(width,Math.ceil(Math.max(...xs)+h*2)),bottom=Math.min(height,Math.ceil(Math.max(...ys)+h*.55));
+ return h>=8?{x,y,w:right-x,h:bottom-y}:null;
+}
 export function enhanceOcrPixels(rgba,channel='blue'){
  const values=new Uint8Array(rgba.length/4),hist=new Uint32Array(256);
  for(let j=0;j<values.length;j++){const i=j*4,v=channel==='blue'?rgba[i+2]:Math.round(.299*rgba[i]+.587*rgba[i+1]+.114*rgba[i+2]);values[j]=v;hist[v]++;}
  const percentile=ratio=>{let sum=0;for(let v=0;v<256;v++){sum+=hist[v];if(sum>=values.length*ratio)return v;}return 255;};
- const low=percentile(.03),high=percentile(.90),range=Math.max(60,high-low),output=new Uint8ClampedArray(rgba.length);
+ const low=percentile(.03),high=percentile(.90),range=Math.max(32,high-low),output=new Uint8ClampedArray(rgba.length);
  for(let j=0;j<values.length;j++){const i=j*4,v=Math.round(Math.max(0,Math.min(255,(values[j]-low)*255/range)));output[i]=output[i+1]=output[i+2]=v;output[i+3]=255;}
+ return output;
+}
+export function removeLongRules(rgba,width,height){
+ const output=new Uint8ClampedArray(rgba),mask=new Uint8Array(width*height);
+ const dark=index=>rgba[index*4]<95&&rgba[index*4+1]<95&&rgba[index*4+2]<95;
+ const mark=(indices)=>{for(const i of indices)mask[i]=1;};
+ for(let y=0;y<height;y++){
+  let start=-1;
+  for(let x=0;x<=width;x++){
+   if(x<width&&dark(y*width+x)){if(start<0)start=x;}
+   else if(start>=0){if(x-start>=Math.max(80,width*.45))mark(Array.from({length:x-start},(_,j)=>y*width+start+j));start=-1;}
+  }
+ }
+ for(let x=0;x<width;x++){
+  let start=-1;
+  for(let y=0;y<=height;y++){
+   if(y<height&&dark(y*width+x)){if(start<0)start=y;}
+   else if(start>=0){if(y-start>=Math.max(80,height*.7))mark(Array.from({length:y-start},(_,j)=>(start+j)*width+x));start=-1;}
+  }
+ }
+ for(let i=0;i<mask.length;i++)if(mask[i])output[i*4]=output[i*4+1]=output[i*4+2]=255;
  return output;
 }
 export function ticketBounds(rgba,width,height) {
