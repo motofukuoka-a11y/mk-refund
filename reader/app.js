@@ -1,13 +1,15 @@
-import {createReaderRefundCalculator} from './before-refund.js?v=7.4.0';
+import {createReaderRefundCalculator} from './before-refund.js?v=7.4.1';
 import {sapporoCityStations} from './city-zone.js?v=6.3';
-import {supportsCancellation,suggestedVias} from './cancellation.js?v=7.4.0';
+import {attachStationSuggestions} from './station-suggestions.js?v=7.4.1';
+import {componentFields,componentTotal} from './review-amounts.js?v=7.4.1';
+import {supportsCancellation,suggestedVias} from './cancellation.js?v=7.4.1';
 import {loadPhotoCanvas} from './photo-loader.js?v=6';
 import {createLocalOcr} from './local-ocr.js?v=6';
-import {editableTicketKind} from './ticket-kind.js?v=7.4.0';
-import {assembleLines} from './ocr-lines.js?v=7.4.0';
+import {editableTicketKind} from './ticket-kind.js?v=7.4.1';
+import {assembleLines} from './ocr-lines.js?v=7.4.1';
 import {createCalculator} from './calculator.js?v=6.3';
-import {frameCrop,ticketBounds,enhanceOcrPixels} from './image-processing.js?v=7.4.0';
-import {parseTicket,mergeReadings} from './parser.js?v=7.4.0';
+import {frameCrop,ticketBounds,enhanceOcrPixels,stationBand,cleanPixels} from './image-processing.js?v=7.4.1';
+import {parseTicket,mergeReadings,stationOnlyReading} from './parser.js?v=7.4.1';
 const $=id=>document.getElementById(id), yen=n=>`${n.toLocaleString('ja-JP',{maximumFractionDigits:2})}円`;
 let currentKind=null,stream=null,canvas=null,worker=null,busy=false,generation=0;
 const data=await Promise.all(['segments','stations','ordinary_fares_main','ordinary_fares_local','discount_rules'].map(async n=>{
@@ -19,34 +21,40 @@ function initialize(){
  $('camera').disabled=false;$('choose').disabled=false;
  const [segments,stations,main,local,discounts]=data, calculator=createCalculator(segments,stations,main,local,discounts);
  const cancelCalculator=createReaderRefundCalculator(calculator,stations);
- for(const id of ['actualFrom','actualTo'])for(const s of sapporoCityStations){const o=document.createElement('option');o.value=s;o.textContent=s;$(id).append(o);}
+ for(const id of ['from','to','stop','via','actualFrom','actualTo'])attachStationSuggestions($(id),id.startsWith('actual')?sapporoCityStations:stations,{multiple:id==='via'});
  stations.forEach(s=>{const option=document.createElement('option');option.value=s;$('stations').append(option);});
  discounts.discounts.forEach(r=>{const option=document.createElement('option');option.value=r.id;option.textContent=r.label;option.defaultSelected=r.id==='none';option.selected=r.id==='none';$('discount').append(option);});
+ const tokudaneOption=document.createElement('option');tokudaneOption.value='tokudane';tokudaneOption.textContent='トクだ値（割引率を入力）';$('discount').append(tokudaneOption);
  const clearResult=()=>{$('result').hidden=true;$('error').hidden=true;};
- function updateDiscount(){const r=discounts.discounts.find(r=>r.id===$('discount').value);$('companionBox').hidden=!r?.requiresCompanion;$('discountNote').textContent=r?`${r.label}${r.rate?`：${r.rate*100}％引` : ''}${r.minimumBusinessKmExclusive!==null?'／営業キロ100km超が条件':''}`:'';}
- function updateCityFields(){for(const end of ['From','To']){const on=$('city'+end).checked&&$('usage').value!=='before';$('actual'+end+'Label').hidden=!on;$('actual'+end).required=on;$('actual'+end).disabled=!on;}}
+ function updateDiscount(){const r=discounts.discounts.find(r=>r.id===$('discount').value);$('companionBox').hidden=!r?.requiresCompanion;const note=currentKind?.product==='tokudane'?'トクだ値は下の専用の割引率を使います。':$('usage').value==='before'?'使用開始前の払戻は入力済みの実発売額を使います。割引の選択で発売額を再割引しません。':!currentKind?.kinds.includes('ordinary')?'この割引は乗車券運賃に適用します。':'乗車券の既乗区間・未使用区間の運賃計算に使います。';$('discountNote').textContent=$('discount').value==='tokudane'?note:(r?`${r.label}${r.rate?`：${r.rate*100}％引` : ''}${r.minimumBusinessKmExclusive!==null?'／営業キロ100km超が条件':''}。`:'券面を確認して選択してください。')+note;}
+ function updateCityFields(){for(const end of ['From','To']){const on=$('city'+end).checked&&$('usage').value!=='before';$('actual'+end+'Label').hidden=false;$('actual'+end).required=on;$('actual'+end).disabled=false;}}
  for(const id of ['cityFrom','cityTo'])$(id).addEventListener('change',updateCityFields);
  function updateCancellationFields(){
   updateCityFields();
   const kind=currentKind||{kinds:['ordinary']},ordinary=kind.kinds.includes('ordinary'),accident=$('refundMode').value==='accident',tokudane=kind.product==='tokudane',multiple=kind.kinds.length>1&&!tokudane,before=$('usage').value==='before',charge=kind.kinds.some(k=>k!=='ordinary'),seat=$('chargeSeat').value,timed=before&&!accident&&charge&&!tokudane&&['reserved','standing'].includes(seat);
-  $('stopSection').hidden=before||tokudane;$('stop').required=!before&&!tokudane;$('stop').disabled=before||tokudane;$('startedLabel').hidden=before||tokudane;$('started').required=!before&&!tokudane;$('started').disabled=before||tokudane;$('unusedLabel').hidden=true;$('unused').required=false;$('unused').disabled=true;$('validLabel').hidden=before||tokudane;$('valid').required=!before&&!tokudane;$('valid').disabled=before||tokudane;$('confirmText').textContent=before?'未使用・有効期間内（前売りは開始前を含む）で、読取内容と選択した条件が券面・実際の状況に一致しています':'券種・発売額・経路・割引・料金内訳などの入力内容が券面と一致しています';
+  $('stopSection').hidden=false;$('stop').required=!before&&!tokudane;$('stop').disabled=false;$('stopNote').textContent=before||tokudane?'使用開始後の旅行中止で使う駅です。今の計算条件では入力は任意です。':'元券の経路上から候補駅を選んでください。';$('startedLabel').hidden=before||tokudane;$('started').required=!before&&!tokudane;$('started').disabled=before||tokudane;$('unusedLabel').hidden=true;$('unused').required=false;$('unused').disabled=true;$('validLabel').hidden=before||tokudane;$('valid').required=!before&&!tokudane;$('valid').disabled=before||tokudane;$('confirmText').textContent=before?'未使用・有効期間内（前売りは開始前を含む）で、読取内容と選択した条件が券面・実際の状況に一致しています':'券種・発売額・経路・割引・料金内訳などの入力内容が券面と一致しています';
   $('beforeFields').hidden=!before||!charge||accident||tokudane;$('chargeSeat').required=before&&charge&&!accident&&!tokudane;$('chargeSeat').disabled=!before||!charge||accident||tokudane;$('timingFields').hidden=!timed;$('seatSummary').textContent=seat?'座席区分：'+({reserved:'指定席',unreserved:'自由席',unassigned:'座席未指定券',standing:'立席特急券'})[seat]+'（修正）':'座席区分を選択してください';$('seatDetails').open=!seat;
   $('timingBand').required=timed;$('timingBand').disabled=!timed;$('tripCancelledLabel').hidden=!before;$('tripCancelled').required=before&&accident;$('tripCancelled').disabled=!before||!accident;
   $('calculationTicket').textContent=currentKind?`計算する券種：${currentKind.label}`:'計算する券種・商品を券面で確認して選択してください。';
-  $('discountFields').hidden=!ordinary||before||tokudane;$('discount').required=ordinary&&!before&&!tokudane;$('discount').disabled=!ordinary||before||tokudane;$('passengerBox').hidden=!ordinary||before||tokudane;$('passenger').required=ordinary&&!before&&!tokudane;$('passenger').disabled=!ordinary||before||tokudane;
-  $('componentBox').hidden=!multiple;
+  $('discountFields').hidden=false;$('discount').required=true;$('discount').disabled=false;$('passengerBox').hidden=!ordinary||before||tokudane;$('passenger').required=ordinary&&!before&&!tokudane;$('passenger').disabled=!ordinary||before||tokudane;
+  $('componentBox').hidden=false;const labels={ordinary:'乗車券運賃',limited_express:'特急料金',green:'グリーン料金'},applicable=currentKind?.kinds.map(k=>labels[k]).filter(Boolean)||[];$('componentNote').textContent=applicable.length?'計算する券種の内訳：'+applicable.join('・')+'。':'券種を選び、対応する料金を確認してください。';
   $('tokudaneFields').hidden=!tokudane;$('tokudaneScope').textContent=!before?'この商品の計算は使用開始前が対象です。未使用なら「使用状態」を使用開始前に変更してください。':accident?'トクだ値の運休払戻は個別条件を駅窓口で確認してください。通常手数料は適用しません。':'受取後の紙券・未使用・出発前の通常払戻を計算します。';for(const id of ['tokudanePaper','tokudaneRate']){$(id).disabled=!tokudane;$(id).required=tokudane&&before&&!accident;}const departure=tokudane&&before&&!accident;$('tokudaneDepartureLabel').hidden=!departure;$('tokudaneDeparture').disabled=!departure;$('tokudaneDeparture').required=departure;
   const blocked=currentKind&&!supportsCancellation(currentKind);$('reviewNotice').hidden=!blocked;$('reviewNotice').textContent=blocked?'この商品には個別条件の確認が必要です。読取内容は修正できます。判定が誤っている場合は「計算する券種・商品」を券面に合わせて修正してください。':'';
-  for(const [type,id] of [['ordinary','ordinary'],['limited_express','express'],['green','green']]){const present=kind.kinds.includes(type);$(id+'ComponentLabel').hidden=!present;$(id+'Component').required=multiple&&present;$(id+'Component').disabled=!multiple||!present;}
+  for(const [type,id] of [['ordinary','ordinary'],['limited_express','express'],['green','green']]){const present=kind.kinds.includes(type);$(id+'ComponentLabel').hidden=false;$(id+'Component').required=multiple&&present;$(id+'Component').disabled=false;}
+  updateDiscount();
   $('accidentFields').hidden=!accident;$('purchasedBefore').required=accident;$('purchasedBefore').disabled=!accident;
   for(const [type,id] of [['limited_express','express'],['green','green']]){const present=accident&&kind.kinds.includes(type);$(id+'UnavailableLabel').hidden=!present;$(id+'Unavailable').required=present;$(id+'Unavailable').disabled=!present;}
  }
  for(const id of ['refundMode','usage','chargeSeat'])$(id).addEventListener('change',updateCancellationFields);
- $('ticketType').addEventListener('change',()=>{currentKind=editableTicketKind($('ticketType').value);$('confirmed').checked=false;clearResult();updateCancellationFields();});
+ function syncComponentTotal(){const values=Object.fromEntries(componentFields.map(([type,id])=>[type,$(id+'Component').value]));const total=componentTotal(currentKind,values);if(total!==null)$('price').value=total;}
+ for(const [type,id] of componentFields)$(id+'Component').addEventListener('input',()=>{if(currentKind?.kinds.includes(type))syncComponentTotal();});
+ $('price').addEventListener('input',()=>{if(currentKind?.kinds.length===1){const field=componentFields.find(([type])=>type===currentKind.kinds[0]);if(field)$(field[1]+'Component').value=$('price').value;}});
+ $('ticketType').addEventListener('change',()=>{currentKind=editableTicketKind($('ticketType').value);if(currentKind?.product==='tokudane')$('discount').value='tokudane';else if($('discount').value==='tokudane')$('discount').value='none';if(currentKind?.kinds.length===1){const field=componentFields.find(([type])=>type===currentKind.kinds[0]);if(field&&!$(field[1]+'Component').value)$(field[1]+'Component').value=$('price').value;}syncComponentTotal();$('confirmed').checked=false;clearResult();updateCancellationFields();});
  function calculateCancellation(){
   if(!$('ticketType').value||!currentKind)throw new Error('計算する券種・商品を券面で確認して選択してください。');
   if(!$('confirmed').checked)throw new Error('券面と入力内容が一致することを確認してください。');
   const kind=currentKind;
+  if(kind.kinds.length===1){const field=componentFields.find(([type])=>type===kind.kinds[0]);if(field){const value=$(field[1]+'Component').value;if(value!==''&&Number(value)!==Number($('price').value))throw new Error('選択した券種の内訳と発売額を一致させてください。');}}
   const components={};for(const [type,id] of [['ordinary','ordinary'],['limited_express','express'],['green','green']])if(kind.kinds.includes(type))components[type]=Number($(id+'Component').value);
   return cancelCalculator({kind,tokudaneRate:$('tokudaneRate').value,tokudanePaper:$('tokudanePaper').checked,tokudaneDeparture:$('tokudaneDeparture').value,usage:$('usage').value,unused:$('usage').value==='before'&&$('confirmed').checked,tripCancelled:$('tripCancelled').checked,chargeSeat:$('chargeSeat').value,timingBand:$('timingBand').value,city:{from:$('cityFrom').checked,to:$('cityTo').checked},actualFrom:$('actualFrom').value,actualTo:$('actualTo').value,mode:$('refundMode').value,from:$('from').value.trim(),to:$('to').value.trim(),stop:$('stop').value.trim(),price:Number($('price').value),components,vias:$('via').value.split(/[,、]/).map(s=>s.trim()).filter(Boolean),discount:$('discount').value,passenger:$('passenger').value,companion:$('companion').checked,valid:$('usage').value==='before'?$('confirmed').checked:$('valid').checked,started:$('started').checked,purchasedBefore:$('purchasedBefore').checked,unavailable:{limited_express:$('expressUnavailable').value,green:$('greenUnavailable').value}});
  }
@@ -56,7 +64,7 @@ function initialize(){
  $('form').addEventListener('input',()=>{clearResult();$('confirmed').checked=false;});
  // 確認チェック自体の操作では解除しない。
  $('confirmed').addEventListener('input',event=>{event.stopPropagation();clearResult();});
- $('discount').addEventListener('change',()=>{$('companion').checked=false;updateDiscount();});
+ $('discount').addEventListener('change',()=>{$('companion').checked=false;if($('discount').value==='tokudane'){currentKind=editableTicketKind('tokudane');$('ticketType').value='tokudane';}else if(currentKind?.product==='tokudane'){currentKind=editableTicketKind('ordinary+limited_express');$('ticketType').value='ordinary+limited_express';}$('confirmed').checked=false;clearResult();updateCancellationFields();});
  $('choose').addEventListener('click',()=>{$('file').click();});
  $('file').addEventListener('change',async()=>{const file=$('file').files[0];if(!file||busy)return;const run=++generation;busy=true;resetTicket();removePhoto();toggleBusy(true);$('scanStatus').textContent='写真を端末内で開いています…';try{const image=await loadPhotoCanvas(file,message=>{if(run===generation)$('scanStatus').textContent=message;});if(run===generation)setPhoto(image);}catch(error){if(run===generation)$('scanStatus').textContent=error.message;}finally{$('file').value='';if(run===generation){busy=false;toggleBusy(false);if(canvas)$('recognize').click();}}});
  $('camera').addEventListener('click',async()=>{
@@ -95,16 +103,23 @@ function initialize(){
    jobWorker=worker||createLocalOcr();worker=jobWorker;$('scanStatus').textContent='端末内の新しい読取エンジンを準備しています。初回は約46MBのデータを取得します…';await jobWorker.ready;
    if(run!==generation)return;
    const prepared=document.createElement('canvas'),scale=Math.min(2,2000/Math.max(canvas.width,canvas.height),Math.max(1,1400/Math.max(canvas.width,canvas.height)));prepared.width=Math.round(canvas.width*scale);prepared.height=Math.round(canvas.height*scale);prepared.getContext('2d').drawImage(canvas,0,0,prepared.width,prepared.height);
-   const readings=[],texts=[],plainTexts=[];
+   const readings=[],texts=[],plainTexts=[];let routeItems=[];
    for(let pass=0;pass<3;pass++){
     if(run!==generation)return;if(pass===2){const merged=mergeReadings(readings);if(merged.from&&merged.to&&merged.price&&merged.ticketKind.id!=='unknown'&&(merged.ticketKind.product==='tokudane'?merged.ticketKind.rate!==null:merged.ticketKind.kinds.length===1||merged.fees))break;}let image=prepared;
     if(pass){image=document.createElement('canvas');image.width=prepared.width;image.height=prepared.height;const ctx=image.getContext('2d');ctx.drawImage(prepared,0,0);const pixels=ctx.getImageData(0,0,image.width,image.height);pixels.data.set(enhanceOcrPixels(pixels.data,pass===1?'blue':'gray'));ctx.putImageData(pixels,0,0);}
     $('progress').value=pass===2?85:pass?55:20;$('scanStatus').textContent=pass===2?'薄い文字を補正して追加確認しています…':pass?'文字の濃さを調整して再確認しています…':'文字の位置と向きを検出して読み取っています…';
-    const read=await jobWorker.recognize(image);if(run!==generation)return;
+    const read=await jobWorker.recognize(image);if(run!==generation)return;if(pass===0)routeItems=read.items;
     const text=assembleLines(read.items)+(read.moneyText?`\n${read.moneyText}`:'');plainTexts.push(text);texts.push(`${pass===2?'薄い文字の補正':pass?'濃さ調整':'元の写真'}：\n${text}\n\n確度の低い文字を含む読取記録：\n${read.items.map(i=>`${Math.round(i.score*100)}％ ${i.text}`).join('\n')}`);const parsedPass=parseTicket(text,stations);readings.push(parsedPass);
     // Always compare the original and contrast-adjusted readings.
    }
-   $('rawText').textContent=texts.join('\n\n');const parsed=mergeReadings(readings);const ranked=readings.map((r,i)=>({i,score:Number(Boolean(r.from&&r.to))*2+Number(Boolean(r.price))*2+Number(Boolean(r.fees))*3+Number(r.ticketKind.id!=='unknown')+Number(r.ticketKind.product==='tokudane')*2})).sort((a,b)=>b.score-a.score);$('recognizedText').value=plainTexts[ranked[0].i]||'';applyParsedTicket(parsed);$('progress').value=100;
+   const initial=mergeReadings(readings),band=(!initial.from||!initial.to)&&stationBand(routeItems,prepared.width,prepared.height);
+   if(band)for(let pass=0;pass<2;pass++){
+    if(run!==generation)return;$('scanStatus').textContent='大きく離れた駅名を部分読取で確認しています…';$('progress').value=92;
+    const image=document.createElement('canvas'),compressed=pass===1?.65:1;image.width=Math.round(band.w*compressed)+80;image.height=band.h+80;const ctx=image.getContext('2d');ctx.fillStyle='white';ctx.fillRect(0,0,image.width,image.height);ctx.drawImage(prepared,band.x,band.y,band.w,band.h,40,40,image.width-80,band.h);
+    if(pass){const pixels=ctx.getImageData(0,0,image.width,image.height);pixels.data.set(cleanPixels(pixels.data,image.width,image.height));ctx.putImageData(pixels,0,0);}
+    const read=await jobWorker.recognize(image);if(run!==generation)return;const text=assembleLines(read.items);plainTexts.push(text);texts.push(`駅名の部分読取${pass?'（間隔・背景補正）':''}：\n${text}\n\n確度の低い文字を含む読取記録：\n${read.items.map(i=>`${Math.round(i.score*100)}％ ${i.text}`).join('\n')}`);readings.push(stationOnlyReading(parseTicket(text,stations)));const merged=mergeReadings(readings);if(merged.from&&merged.to)break;
+   }
+   $('rawText').textContent=texts.join('\n\n');const parsed=mergeReadings(readings);const ranked=readings.map((r,i)=>({i,score:Number(Boolean(r.from&&r.to))*2+Number(Boolean(r.price))*2+Number(Boolean(r.fees))*3+Number(r.ticketKind.id!=='unknown')+Number(r.ticketKind.product==='tokudane')*2})).sort((a,b)=>b.score-a.score);$('recognizedText').value=(plainTexts[ranked[0].i]||'')+(parsed.from&&parsed.to?`\n${parsed.from}${parsed.ticketKind.city.from?'（市内）':''} → ${parsed.to}${parsed.ticketKind.city.to?'（市内）':''}`:'');applyParsedTicket(parsed);$('progress').value=100;
   }catch(error){if(run===generation){jobWorker?.terminate();worker=null;$('scanStatus').textContent='読み取りできませんでした。写真を撮り直すか手入力してください。';$('rawText').textContent=`読取エラー：${error.message||error.name}\n読み込みが止まる場合は写真のサイズを小さくして再試行してください。`;}}
   finally{if(run===generation){busy=false;toggleBusy(false);}}
  });
@@ -125,14 +140,15 @@ function initialize(){
   for(const id of ['from','to'])$(id).value=parsed[id];$('price').value=parsed.price??'';
   $('chargeSeat').value=parsed.chargeSeat||(['reserved','unreserved','standing','unassigned'].includes(kind.seat)?kind.seat:'');
   $('cityFrom').checked=Boolean(kind.city?.from);$('cityTo').checked=Boolean(kind.city?.to);$('actualFrom').value='';$('actualTo').value='';
-  $('passenger').value=parsed.passenger??'adult';$('discount').value=parsed.discountNeedsReview?'':parsed.discount??'none';$('companion').checked=false;
+  $('passenger').value=parsed.passenger??'adult';$('discount').value=kind.product==='tokudane'?'tokudane':parsed.discountNeedsReview?'':parsed.discount??'none';$('companion').checked=false;
   $('via').value=suggestedVias(parsed.train,parsed.from,parsed.to,calculator).join('、');
   for(const [type,id] of [['ordinary','ordinary'],['limited_express','express'],['green','green']])$(id+'Component').value=parsed.fees?.[type]??'';
+  if(kind.kinds.length===1&&parsed.price&&!parsed.fees){const field=componentFields.find(([type])=>type===kind.kinds[0]);if(field)$(field[1]+'Component').value=parsed.price;}
   $('tokudaneRate').value=kind.product==='tokudane'?kind.rate??'':'';
   // Reading a ticket never proves its receipt, use state or departure deadline.
   for(const id of ['tokudanePaper','started','valid','purchasedBefore','tripCancelled'])$(id).checked=false;
   for(const id of ['tokudaneDeparture','timingBand','expressUnavailable','greenUnavailable'])$(id).value='';
-  updateCancellationFields();updateDiscount();$('ticketDetails').open=true;
+  updateCancellationFields();updateDiscount();
   $('warnings').textContent=parsed.warnings.filter(w=>!supportsCancellation(kind)||!w.startsWith('普通片道乗車券以外')).join('\n');$('warnings').hidden=!$('warnings').textContent;
   $('scanStatus').textContent='読み取り完了。下の入力欄へ反映しました。券種・商品、金額、割引率を確認・修正してください。';
  }
@@ -153,7 +169,7 @@ function initialize(){
   $('resultScope').textContent=r.product==='tokudane'?'紙のトクだ値の受取後・未使用・出発前の通常払戻。駅窓口での取扱いです。端数がある場合は窓口で手数料を確認してください。':r.usage==='before'?'使用開始前は未使用・有効期間等の条件確認が必要です。他の企画商品は個別確認対象です。':'普通乗車券の通常払戻は未使用101km以上が対象です。料金券は使用開始後のお客様都合では払戻0円、運休では指定列車・設備を一部利用できなかった場合に当該料金全額。遅延だけの払戻はここでは計算しません。';
   $('routeDetail').replaceChildren(...r.path.map(s=>{const p=document.createElement('p');p.textContent=`${s.from} → ${s.to}：${s.line} ${s.business_km}km`;return p;}));$('result').hidden=false;
  }
- function resetTicket(){ currentKind=null;$('ticketKind').hidden=true; const usage=$('usage').value,mode=$('refundMode').value;$('form').reset();currentKind=editableTicketKind($('ticketType').value);$('recognizedText').value='';$('usage').value=usage;$('refundMode').value=mode;$('formCard').hidden=false;$('ticketDetails').open=true;$('form').hidden=false;$('reviewNotice').hidden=true;$('reviewNotice').textContent='';$('warnings').hidden=true;$('rawText').textContent='まだ読み取っていません。';updateDiscount();updateCancellationFields();clearResult(); }
+ function resetTicket(){ currentKind=null;$('ticketKind').hidden=true; const usage=$('usage').value,mode=$('refundMode').value;$('form').reset();currentKind=editableTicketKind($('ticketType').value);$('recognizedText').value='';$('usage').value=usage;$('refundMode').value=mode;$('formCard').hidden=false;$('form').hidden=false;$('reviewNotice').hidden=true;$('reviewNotice').textContent='';$('warnings').hidden=true;$('rawText').textContent='まだ読み取っていません。';updateDiscount();updateCancellationFields();clearResult(); }
  function setPhoto(image){canvas=image;resetTicket();$('photo').src=image.toDataURL('image/jpeg',.92);$('photo').hidden=false;$('emptyPreview').hidden=true;$('photoTools').hidden=false;$('recognize').disabled=false;$('scanStatus').textContent='きっぷが横向きで大きく写っているか確認してください。背景が多い場合は「きっぷだけを切り出す」を使ってから読み取ります。';if(!busy)$('recognize').click();}
  function removePhoto(){ resetTicket();$('ticketKind').hidden=true;canvas=null;$('photo').removeAttribute('src');$('photo').hidden=true;$('emptyPreview').hidden=false;$('photoTools').hidden=true;$('recognize').disabled=true;$('rawText').textContent='写真と読み取り文字を消去しました。';$('warnings').hidden=true;}
  function toggleBusy(on){$('form').querySelector('button[type=submit]').disabled=on;for(const id of ['camera','choose','rotate','crop','remove','resetAll','applyText'])$(id).disabled=on;$('recognize').disabled=on||!canvas;$('cancel').hidden=!on;$('progress').hidden=!on;}

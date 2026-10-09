@@ -1,5 +1,5 @@
-import {supportsCancellation,cancellationLabels,createCancellationCalculator} from './cancellation.js?v=7.4.0';
-import {calculateTokudane} from './tokudane.js?v=7.4.0';
+import {supportsCancellation,cancellationLabels,createCancellationCalculator} from './cancellation.js?v=7.4.1';
+import {calculateTokudane} from './tokudane.js?v=7.4.1';
 const yen=n=>`${n.toLocaleString('ja-JP')}円`;
 function jstDate(value){
  if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value||''))throw new Error('申出日時・列車出発日時を入力してください。');

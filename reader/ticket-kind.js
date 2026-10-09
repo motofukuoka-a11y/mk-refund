@@ -1,4 +1,4 @@
-import {readTokudane} from './tokudane.js?v=7.4.0';
+import {readTokudane} from './tokudane.js?v=7.4.1';
 const labels={ordinary:'普通乗車券',limited_express:'特急券',green:'グリーン券',seat_fee:'指定料金券',other:'その他・個別条件のある券',unknown:'判別できません',conflict:'券種の読取結果が一致しません'};
 const combinedLabels={ordinary:'乗車券',limited_express:labels.limited_express,green:labels.green};
 const labelForKinds=kinds=>kinds.length>1&&kinds.includes('ordinary')?kinds.map(k=>combinedLabels[k]||labels[k]).join('＋'):kinds.map(k=>labels[k]).join('＋');

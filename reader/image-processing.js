@@ -1,4 +1,14 @@
 // Pure pixel helpers shared by browser capture and the sample benchmark.
+// Large, widely spaced station characters can be missed by a whole-ticket
+// detector. Locate their band above an actual travel date, never an issue date.
+export function stationBand(items,width,height){
+ const date=items.find(item=>item.score>=.85&&/\d+月\d+日/.test(item.text.normalize('NFKC').replace(/\s/g,''))&&item.poly?.length===4);
+ if(!date)return null;
+ const ys=date.poly.map(p=>p[1]),top=Math.min(...ys),h=Math.max(...ys)-top;
+ if(h<10||top<height*.15||top>height*.7)return null;
+ const y=Math.max(0,Math.floor(top-h*2.8)),bottom=Math.min(height,Math.ceil(top+h*.08));
+ return {x:0,y,w:width,h:bottom-y};
+}
 export function enhanceOcrPixels(rgba,channel='blue'){
  const values=new Uint8Array(rgba.length/4),hist=new Uint32Array(256);
  for(let j=0;j<values.length;j++){const i=j*4,v=channel==='blue'?rgba[i+2]:Math.round(.299*rgba[i]+.587*rgba[i+1]+.114*rgba[i+2]);values[j]=v;hist[v]++;}
